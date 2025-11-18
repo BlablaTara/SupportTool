@@ -7,4 +7,23 @@ router.get("/", (req, res) => {
 
 });
 
+
+router.get("/check-user", (req, res) => {
+    const email = req.query.email;
+
+    const testUsers = [
+        "test@test.dk",
+        "bo@test.dk",
+        "bente@test.dk"
+    ];
+
+    const exists = testUsers.includes(email);
+
+    res.send({
+        email,
+        exists,
+        collection: "test_users"
+    });
+})
+
 export default router;
