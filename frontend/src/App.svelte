@@ -3,9 +3,13 @@ import Section from "./components/sections/Section.svelte";
   import EmailCheck from "./components/EmailCheck.svelte";
   import ResultItem from "./components/ResultItem.svelte";
   import { checks } from "./stores/checksStore.js";
+  import Header from "./components/header/Header.svelte";
+
+  let environment = "Loading...";
 </script>
 
-<h1>Support Tool</h1>
+
+<Header />
 
 <div class="section-container">
     <Section title="User Validation">
