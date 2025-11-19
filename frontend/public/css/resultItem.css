@@ -1,16 +1,32 @@
 .result-item {
   padding: 1rem;
   border-radius: 6px;
-  margin-bottom: 1rem;
-  border: 1px solid #ddd;
+  border-left: 1px solid #ddd;
 }
 
 .result-item.success {
   background: #e0ffe0;
-  border-color: #6abe6a;
+  border-left: 3px solid #48c148;
 }
 
 .result-item.fail {
   background: #ffe0e0;
-  border-color: #d96c6c;
+  border-left: 3px solid #e13c3c;
+}
+
+.result-item h4 {
+  margin-bottom: 0.4rem;
+}
+
+.result-item p {
+    font-size: 0.9rem;
+  margin: 0.7rem 0 0.3rem;
+}
+
+.result-item small {
+  display: block;
+  font-size: 0.8rem;
+  font-style: italic;
+  margin-top: 0.3rem;
+  color: #575757;
 }

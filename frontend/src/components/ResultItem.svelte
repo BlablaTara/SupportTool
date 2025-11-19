@@ -7,7 +7,7 @@
 </script>
 
 <div class="result-item {status}">
-    <h3>{title}</h3>
+    <h4>{title}</h4>
     <p>{message}</p>
     <small>Collection: {detail}</small>
 </div>
