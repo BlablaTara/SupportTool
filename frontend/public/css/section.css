@@ -32,7 +32,6 @@
 /* SUMMARY STYLING */
 
 .summary-container {
-    /* border: 1px solid #ccc; */
     border-radius: 6px;
     padding: 0.8rem 1rem;
     background-color: #eaeaea;
@@ -51,9 +50,4 @@
     font-weight: 500;
 }
 
-.summary-container small {
-    display: block;
-    margin-top: 0.5rem;
-    color: #666;
-}
 
