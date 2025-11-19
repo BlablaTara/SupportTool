@@ -1,0 +1,16 @@
+.result-item {
+  padding: 1rem;
+  border-radius: 8px;
+  margin-bottom: 1rem;
+  border: 1px solid #ddd;
+}
+
+.result-item.success {
+  background: #e0ffe0;
+  border-color: #6abe6a;
+}
+
+.result-item.fail {
+  background: #ffe0e0;
+  border-color: #d96c6c;
+}
