@@ -1,6 +1,11 @@
 <script>
   import '../../../public/css/section.css'
+  import { checks } from '../../stores/checksStore.js';
+  import ResultItem from '../ResultItem.svelte';
+  import Summary from './Summary.svelte';
+
     export let title = "Section Title";
+    export let section; // user, db, btp
 </script>
 
 <section class="section">
@@ -8,10 +13,14 @@
 
     <div class="section-content">
         <slot></slot>
-    </div>
 
-    <!-- <div class="section-summary">
-    <Summary ... />
-    </div> -->
+        <div class="section-summary">
+          <Summary section={section} />
+        </div>
+
+        {#each $checks[section] as check}
+          <ResultItem {...check} />
+        {/each}  
+    </div>
 
 </section>

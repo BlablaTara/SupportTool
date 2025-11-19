@@ -1,5 +1,5 @@
 <script>
-    import { checks } from "../stores/checksStore.js";
+    import { addCheck, clearSection } from "../stores/checksStore.js";
     let email = "";
     let loading = false;
 
@@ -9,7 +9,7 @@
         try {
             const res = await fetch(`http://localhost:8080/check-user?email=${email}`);
             const data = await res.json();
-            checks.set(
+            addCheck("user",
                 {
                     id: crypto.randomUUID(),
                     title: "Email Check",
@@ -27,9 +27,8 @@
     }
 
     function clearCheck() {
-        checks.set(null);
+        clearSection("user");
         email = "";
-
     }
 </script>
 
