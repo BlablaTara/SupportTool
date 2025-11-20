@@ -7,7 +7,7 @@
         loading = true;
 
         try {
-            const res = await fetch(`http://localhost:8080/api/users?collection=users&email=${email}`);
+            const res = await fetch(`http://localhost:8080/api/users?email=${email}`);
             const data = await res.json();
             const exists = data.items.some(u => u.email === email);
             addCheck("user",
@@ -18,7 +18,7 @@
                     message: exists
                         ? `User found: ${email}`
                         : `User does not exist`,
-                    collection: data.collection    
+                    detail: data.collection    
                 }
             );
         } catch (error) {
