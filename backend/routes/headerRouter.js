@@ -8,4 +8,10 @@ router.get("/environment", (req, res) => {
     });
 });
 
+router.get("/database", (req, res) => {
+    res.json({
+        database: process.env.DB_TYPE || "UNKNOWN"
+    });
+});
+
 export default router;

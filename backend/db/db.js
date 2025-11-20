@@ -4,13 +4,13 @@ import { connectCouchbase, findAllCouchbase } from "./drivers/couchbase.js";
 
 let driver = {};
 
-if (process.env.DB_TYPE === "mongo") {
+if (process.env.DB_TYPE === "MongoDB") {
     await connectMongo();
     driver = {
         findAll: (c) => findAllMongo(c),
         findFiltered: (c, q) => findAllMongoFiltered(c, q)
     };
-} else if (process.env.DB_TYPE === "couchbase") {
+} else if (process.env.DB_TYPE === "Couchbase") {
     await connectCouchbase();
     driver = {
         findAll: (c) => findAllCouchbase(c),
