@@ -7,15 +7,16 @@
         loading = true;
 
         try {
-            const res = await fetch(`http://localhost:8080/check-user?email=${email}`);
+            const res = await fetch(`http://localhost:8080/api/users?collection=users&email=${email}`);
             const data = await res.json();
+            const exists = data.items.some(u => u.email === email);
             addCheck("user",
                 {
                     id: crypto.randomUUID(),
                     title: "Email Check",
-                    status: data.exists ? "success" : "fail",
-                    message: data.exists
-                        ? `User found: ${data.email}`
+                    status: exists ? "success" : "fail",
+                    message: exists
+                        ? `User found: ${email}`
                         : `User does not exist`,
                     collection: data.collection    
                 }

@@ -17,6 +17,9 @@ export async function connectMongo() {
 }
 
 export async function findAllMongo(collection) {
-    return db.collections(collection).find({}).toArray();
+    return db.collection(collection).find({}).toArray();
 }
 
+export async function findAllMongoFiltered(collection, query) {
+    return db.collection(collection).find(query).toArray();
+}
