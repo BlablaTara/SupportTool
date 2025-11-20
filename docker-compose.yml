@@ -13,5 +13,19 @@ services:
     volumes:
       - mongo_data:/data/db
 
+  couchbase:
+    image: couchbase:7.2.0
+    container_name: dev-couchbase
+    restart: always
+    ports:
+      - "8091-8096:8091-8096"   # Web UI og admin services
+      - "11210:11210"           # Data service
+    environment:
+      COUCHBASE_ADMINISTRATOR_USERNAME: ${CB_USERNAME}
+      COUCHBASE_ADMINISTRATOR_PASSWORD: ${CB_PASSWORD}
+    volumes:
+      - couchbase_data:/opt/couchbase/var
+
 volumes:
   mongo_data:
+  couchbase_data:
