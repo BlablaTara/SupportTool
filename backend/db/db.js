@@ -1,6 +1,18 @@
-import "dotenv/config"
-import { connectMongo, findAllMongo, findAllMongoFiltered } from "./drivers/mongo.js";
-import { connectCouchbase, findAllCouchbase } from "./drivers/couchbase.js";
+import dotenv from "dotenv";
+import path from "path";
+import { fileURLToPath } from "url";
+
+import { connectMongo, findAllMongo, findAllMongoFiltered } from "./mongo/mongoDriver.js";
+import { connectCouchbase } from "./couchbase/couchbaseDriver.js";
+import { emailCheckCB } from "./couchbase/emailCheck.js";
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+
+dotenv.config({
+    path: path.join(__dirname, "..", "..", ".env")
+});
+
 
 let driver = {};
 
@@ -8,13 +20,14 @@ if (process.env.DB_TYPE === "MongoDB") {
     await connectMongo();
     driver = {
         findAll: (c) => findAllMongo(c),
-        findFiltered: (c, q) => findAllMongoFiltered(c, q)
+        findEmail: (c, q) => findAllMongoFiltered(c, q)
     };
 } else if (process.env.DB_TYPE === "Couchbase") {
     await connectCouchbase();
     driver = {
-        findAll: (c) => findAllCouchbase(c),
-        findFiltered: (c, q) => findAllCouchbase(c) //TODO: Couchbase query kan laves senere
+        // findAll: (c) => findAllCouchbase(c),
+        findEmail: (c, q) => emailCheckCB(c, q)
+        //findEmail: (c, q) => findFilteredCouchbase(c, q)
     };
 }
 

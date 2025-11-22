@@ -1,36 +1,53 @@
 <script>
-    import { addCheck, clearSection } from "../stores/checksStore.js";
-    let email = "";
-    let loading = false;
+  import { addCheck, clearSection } from "../stores/checksStore.js";
+  let email = "";
+  let loading = false;
 
-    async function runCheck() {
-        loading = true;
+  async function runCheck() {
+    loading = true;
 
-        try {
-            const res = await fetch(`http://localhost:8080/api/users?email=${email}`);
-            const data = await res.json();
-            const exists = data.items.some(u => u.email === email);
-            addCheck("user",
-                {
-                    id: crypto.randomUUID(),
-                    title: "Email Check",
-                    status: exists ? "success" : "fail",
-                    message: exists
-                        ? `User found: ${email}`
-                        : `User does not exist`,
-                    detail: data.collection    
-                }
-            );
-        } catch (error) {
-            console.error(error);
-        }
-        loading = false;
+    try {
+      const res = await fetch(`http://localhost:8080/api/users/email?email=${email}`);
+      const data = await res.json();
+
+      if (!data.ok) {
+        addCheck("user", {
+          id: crypto.randomUUID(),
+          title: "Email Check",
+          status: "error",
+          message: data.message || "Unknown error",
+          detail: data.detail || data.error
+        });
+      } else {
+        const exists = data.items?.some(u => u.email === email) ?? false;
+        addCheck("user", {
+          id: crypto.randomUUID(),
+          title: "Email Check",
+          status: exists ? "success" : "fail",
+          message: exists
+            ? `User found: ${email}`
+            : `User does not exist`,
+          detail: data.collection
+        });
+      }
+
+    } catch (error) {
+      addCheck("user", {
+        id: crypto.randomUUID(),
+        title: "Email Check",
+        status: "error",
+        message: error.message,
+        detail: ""
+      });
     }
 
-    function clearCheck() {
-        clearSection("user");
-        email = "";
-    }
+    loading = false;
+  }
+
+  function clearCheck() {
+    clearSection("user");
+    email = "";
+  }
 </script>
 
 <div class="email-check">
