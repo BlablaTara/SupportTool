@@ -16,10 +16,10 @@ export async function connectMongo() {
     return db;
 }
 
-export async function findAllMongo(collection) {
-    return db.collection(collection).find({}).toArray();
-}
+// export async function findAllMongo(collection) {
+//     return db.collection(collection).find({}).toArray();
+// }
 
-export async function findAllMongoFiltered(collection, query) {
-    return db.collection(collection).find(query).toArray();
-}
+// export async function findAllMongoFiltered(collection, query) {
+//     return db.collection(collection).find(query).toArray();
+// }

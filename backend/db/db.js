@@ -2,9 +2,10 @@ import dotenv from "dotenv";
 import path from "path";
 import { fileURLToPath } from "url";
 
-import { connectMongo, findAllMongo, findAllMongoFiltered } from "./mongo/mongoDriver.js";
-import { connectCouchbase } from "./couchbase/couchbaseDriver.js";
-import { emailCheckCB } from "./couchbase/emailCheck.js";
+import { connectMongo } from "./mongo/mongoDriver.js";
+import { emailCheckM } from "./mongo/emailCheckM.js";
+// import { connectCouchbase } from "./couchbase/couchbaseDriver.js";
+// import { emailCheckCB } from "./couchbase/emailCheck.js";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -19,15 +20,17 @@ let driver = {};
 if (process.env.DB_TYPE === "MongoDB") {
     await connectMongo();
     driver = {
-        findAll: (c) => findAllMongo(c),
-        findEmail: (c, q) => findAllMongoFiltered(c, q)
+        findEmail: (c, q) => emailCheckM(c, q)
     };
 } else if (process.env.DB_TYPE === "Couchbase") {
+    // import here else node will crash bc CB will try to load native bindings
+    // Therefor only couchbase import if couchbase is choosen.
+    const { connectCouchbase } = await import( "./couchbase/couchbaseDriver.js");
+    const { emailCheckCB } = await import("./couchbase/emailCheckCB.js");
+    
     await connectCouchbase();
     driver = {
-        // findAll: (c) => findAllCouchbase(c),
         findEmail: (c, q) => emailCheckCB(c, q)
-        //findEmail: (c, q) => findFilteredCouchbase(c, q)
     };
 }
 
