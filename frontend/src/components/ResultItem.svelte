@@ -9,5 +9,5 @@
 <div class="result-item {status}">
     <h4>{title}</h4>
     <p>{message}</p>
-    <small>Collection: {detail}</small>
+    <small>{detail}</small>
 </div>

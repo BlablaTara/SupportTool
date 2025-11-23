@@ -17,36 +17,40 @@ export async function emailCheckCB(collection, email) {
     try {
         const result = await cluster.query(query, { parameters: { email } });
         // console.log("Query result:", result.rows);
-        return { ok: true, items: result.rows.map(r => r[collection]) };
+        const items = result.rows.map(r => r[collection]);
 
-    } catch (err) {
-        // Couchbase missing index = code 4000
-        console.error("Couchbase query error:", err);
-        const missingIndex = err?.cause?.first_error_code === 4000;
-        
-        const keyspaceNotFound = err?.cause?.first_error_message?.includes("Keyspace not found");
+        return {
+            status: items.length ? "success" : "fail",
+            message: items.length
+                ? `User found: ${email}`
+                : `User does not exist`,
+            detail: `Collection: ${collection}`,
+            items
+        };
+
+    } catch (error) {
+        // console.error("Couchbase query error:", err);
+        const missingIndex = error?.cause?.first_error_code === 4000;
+        const keyspaceNotFound = error?.cause?.first_error_message?.includes("Keyspace not found");
 
         if (missingIndex) {
             return {
-                ok: false,
-                error: "MISSING_INDEX",
+                status: "error",
                 message: "Required index is missing",
                 detail: `CREATE INDEX idx_email ON \`${BUCKET}\`.\`${SCOPE}\`.\`${collection}\`(email);`
             };
         } else if (keyspaceNotFound) {
             return {
-                ok: false,
-                error: "KEYSPACE_NOT_FOUND",
+                status: "error",
                 message: `The bucket/scope/collection does not exist`,
-                detail: err.cause.first_error_message 
+                detail: error.cause.first_error_message 
             };
         }
 
         return {
-            ok: false,
-            error: "QUERY_FAILED",
+            status: "error",
             message: "Unknown Couchbase error",
-            detail: err.message
+            detail: error.message
         };
     }
 }

@@ -10,37 +10,23 @@
       const res = await fetch(`http://localhost:8080/api/users/email?email=${email}`);
       const data = await res.json();
 
-      if (!data.ok) {
         addCheck("user", {
           id: crypto.randomUUID(),
           title: "Email Check",
-          status: "error",
-          message: data.message || "Unknown error",
-          detail: data.detail || data.error
+          status: data.status,
+          message: data.message,
+          detail: data.detail || ""
         });
-      } else {
-        const exists = data.items?.some(u => u.email === email) ?? false;
-        addCheck("user", {
-          id: crypto.randomUUID(),
-          title: "Email Check",
-          status: exists ? "success" : "fail",
-          message: exists
-            ? `User found: ${email}`
-            : `User does not exist`,
-          detail: data.collection
-        });
-      }
 
     } catch (error) {
-      addCheck("user", {
-        id: crypto.randomUUID(),
-        title: "Email Check",
-        status: "error",
-        message: error.message,
-        detail: ""
-      });
+        addCheck("user", {
+            id: crypto.randomUUID(),
+            title: "Email Check",
+            status: "error",
+            message: error.message,
+            detail: ""
+        });
     }
-
     loading = false;
   }
 

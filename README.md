@@ -9,6 +9,7 @@ $ npm run dev
 OBS: changing from MongoDB to Couchbase - may need you to:
 $ rm -rf node_modules package-lock.json
 $ npm install couchbase@4.6.0 --force
+$ npm i
 
 Test database:
 docker compose up -d

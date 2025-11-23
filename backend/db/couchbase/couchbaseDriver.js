@@ -37,29 +37,4 @@ export async function connectCouchbase() {
     return { cluster, bucket };
 }
 
-// export async function findFilteredCouchbase(collection, filter) {
-//   const { cluster } = await connectCouchbase();
-//   const { email } = filter;
-
-//   const query = `
-//     SELECT * FROM \`${BUCKET}\`.\`${SCOPE}\`.\`${collection}\`
-//     WHERE email = $email
-//   `;
-
-//   try {
-//     const result = await cluster.query(query, { parameters: { email } });
-//     return { status: "success", items: result.rows.map(r => r[collection]) };
-//   } catch (err) {
-//     const missingIndex = err?.cause?.first_error_code === 4000;
-//     if (missingIndex) {
-//       return {
-//         status: "error",
-//         message: "Required index is missing",
-//         detail: `CREATE INDEX idx_email ON \`${BUCKET}\`.\`${SCOPE}\`.\`${collection}\`(email);`
-//       };
-//     }
-//     return { status: "error", message: err.message, detail: err.code || "" };
-//   }
-// }
-
 export { BUCKET, SCOPE };
