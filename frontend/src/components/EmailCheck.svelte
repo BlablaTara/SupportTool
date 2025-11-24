@@ -1,6 +1,6 @@
 <script>
   import { addCheck, clearSection } from "../stores/checksStore.js";
-  let email = "";
+  let email = "test@test.dk";
   let loading = false;
 
   async function runCheck() {
@@ -15,7 +15,7 @@
           title: "Email Check",
           status: data.status,
           message: data.message,
-          detail: data.detail || ""
+          detail: "Collection: " + data.detail || ""
         });
 
     } catch (error) {
