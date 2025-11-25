@@ -1,6 +1,8 @@
 import { connectCouchbase, BUCKET, SCOPE } from "./couchbaseDriver.js";
+import { emailEnding } from "../../utils/emailEnding.js";
 
 export async function emailCheckCB(collection, email) {
+    const fullEmail = emailEnding(email);
     const { cluster } = await connectCouchbase();
 
     // console.log("Querying Couchbase with:");
@@ -15,14 +17,14 @@ export async function emailCheckCB(collection, email) {
     `;
 
     try {
-        const result = await cluster.query(query, { parameters: { email } });
+        const result = await cluster.query(query, { parameters: { email: fullEmail } });
         // console.log("Query result:", result.rows);
         const items = result.rows.map(r => r[collection]);
 
         return {
             status: items.length ? "success" : "fail",
             message: items.length
-                ? `User found: ${email}`
+                ? `User found: ${fullEmail}`
                 : `User does not exist`,
             detail: `Collection: ${collection}`,
             items
