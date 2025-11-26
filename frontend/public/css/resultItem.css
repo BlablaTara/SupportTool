@@ -5,8 +5,8 @@
 }
 
 .result-item.success {
-  background: #e0ffe0;
-  border-left: 3px solid #48c148;
+  background: #cceacc;
+  border-left: 3px solid #57ac57;
 }
 
 .result-item.fail {

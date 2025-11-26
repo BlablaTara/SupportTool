@@ -1,10 +1,7 @@
 <script>
 import Section from "./components/sections/Section.svelte";
   import EmailCheck from "./components/EmailCheck.svelte";
-  import ResultItem from "./components/ResultItem.svelte";
-  import { checks } from "./stores/checksStore.js";
   import Header from "./components/header/Header.svelte";
-  import Summary from "./components/sections/Summary.svelte";
 </script>
 
 
