@@ -1,13 +1,25 @@
 <script>
+  import { onMount } from "svelte";
   import { addCheck, clearSection } from "../stores/checksStore.js";
-  let email = "test@test.dk";
+  //let email = "test@test.dk";
+  let email = "";
   let loading = false;
+  let emailEnding = "";
+
+  onMount(async () => {
+    const res = await fetch("http://localhost:8080/api/users/email-ending");
+    const data = await res.json();
+    emailEnding = data.ending || "";
+  })
 
   async function runCheck() {
     loading = true;
 
+    let finalEmail =
+    emailEnding && !email.includes("@") ? email + emailEnding : email;
+
     try {
-      const res = await fetch(`http://localhost:8080/api/users/email?email=${email}`);
+      const res = await fetch(`http://localhost:8080/api/users/email?email=${finalEmail}`);
       const data = await res.json();
 
         addCheck("user", {
@@ -38,9 +50,9 @@
 
 <div class="email-check">
     <input
-    type="email"
+    type="text"
     bind:value={email}
-    placeholder="Enter email..."
+    placeholder={`Enter email... ${emailEnding ? `(${emailEnding})` : ""}`}
     />
 
     <button on:click={runCheck} disabled={loading || email.length === 0}>
@@ -52,16 +64,28 @@
     </button>
 </div>
 
+<!-- Email Preview -->
+{#if emailEnding && email && !email.includes("@")}
+  <div class="email-preview">
+    Will be checked as:
+    <strong>{email}{emailEnding}</strong>
+  </div>
+{/if}
+
 <style>
 .email-check {
   display: flex;
   gap: 0.5rem;
   margin-bottom: 1rem;
 }
-
 input {
   flex: 1;
   padding: 0.5rem;
+}
+.email-preview {
+  font-size: 0.9rem;
+  color: #666;
+  margin-bottom: 1rem;
 }
 button {
   padding: 0.5rem 1rem;

@@ -4,8 +4,6 @@ import { fileURLToPath } from "url";
 
 import { connectMongo } from "./mongo/mongoDriver.js";
 import { emailCheckM } from "./mongo/emailCheckM.js";
-// import { connectCouchbase } from "./couchbase/couchbaseDriver.js";
-// import { emailCheckCB } from "./couchbase/emailCheck.js";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
