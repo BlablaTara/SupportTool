@@ -19,15 +19,15 @@ export async function emailCheckCB(collection, email) {
     try {
         const result = await cluster.query(query, { parameters: { email: fullEmail } });
         // console.log("Query result:", result.rows);
-        const items = result.rows.map(r => r[collection]);
+        const data = result.rows.map(r => r[collection]);
 
         return {
-            status: items.length ? "success" : "fail",
-            message: items.length
+            status: data.length ? "success" : "fail",
+            message: data.length
                 ? `User found: ${fullEmail}`
                 : `User does not exist`,
             detail: `Collection: ${collection}`,
-            items
+            data
         };
 
     } catch (error) {

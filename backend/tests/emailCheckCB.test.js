@@ -43,14 +43,14 @@ describe('emailCheckCB()', () => {
     test('returns success when email exists', async () => {
         const result = await emailCheckCB('users', 'exists@test.dk');
         expect(result.status).toBe('success');
-        expect(result.items.length).toBe(1);
+        expect(result.data.length).toBe(1);
         expect(result.message).toBe('User found: exists@test.dk');
     });
 
     test('returns fail when email does not exist', async () => {
         const result = await emailCheckCB('users', 'notfound@test.dk');
         expect(result.status).toBe('fail');
-        expect(result.items.length).toBe(0);
+        expect(result.data.length).toBe(0);
         expect(result.message).toBe('User does not exist');
     });
 

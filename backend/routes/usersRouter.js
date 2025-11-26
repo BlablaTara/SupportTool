@@ -8,26 +8,33 @@ router.get("/users/email", async (req, res) => {
     const email = req.query.email;
 
     if(!email) {
-        return res.status(400).json({ ok: false, error: "MISSING EMAIL" });
+        return res.status(400).json({ 
+            status: "error", 
+            message: "Missing Email",
+            detail: "Query parameter 'email' is required",
+            data: []
+        });
     }
 
     const result = await db.findEmail(collection, email);
 
 
-    if (!result.ok) {
-        return res.status(400).json(result);
+    if (result.status === "error") {
+        return res.status(500).json(result);
     }
 
-    return res.json({
-        ok: true,
-        collection,
-        items: result.items
-    });
+    if (result.status === "fail") {
+        return res.status(404).json(result);
+    }
+
+    return res.json(result);
 });
 
 router.get("/users/email-ending", (req, res) => {
-    res.json({
-        ok: true,
+    return res.json({
+        status: "success",
+        message: "Email ending retrieved",
+        detail: null,
         ending: process.env.EMAIL_ENDING || ""
     });
 });

@@ -5,15 +5,15 @@ export async function emailCheckM(collection, email) {
     const fullEmail = emailEnding(email);
     try {
         const db = await connectMongo();
-        const items = await db.collection(collection).find({ email: fullEmail }).toArray();
+        const data = await db.collection(collection).find({ email: fullEmail }).toArray();
 
         return {
-            status: items.length ? "success" : "fail",
-            message: items.length
+            status: data.length ? "success" : "fail",
+            message: data.length
                 ? `User found: ${fullEmail}`
                 : `User does not exist`,
             detail: collection,
-            items
+            data
         };
     } catch (error) {
         // console.error("Mongo query error:", error);
