@@ -4,6 +4,7 @@ import { fileURLToPath } from "url";
 
 import { connectMongo } from "./mongo/mongoDriver.js";
 import { emailCheckM } from "./mongo/emailCheckM.js";
+import { rolesCheckM } from "./mongo/rolesCheckM.js";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -18,7 +19,8 @@ let driver = {};
 if (process.env.DB_TYPE === "MongoDB") {
     await connectMongo();
     driver = {
-        findEmail: (c, q) => emailCheckM(c, q)
+        findEmail: (c, q) => emailCheckM(c, q),
+        findRoles: (c, q) => rolesCheckM(c, q)
     };
 } else if (process.env.DB_TYPE === "Couchbase") {
     // import here else node will crash bc CB will try to load native bindings
