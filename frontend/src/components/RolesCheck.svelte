@@ -1,11 +1,12 @@
 <script>
     import { addCheck } from "../stores/checksStore";
-
-    let email = "";
-    // parent component can bind email
-    export { email as email }; 
-
+    
+    export let email = "";
     let loading = false;
+
+    $: if (email) {
+        runRolesCheck();
+    }
 
     async function runRolesCheck() {
         if (!email) return;
@@ -21,7 +22,7 @@
                 title: "Roles Check",
                 status: data.status,
                 message: data.message,
-                detail: data.detail
+                detail: "Collection: " + data.detail
             });
 
         } catch (error) {
@@ -39,19 +40,3 @@
 
 </script>
 
-<div class="roles-check">
-    <button on:click={runRolesCheck} disabled={loading || !email}>
-        {loading ? "Checking..." : "Check Roles"}
-    </button>
-</div>
-
-
-<style>
-.roles-check {
-  margin-top: 0.5rem;
-}
-
-button {
-  padding: 0.5rem 1rem;
-}
-</style>

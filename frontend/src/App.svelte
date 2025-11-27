@@ -3,6 +3,8 @@ import Section from "./components/sections/Section.svelte";
   import EmailCheck from "./components/EmailCheck.svelte";
   import Header from "./components/header/Header.svelte";
   import RolesCheck from "./components/RolesCheck.svelte";
+
+  let email = "";
 </script>
 
 
@@ -10,8 +12,8 @@ import Section from "./components/sections/Section.svelte";
 
 <div class="section-container">
     <Section title="User Validation" section="user">
-        <EmailCheck />
-        <RolesCheck/>
+        <EmailCheck on:validate={(e) => email = e.detail.email }/>
+        <RolesCheck {email}/>
     </Section>
 
     <Section title="DB Validation" section="db">

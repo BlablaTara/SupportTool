@@ -1,10 +1,13 @@
 <script>
   import { onMount } from "svelte";
+  import { createEventDispatcher } from "svelte";
   import { addCheck, clearSection } from "../stores/checksStore.js";
   //let email = "test@test.dk";
   let email = "";
   let loading = false;
   let emailEnding = "";
+
+  const dispatch = createEventDispatcher();
 
   onMount(async () => {
     const res = await fetch("http://localhost:8080/api/users/email-ending");
@@ -29,6 +32,9 @@
           message: data.message,
           detail: "Collection: " + data.detail || ""
         });
+
+      // notifying other components:
+      dispatch("validate", { email: finalEmail });
 
     } catch (error) {
         addCheck("user", {
