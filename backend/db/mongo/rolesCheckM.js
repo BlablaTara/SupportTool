@@ -9,7 +9,6 @@ export async function rolesCheckM(email) {
     try {
         const db = await connectMongo();
         const user = await db.collection(collection).findOne({ email: fullEmail });
-        //const roles = await db.collection(collection).findOne({ field }).toArray;
 
         if (!user) {
             return {
@@ -34,7 +33,7 @@ export async function rolesCheckM(email) {
         if (rolesArray.length === 0) {
             return {
                 status: "fail",
-                message: `${fullEmail}, has 0 roles`,
+                message: `${fullEmail} has 0 roles`,
                 detail: field,
                 data: []
             };
@@ -42,7 +41,7 @@ export async function rolesCheckM(email) {
 
         return {
             status: "success",
-            message: `${fullEmail}, has roles: ${rolesArray.join(", ")}`,
+            message: `${fullEmail} has roles: ${rolesArray.join(", ")}`,
             detail: field,
             data: rolesArray
         };
