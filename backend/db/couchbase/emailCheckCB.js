@@ -40,7 +40,7 @@ export async function emailCheckCB(email) {
             return {
                 status: "error",
                 message: "Required index is missing",
-                detail: `CREATE INDEX idx_email ON \`${BUCKET}\`.\`${SCOPE}\`.\`${collection}\`(email);`
+                detail: `CREATE PRIMARY INDEX \`#primary\` ON \`${BUCKET}\`.\`${SCOPE}\`.\`${collection}\`;`
             };
         } else if (keyspaceNotFound) {
             return {
