@@ -22,7 +22,7 @@
                 title: "Roles Check",
                 status: data.status,
                 message: data.message,
-                detail: "Collection: " + data.detail
+                detail: data.detail
             });
 
         } catch (error) {

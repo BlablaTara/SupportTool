@@ -6,6 +6,7 @@ import { connectMongo } from "./mongo/mongoDriver.js";
 import { emailCheckM } from "./mongo/emailCheckM.js";
 import { rolesCheckM } from "./mongo/rolesCheckM.js";
 
+
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
@@ -23,14 +24,17 @@ if (process.env.DB_TYPE === "MongoDB") {
         findRoles: (email) => rolesCheckM(email)
     };
 } else if (process.env.DB_TYPE === "Couchbase") {
-    // import here else node will crash bc CB will try to load native bindings
+    
+    // imports here else node will crash bc CB will try to load native bindings
     // Therefor only couchbase import if couchbase is choosen.
     const { connectCouchbase } = await import( "./couchbase/couchbaseDriver.js");
     const { emailCheckCB } = await import("./couchbase/emailCheckCB.js");
+    const { rolesCheckCB } = await import ("./couchbase/rolesCheckCB.js");
     
     await connectCouchbase();
     driver = {
-        findEmail: (c, q) => emailCheckCB(c, q)
+        findEmail: (email) => emailCheckCB(email),
+        findRoles: (email) => rolesCheckCB(email)
     };
 }
 

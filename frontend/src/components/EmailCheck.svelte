@@ -30,7 +30,7 @@
           title: "Email Check",
           status: data.status,
           message: data.message,
-          detail: "Looking in '" + data.detail + "' collection."
+          detail: data.detail 
         });
 
       // notifying other components:

@@ -1,8 +1,9 @@
 import { connectCouchbase, BUCKET, SCOPE } from "./couchbaseDriver.js";
 import { emailEnding } from "../../utils/emailEnding.js";
 
-export async function emailCheckCB(collection, email) {
+export async function emailCheckCB(email) {
     const fullEmail = emailEnding(email);
+    const collection = process.env.EMAIL_COLLECTION;
     const { cluster } = await connectCouchbase();
 
     // console.log("Querying Couchbase with:");
@@ -26,7 +27,7 @@ export async function emailCheckCB(collection, email) {
             message: data.length
                 ? `User found: ${fullEmail}`
                 : `User does not exist`,
-            detail: `Collection: ${collection}`,
+            detail: `Looking in ' ${collection} ' collection.`,
             data
         };
 
