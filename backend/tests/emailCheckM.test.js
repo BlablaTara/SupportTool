@@ -21,7 +21,7 @@ describe("emailCheckM()", () =>{
             })
         });
 
-        const result = await emailCheckM("users", "exists@test.dk");
+        const result = await emailCheckM("exists@test.dk");
 
         expect(result.status).toBe("success");
         expect(result.data.length).toBe(1);
@@ -37,17 +37,17 @@ describe("emailCheckM()", () =>{
             })
         });
 
-        const result = await emailCheckM("users", "notfound@test.dk");
+        const result = await emailCheckM("notfound@test.dk");
 
         expect(result.status).toBe("fail");
         expect(result.data.length).toBe(0);
-        expect(result.message).toBe("User does not exist");
+        expect(result.message).toBe("User does not exist: notfound@test.dk");
     });
 
     test("returns error on Mongo exception", async () => {
         connectMongo.mockRejectedValue(new Error("Connection failed"));
 
-        const result = await emailCheckM("users", "error@test.dk");
+        const result = await emailCheckM("error@test.dk");
 
         expect(result.status).toBe("error");
         expect(result.message).toBe("MongoDB query failed");
