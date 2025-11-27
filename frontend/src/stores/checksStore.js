@@ -9,7 +9,16 @@ export const checks = writable({
 // adding check to a specifik section
 export function addCheck(section, check) {
     checks.update(all => {
-        all[section].push(check);
+        const existingIndex = all[section].findIndex(c => c.title === check.title);
+
+        // if checks with this title exists -> replace it
+        if (existingIndex !== -1) {
+            all[section] [existingIndex] = check;
+        } else {
+            // else add new
+            all[section].push(check);
+        }
+
         return all;
     });
 }
