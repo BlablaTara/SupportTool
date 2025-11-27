@@ -1,12 +1,15 @@
 import { connectMongo } from "./mongoDriver.js";
 import { emailEnding } from "../../utils/emailEnding.js";
 
-export async function rolesCheckM(collection, email) {
+export async function rolesCheckM(email) {
     const fullEmail = emailEnding(email);
+    const collection = process.env.EMAIL_COLLECTION;
+    const field = process.env.ROLES_FIELD;
 
     try {
         const db = await connectMongo();
         const user = await db.collection(collection).findOne({ email: fullEmail });
+        //const roles = await db.collection(collection).findOne({ field }).toArray;
 
         if (!user) {
             return {
@@ -17,20 +20,31 @@ export async function rolesCheckM(collection, email) {
             };
         }
 
-        if (user.roles === "") {
+        const roles = user[field];
+        let rolesArray;
+
+        if (Array.isArray(roles)) {
+            rolesArray = roles;
+        } else if (typeof roles === "string" && roles.trim() !== "") {
+            rolesArray = [roles]; //from string to array
+        } else {
+            rolesArray = [];
+        }
+
+        if (rolesArray.length === 0) {
             return {
                 status: "fail",
                 message: `${fullEmail}, has 0 roles`,
-                detail: collection,
+                detail: field,
                 data: []
-            }
+            };
         }
 
         return {
             status: "success",
-            message: `${fullEmail}, has roles: ${user.roles?.join(", ")}`,
-            detail: collection,
-            data: user.roles
+            message: `${fullEmail}, has roles: ${rolesArray.join(", ")}`,
+            detail: field,
+            data: rolesArray
         };
 
     } catch (error) {

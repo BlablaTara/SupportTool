@@ -19,8 +19,8 @@ let driver = {};
 if (process.env.DB_TYPE === "MongoDB") {
     await connectMongo();
     driver = {
-        findEmail: (c, q) => emailCheckM(c, q),
-        findRoles: (c, q) => rolesCheckM(c, q)
+        findEmail: (email) => emailCheckM(email),
+        findRoles: (email) => rolesCheckM(email)
     };
 } else if (process.env.DB_TYPE === "Couchbase") {
     // import here else node will crash bc CB will try to load native bindings

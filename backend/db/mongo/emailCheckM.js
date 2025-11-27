@@ -1,8 +1,10 @@
 import { connectMongo } from "./mongoDriver.js";
 import { emailEnding } from "../../utils/emailEnding.js";
 
-export async function emailCheckM(collection, email) {
+export async function emailCheckM(email) {
     const fullEmail = emailEnding(email);
+    const collection = process.env.EMAIL_COLLECTION;
+
     try {
         const db = await connectMongo();
         const data = await db.collection(collection).find({ email: fullEmail }).toArray();
@@ -11,7 +13,7 @@ export async function emailCheckM(collection, email) {
             status: data.length ? "success" : "fail",
             message: data.length
                 ? `User found: ${fullEmail}`
-                : `User does not exist`,
+                : `User does not exist: ${fullEmail}`,
             detail: collection,
             data
         };

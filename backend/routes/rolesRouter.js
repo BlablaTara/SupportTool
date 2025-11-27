@@ -4,7 +4,6 @@ import db from "../db/db.js";
 const router = Router();
 
 router.get("/users/roles", async (req, res) => {
-    const collection = req.query.collection || process.env.ROLES_COLLECTION;
     const email = req.query.email;
 
     if (!email) {
@@ -16,7 +15,7 @@ router.get("/users/roles", async (req, res) => {
         });
     }
 
-    const result = await db.findRoles(collection, email);
+    const result = await db.findRoles(email);
 
     if (result.status === "error") {
         return res.status(500).json(result);
