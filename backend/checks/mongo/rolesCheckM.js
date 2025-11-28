@@ -13,7 +13,7 @@ export async function rolesCheckM(email) {
     if (!user) {
       return {
         status: "fail",
-        message: `User not found: ${fullEmail}`,
+        message: `Email not found: ${fullEmail}`,
         detail: collection,
         data: [],
       };
@@ -34,7 +34,7 @@ export async function rolesCheckM(email) {
       return {
         status: "fail",
         message: `${fullEmail} has 0 roles`,
-        detail: `Looking in - Collection: ' ${collection} '.  Field: ' ${field} '`,
+        detail: `Collection: ' ${collection} '.  Field: ' ${field}'`,
         data: [],
       };
     }
@@ -42,7 +42,7 @@ export async function rolesCheckM(email) {
     return {
       status: "success",
       message: `${fullEmail} has roles: ${rolesArray.join(", ")}`,
-      detail: `Looking in - Collection: ' ${collection} '.  Field: ' ${field} '`,
+      detail: `Collection: ' ${collection} '.  Field: ' ${field} '`,
       data: rolesArray,
     };
   } catch (error) {

@@ -26,8 +26,8 @@ export async function emailCheckCB(email) {
 
     return {
       status: data.length ? "success" : "fail",
-      message: data.length ? `User found: ${fullEmail}` : `User does not exist`,
-      detail: `Looking in ' ${collection} ' collection.`,
+      message: data.length ? `Email found: ${fullEmail}` : `Email not found`,
+      detail: `Collection: ' ${collection} '`,
       data,
     };
   } catch (error) {

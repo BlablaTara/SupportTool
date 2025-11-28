@@ -15,9 +15,9 @@ export async function emailCheckM(email) {
     return {
       status: data.length ? "success" : "fail",
       message: data.length
-        ? `User found: ${fullEmail}`
-        : `User does not exist: ${fullEmail}`,
-      detail: collection,
+        ? `Email found: ${fullEmail}`
+        : `Email not found: ${fullEmail}`,
+      detail: `Collection: '${collection}'`,
       data,
     };
   } catch (error) {

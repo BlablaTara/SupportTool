@@ -13,7 +13,7 @@ export async function countCheckM(email) {
         if (!user) {
             return {
                 status: "fail",
-                message: `User not found: ${fullEmail}`,
+                message: `Email not found: ${fullEmail}`,
                 detail: `Collection: ${collection}`,
                 data: [],
             };
