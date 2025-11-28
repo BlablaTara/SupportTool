@@ -54,7 +54,7 @@ describe("rolesCheckCB()", () => {
 
     expect(result.status).toBe("success");
     expect(result.data).toEqual(["tester", "developer"]);
-    expect(result.message).toBe("exists@test.dk, has roles: tester, developer");
+    expect(result.message).toBe("exists@test.dk has roles: tester, developer");
   });
 
   test("returns success when user has a single string role", async () => {
@@ -62,7 +62,7 @@ describe("rolesCheckCB()", () => {
 
     expect(result.status).toBe("success");
     expect(result.data).toEqual(["tester"]);
-    expect(result.message).toBe("singlerole@test.dk, has roles: tester");
+    expect(result.message).toBe("singlerole@test.dk has roles: tester");
   });
 
   test("returns fail when user has 0 roles", async () => {
@@ -70,7 +70,7 @@ describe("rolesCheckCB()", () => {
 
     expect(result.status).toBe("fail");
     expect(result.data.length).toBe(0);
-    expect(result.message).toBe("noroles@test.dk, has 0 roles");
+    expect(result.message).toBe("noroles@test.dk has 0 roles");
   });
 
   test("returns fail when user does not exist", async () => {
@@ -78,7 +78,7 @@ describe("rolesCheckCB()", () => {
 
     expect(result.status).toBe("fail");
     expect(result.data).toEqual([]);
-    expect(result.message).toBe("User not found: notfound@test.dk");
+    expect(result.message).toBe("Email not found: notfound@test.dk");
   });
 
   test("returns error when index is missing", async () => {

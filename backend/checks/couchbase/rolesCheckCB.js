@@ -21,7 +21,7 @@ export async function rolesCheckCB(email) {
     if (!result.rows || result.rows.length === 0) {
       return {
         status: "fail",
-        message: `User not found: ${fullEmail}`,
+        message: `Email not found: ${fullEmail}`,
         detail: `Collection: ${collection}`,
         data: [],
       };
@@ -42,7 +42,7 @@ export async function rolesCheckCB(email) {
     if (rolesArray.length === 0) {
       return {
         status: "fail",
-        message: `${fullEmail}, has 0 roles`,
+        message: `${fullEmail} has 0 roles`,
         detail: `Collection: ' ${collection} '.  Field: ' ${field} '`,
         data: [],
       };
@@ -50,11 +50,11 @@ export async function rolesCheckCB(email) {
 
     return {
       status: "success",
-      message: `${fullEmail}, has roles: ${rolesArray.join(", ")}`,
+      message: `${fullEmail} has roles: ${rolesArray.join(", ")}`,
       detail: `Collection: ' ${collection} '.  Field: ' ${field} '`,
       data: rolesArray,
     };
-    
+
   } catch (error) {
     // Couchbase errors: missing index / keyspace not found
     const missingIndex = error?.cause?.first_error_code === 4000;
