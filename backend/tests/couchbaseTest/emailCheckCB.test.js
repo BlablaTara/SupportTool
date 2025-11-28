@@ -3,7 +3,7 @@ import { describe, expect, jest } from '@jest/globals';
 process.env.EMAIL_COLLECTION = "users";
 
 //Mocking coucbase-driver before importing emailCheckCB
-jest.unstable_mockModule('../db/couchbase/couchbaseDriver.js', () => ({
+jest.unstable_mockModule('../../db/couchbase/couchbaseDriver.js', () => ({
     BUCKET:'mockBucket',
     SCOPE: 'mockScope',
     connectCouchbase: jest.fn(async () => ({
@@ -40,7 +40,7 @@ jest.unstable_mockModule('../db/couchbase/couchbaseDriver.js', () => ({
     }))
 }));
 
-const { emailCheckCB } = await import ('../db/couchbase/emailCheckCB.js');
+const { emailCheckCB } = await import ('../../db/couchbase/emailCheckCB.js');
 
 describe('emailCheckCB()', () => {
     test('returns success when email exists', async () => {

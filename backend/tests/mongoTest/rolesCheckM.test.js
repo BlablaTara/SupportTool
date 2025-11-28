@@ -4,7 +4,7 @@ process.env.EMAIL_COLLECTION = "users";
 process.env.ROLES_FIELD = "roles";
 
 // Mock mongoDriver before import
-jest.unstable_mockModule("../db/mongo/mongoDriver.js", () => ({
+jest.unstable_mockModule("../../db/mongo/mongoDriver.js", () => ({
     connectMongo: jest.fn(async () => ({
         collection: () => ({
             findOne: mockFindOne
@@ -16,7 +16,7 @@ jest.unstable_mockModule("../db/mongo/mongoDriver.js", () => ({
 let mockFindOne;
 
 // Import module under test
-const { rolesCheckM } = await import("../db/mongo/rolesCheckM.js");
+const { rolesCheckM } = await import("../../db/mongo/rolesCheckM.js");
 
 describe("rolesCheckM", () => {
 
