@@ -4,7 +4,7 @@ process.env.EMAIL_COLLECTION = "users";
 process.env.ROLES_FIELD = "roles";
 
 // Mock mongoDriver before import
-jest.unstable_mockModule("../../db/mongo/mongoDriver.js", () => ({
+jest.unstable_mockModule("../../db/mongoDriver.js", () => ({
     connectMongo: jest.fn(async () => ({
         collection: () => ({
             findOne: mockFindOne
@@ -16,7 +16,7 @@ jest.unstable_mockModule("../../db/mongo/mongoDriver.js", () => ({
 let mockFindOne;
 
 // Import module under test
-const { rolesCheckM } = await import("../../db/mongo/rolesCheckM.js");
+const { rolesCheckM } = await import("../../checks/mongo/rolesCheckM.js");
 
 describe("rolesCheckM", () => {
 
@@ -31,7 +31,7 @@ describe("rolesCheckM", () => {
         expect(result).toEqual({
             status: "success",
             message: "arrayexists@test.dk has roles: tester, developer",
-            detail: "roles",
+            detail: "Looking in - Collection: ' users '.  Field: ' roles '",
             data: ["tester", "developer"]
         });
     });
@@ -47,7 +47,7 @@ describe("rolesCheckM", () => {
         expect(result).toEqual({
             status: "success",
             message: "stringexists@test.dk has roles: developer",
-            detail: "roles",
+            detail: "Looking in - Collection: ' users '.  Field: ' roles '",
             data: ["developer"]
         });
     });
@@ -63,7 +63,7 @@ describe("rolesCheckM", () => {
         expect(result).toEqual({
             status: "fail",
             message: "empty@test.dk has 0 roles",
-            detail: "roles",
+            detail: "Looking in - Collection: ' users '.  Field: ' roles '",
             data: []
         });
     });

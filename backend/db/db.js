@@ -2,9 +2,9 @@ import dotenv from "dotenv";
 import path from "path";
 import { fileURLToPath } from "url";
 
-import { connectMongo } from "./mongo/mongoDriver.js";
-import { emailCheckM } from "./mongo/emailCheckM.js";
-import { rolesCheckM } from "./mongo/rolesCheckM.js";
+import { connectMongo } from "./mongoDriver.js";
+import { emailCheckM } from "../checks/mongo/emailCheckM.js";
+import { rolesCheckM } from "../checks/mongo/rolesCheckM.js";
 
 
 const __filename = fileURLToPath(import.meta.url);
@@ -27,9 +27,9 @@ if (process.env.DB_TYPE === "MongoDB") {
     
     // imports here else node will crash bc CB will try to load native bindings
     // Therefor only couchbase import if couchbase is choosen.
-    const { connectCouchbase } = await import( "./couchbase/couchbaseDriver.js");
-    const { emailCheckCB } = await import("./couchbase/emailCheckCB.js");
-    const { rolesCheckCB } = await import ("./couchbase/rolesCheckCB.js");
+    const { connectCouchbase } = await import( "./couchbaseDriver.js");
+    const { emailCheckCB } = await import("../checks/couchbase/emailCheckCB.js");
+    const { rolesCheckCB } = await import ("../checks/couchbase/rolesCheckCB.js");
     
     await connectCouchbase();
     driver = {

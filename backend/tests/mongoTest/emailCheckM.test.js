@@ -3,7 +3,7 @@ import { jest } from '@jest/globals';
 process.env.EMAIL_COLLECTION = "users";
 
 // Mocks the Mongo-driver
-jest.unstable_mockModule("../../db/mongo/mongoDriver.js", () => ({
+jest.unstable_mockModule("../../db/mongoDriver.js", () => ({
     connectMongo: jest.fn(async () => ({
         collection: () => ({
             find: () => ({
@@ -16,7 +16,7 @@ jest.unstable_mockModule("../../db/mongo/mongoDriver.js", () => ({
 let mockToArray;
 
 // Imports email-check after the mock
-const { emailCheckM } = await import("../../db/mongo/emailCheckM.js");
+const { emailCheckM } = await import("../../checks/mongo/emailCheckM.js");
 
 describe("emailCheckM()", () =>{
 
