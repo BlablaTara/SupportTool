@@ -28,15 +28,13 @@ export async function countCheckM(email) {
             };
         }
 
-
-        const count = user[field] ?? [];
-
-        const fieldCount = Array.isArray(count) ? count.length : 0;
+        const value = user[field];
+        const fieldCount = value.length;
 
         if (fieldCount === 0) {
             return {
                 status: "fail",
-                message: `0 ${field} found on ${fullEmail}`,
+                message: `${fullEmail}, has 0 ${field}`,
                 detail: `Collection: ' ${collection} '.  Field: ' ${field} '`,
                 data: [],
             };
@@ -44,10 +42,11 @@ export async function countCheckM(email) {
 
         return {
             status: "success",
-            message: `${fieldCount} ${field} found on ${fullEmail}`,
+            message: `${fullEmail}, has ${fieldCount} ${field}`,
             detail: `Collection: ' ${collection} '.  Field: ' ${field} '`,
             data: fieldCount
         };
+        
     } catch (error) {
         return {
             status: "error",

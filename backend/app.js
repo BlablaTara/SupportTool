@@ -29,11 +29,8 @@ app.use(express.json());
 app.use("/", homeRouter);
 
 app.use("/api", headerRouter);
-
 app.use("/api", usersRouter);
-
 app.use("/api", rolesRouter);
-
 app.use("/api", countRouter);
 
 const PORT = 8080;

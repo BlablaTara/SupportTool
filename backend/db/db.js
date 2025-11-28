@@ -32,11 +32,13 @@ if (process.env.DB_TYPE === "MongoDB") {
     const { connectCouchbase } = await import( "./couchbaseDriver.js");
     const { emailCheckCB } = await import("../checks/couchbase/emailCheckCB.js");
     const { rolesCheckCB } = await import ("../checks/couchbase/rolesCheckCB.js");
+    const { countCheckCB } = await import("../checks/couchbase/countCheckCB.js");
     
     await connectCouchbase();
     driver = {
         findEmail: (email) => emailCheckCB(email),
-        findRoles: (email) => rolesCheckCB(email)
+        findRoles: (email) => rolesCheckCB(email),
+        findCount: (email) => countCheckCB(email)
     };
 }
 
