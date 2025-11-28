@@ -14,7 +14,7 @@ export async function countCheckM(email) {
             return {
                 status: "fail",
                 message: `Email not found: ${fullEmail}`,
-                detail: `Collection: ${collection}`,
+                detail: `Collection: '${collection}'`,
                 data: [],
             };
         }
@@ -46,7 +46,7 @@ export async function countCheckM(email) {
             detail: `Collection: ' ${collection} '.  Field: ' ${field} '`,
             data: fieldCount
         };
-        
+
     } catch (error) {
         return {
             status: "error",

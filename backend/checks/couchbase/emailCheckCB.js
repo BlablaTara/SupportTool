@@ -26,7 +26,7 @@ export async function emailCheckCB(email) {
 
     return {
       status: data.length ? "success" : "fail",
-      message: data.length ? `Email found: ${fullEmail}` : `Email not found`,
+      message: data.length ? `Email found: ${fullEmail}` : `Email not found: ${fullEmail}`,
       detail: `Collection: ' ${collection} '`,
       data,
     };

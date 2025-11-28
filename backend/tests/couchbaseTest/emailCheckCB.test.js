@@ -45,14 +45,14 @@ describe("emailCheckCB()", () => {
     const result = await emailCheckCB("exists@test.dk");
     expect(result.status).toBe("success");
     expect(result.data.length).toBe(1);
-    expect(result.message).toBe("User found: exists@test.dk");
+    expect(result.message).toBe("Email found: exists@test.dk");
   });
 
   test("returns fail when email does not exist", async () => {
     const result = await emailCheckCB("notfound@test.dk");
     expect(result.status).toBe("fail");
     expect(result.data.length).toBe(0);
-    expect(result.message).toBe("User does not exist");
+    expect(result.message).toBe("Email not found: notfound@test.dk");
   });
 
   test("returns error for missing index", async () => {

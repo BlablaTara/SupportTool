@@ -29,8 +29,8 @@ describe("emailCheckM()", () =>{
 
         expect(result).toEqual({
             status: "success",
-            message: "User found: exists@test.dk",
-            detail: "users",
+            message: "Email found: exists@test.dk",
+            detail: "Collection: 'users'",
             data: [{ email: "exists@test.dk" }]
         });
     });
@@ -42,8 +42,8 @@ describe("emailCheckM()", () =>{
 
         expect(result).toEqual({
             status: "fail",
-            message: "User does not exist: notfound@test.dk",
-            detail: "users",
+            message: "Email not found: notfound@test.dk",
+            detail: "Collection: 'users'",
             data: []
         });
     });

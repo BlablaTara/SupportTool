@@ -14,7 +14,7 @@ export async function rolesCheckM(email) {
       return {
         status: "fail",
         message: `Email not found: ${fullEmail}`,
-        detail: collection,
+        detail: `Collection: '${collection}'`,
         data: [],
       };
     }

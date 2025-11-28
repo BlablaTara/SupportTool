@@ -21,8 +21,8 @@ export async function countCheckCB(email) {
         if (!result.rows || result.rows.length === 0) {
             return {
                 status: "fail",
-                message: `User not found: ${fullEmail}`,
-                detail: `Collection: ${collection}`,
+                message: `Email not found: ${fullEmail}`,
+                detail: `Collection: '${collection}'`,
                 data: [],
             };
         }
