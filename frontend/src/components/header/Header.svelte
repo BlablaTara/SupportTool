@@ -1,5 +1,5 @@
 <script>
-    import '../../../public/css/header.css'
+    import '../../css/header.css'
     import Logo from "./Logo.svelte";
     import EnvBadge from "./EnvBadge.svelte";
     import DBBadge from "./DBBadge.svelte";

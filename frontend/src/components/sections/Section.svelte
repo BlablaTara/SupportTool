@@ -1,5 +1,5 @@
 <script>
-  import '../../../public/css/section.css'
+  import '../../css/section.css'
   import { checks } from '../../stores/checksStore.js';
   import ResultItem from '../ResultItem.svelte';
   import Summary from './Summary.svelte';
