@@ -1,25 +1,25 @@
 <script>
-    import { addCheck } from "../stores/checksStore";
-    
+    import { addCheck } from "../stores/checksStore.js";
+
     export let email = "";
     let loading = false;
 
     $: if (email) {
-        runRolesCheck();
+        runCountCheck();
     }
 
-    async function runRolesCheck() {
+    async function runCountCheck() {
         if (!email) return;
 
         loading = true;
 
         try {
-            const res = await fetch(`http://localhost:8080/api/users/roles?email=${email}`);
+            const res = await fetch(`http://localhost:8080/api/users/count?email=${email}`);
             const data = await res.json();
 
             addCheck("user", {
                 id: crypto.randomUUID(),
-                title: "Roles Check",
+                title: "Count Check",
                 status: data.status,
                 message: data.message,
                 detail: data.detail
@@ -28,14 +28,13 @@
         } catch (error) {
             addCheck("user", {
                 id: crypto.randomUUID(),
-                title: "Roles Check",
+                title: "Count Check",
                 status: "error",
-                message: "Failed to fetch roles",
+                message: "Failed to fetch from backend",
                 detail: error.message
             });
         }
         loading = false;
     }
-
+    
 </script>
-

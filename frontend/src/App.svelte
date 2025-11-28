@@ -3,6 +3,7 @@ import Section from "./components/sections/Section.svelte";
   import EmailCheck from "./components/EmailCheck.svelte";
   import Header from "./components/header/Header.svelte";
   import RolesCheck from "./components/RolesCheck.svelte";
+  import CountCheck from "./components/CountCheck.svelte";
 
   let email = "";
 </script>
@@ -13,7 +14,8 @@ import Section from "./components/sections/Section.svelte";
 <div class="section-container">
     <Section title="User Validation" section="user">
         <EmailCheck on:validate={(e) => email = e.detail.email }/>
-        <RolesCheck {email}/>
+        <RolesCheck {email} />
+        <CountCheck {email} />
     </Section>
 
     <Section title="DB Validation" section="db">

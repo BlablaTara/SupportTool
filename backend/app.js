@@ -9,6 +9,7 @@ import homeRouter from "./routes/homeRouter.js";
 import headerRouter from "./routes/headerRouter.js";
 import usersRouter from "./routes/usersRouter.js";
 import rolesRouter from "./routes/rolesRouter.js";
+import countRouter from "./routes/countRouter.js";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -32,6 +33,8 @@ app.use("/api", headerRouter);
 app.use("/api", usersRouter);
 
 app.use("/api", rolesRouter);
+
+app.use("/api", countRouter);
 
 const PORT = 8080;
 app.listen(PORT, () => console.log("Server is running on: ", PORT));

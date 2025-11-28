@@ -5,6 +5,7 @@ import { fileURLToPath } from "url";
 import { connectMongo } from "./mongoDriver.js";
 import { emailCheckM } from "../checks/mongo/emailCheckM.js";
 import { rolesCheckM } from "../checks/mongo/rolesCheckM.js";
+import { countCheckM } from "../checks/mongo/countCheckM.js";
 
 
 const __filename = fileURLToPath(import.meta.url);
@@ -21,7 +22,8 @@ if (process.env.DB_TYPE === "MongoDB") {
     await connectMongo();
     driver = {
         findEmail: (email) => emailCheckM(email),
-        findRoles: (email) => rolesCheckM(email)
+        findRoles: (email) => rolesCheckM(email),
+        findCount: (email) => countCheckM(email),
     };
 } else if (process.env.DB_TYPE === "Couchbase") {
     
