@@ -6,6 +6,7 @@
 
     $: if (email) {
         runRolesCheck();
+        
     }
 
     async function runRolesCheck() {
