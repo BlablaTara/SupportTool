@@ -5,6 +5,7 @@ export async function countCheckCB(email) {
     const fullEmail = emailEnding(email);
     const collection = process.env.COUNT_COLLECTION;
     const field = process.env.COUNT_FIELD;
+    const title = process.env.COUNT_TITLE
     const { cluster } = await connectCouchbase();
 
     const query = `
@@ -21,6 +22,7 @@ export async function countCheckCB(email) {
         if (!result.rows || result.rows.length === 0) {
             return {
                 status: "fail",
+                title,
                 message: `Email not found: ${fullEmail}`,
                 detail: `Collection: '${collection}'`,
                 data: [],
@@ -32,6 +34,7 @@ export async function countCheckCB(email) {
         if (value === undefined) {
             return {
                 status: "fail",
+                title,
                 message: `${fullEmail} has no '${field}' field`,
                 detail: `Collection: '${collection}', Field: '${field}'`,
                 data: [],
@@ -41,6 +44,7 @@ export async function countCheckCB(email) {
         if (!Array.isArray(value)) {
             return {
                 status: "fail",
+                title,
                 message: `'${field}' exists, but is not an array.`,
                 detail: `Found type: ${typeof value}`,
                 data: [],
@@ -52,6 +56,7 @@ export async function countCheckCB(email) {
         if (fieldCount === 0) {
             return {
                 status: "fail",
+                title,
                 message: `${fullEmail}, has 0 ${field}`,
                 detail: `Collection: ' ${collection} '.  Field: ' ${field} '`,
                 data: [],
@@ -60,6 +65,7 @@ export async function countCheckCB(email) {
 
         return {
             status: "success",
+            title,
             message: `${fullEmail}, has ${fieldCount} ${field}`,
             detail: `Collection: ' ${collection} '.  Field: ' ${field} '`,
             data: fieldCount
@@ -74,6 +80,7 @@ export async function countCheckCB(email) {
         if (missingIndex) {
             return {
                 status: "error",
+                title,
                 message: "Required index is missing",
                 detail: `CREATE INDEX idx_email ON \`${BUCKET}\`.\`${SCOPE}\`.\`${collection}\`(email);`,
             };
@@ -81,6 +88,7 @@ export async function countCheckCB(email) {
         } else if (keyspaceNotFound) {
             return {
                 status: "error",
+                title,
                 message: `The bucket/scope/collection does not exist`,
                 detail: error.cause.first_error_message,
             };
@@ -88,6 +96,7 @@ export async function countCheckCB(email) {
 
         return {
         status: "error",
+        title,
         message: "Unknown Couchbase error",
         detail: error.message,
         };
