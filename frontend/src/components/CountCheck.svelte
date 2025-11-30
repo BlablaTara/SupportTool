@@ -5,36 +5,38 @@
     let loading = false;
 
     $: if (email) {
-        runCountCheck();
+        runCountChecks();
     }
 
-    async function runCountCheck() {
+    async function runCountChecks() {
         if (!email) return;
 
         loading = true;
 
         try {
             const res = await fetch(`http://localhost:8080/api/users/count?email=${email}`);
-            const data = await res.json();
+            const data = await res.json(); // data er et array af check-resultater
 
-            addCheck("user", {
-                id: crypto.randomUUID(),
-                title: data.title,
-                status: data.status,
-                message: data.message,
-                detail: data.detail
-            });
+            for (const check of data) {
+                addCheck("user", {
+                    id: crypto.randomUUID(),
+                    title: check.title,
+                    status: check.status,
+                    message: check.message,
+                    detail: check.detail
+                });
+            }
 
         } catch (error) {
             addCheck("user", {
                 id: crypto.randomUUID(),
-                title: "Count Check",
+                title: "Count Checks",
                 status: "error",
                 message: "Failed to fetch from backend",
                 detail: error.message
             });
         }
+
         loading = false;
     }
-    
 </script>

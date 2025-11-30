@@ -6,6 +6,8 @@ import { connectMongo } from "./mongoDriver.js";
 import { emailCheckM } from "../checks/mongo/emailCheckM.js";
 import { rolesCheckM } from "../checks/mongo/rolesCheckM.js";
 import { countCheckM } from "../checks/mongo/countCheckM.js";
+import { parseCountChecks } from "../utils/parseCountChecks.js";
+import { dynamicCountCheckM } from "../checks/mongo/dynamicCountCheckM.js";
 
 
 const __filename = fileURLToPath(import.meta.url);
@@ -15,15 +17,17 @@ dotenv.config({
     path: path.join(__dirname, "..", "..", ".env")
 });
 
+export const COUNT_CHECK_CONFIG = parseCountChecks(process.env.COUNT_CHECKS);
 
 let driver = {};
 
 if (process.env.DB_TYPE === "MongoDB") {
+    
     await connectMongo();
     driver = {
         findEmail: (email) => emailCheckM(email),
         findRoles: (email) => rolesCheckM(email),
-        findCount: (email) => countCheckM(email),
+        findCount: (id, email) => dynamicCountCheckM(id, email),
     };
 } else if (process.env.DB_TYPE === "Couchbase") {
     

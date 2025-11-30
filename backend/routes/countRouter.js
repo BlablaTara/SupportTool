@@ -1,5 +1,6 @@
 import { Router } from "express";
 import db from "../db/db.js";
+import { COUNT_CHECK_CONFIG } from "../db/db.js";
 
 const router = Router();
 
@@ -15,17 +16,39 @@ router.get("/users/count", async (req, res) => {
         });
     }
 
-    const result = await db.findCount(email);
+    // const result = await db.findCount(email);
 
-    if (result.status === "error") {
-        return res.status(500).json(result);
+    // if (result.status === "error") {
+    //     return res.status(500).json(result);
+    // }
+
+    // if (result.status === "fail") {
+    //     return res.status(404).json(result);
+    // }
+
+    //const result = await db.findCount(email);
+    
+    const results = [];
+
+    for (const id in COUNT_CHECK_CONFIG) {
+        try {
+            const checkResult = await db.findCount(id, email);
+            results.push(checkResult);
+        } catch (error) {
+            results.push({
+                status: "error",
+                title: COUNT_CHECK_CONFIG[id].title,
+                message: "Count check failed",
+                detail: error.message,
+                data: []
+            });
+        }
     }
+    
+    
+    res.json(results);
 
-    if (result.status === "fail") {
-        return res.status(404).json(result);
-    }
-
-    return res.json(result);
+    //return res.json(result);
 });
 
 export default router;
