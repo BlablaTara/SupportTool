@@ -19,7 +19,7 @@
 
             addCheck("user", {
                 id: crypto.randomUUID(),
-                title: "Count Check",
+                title: data.title,
                 status: data.status,
                 message: data.message,
                 detail: data.detail
