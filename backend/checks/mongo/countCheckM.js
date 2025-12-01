@@ -1,11 +1,10 @@
 import { connectMongo } from "../../db/mongoDriver.js";
 import { emailEnding } from "../../utils/emailEnding.js";
 
-export async function countCheckM(email) {
+export async function countCheckM(config, email) {
     const fullEmail = emailEnding(email);
-    const collection = process.env.COUNT_COLLECTION
-    const field = process.env.COUNT_FIELD
-    const title = process.env.COUNT_TITLE || "Count Check"
+    const { title, collection, field } = config;
+
 
     try {
         const db = await connectMongo();
@@ -32,7 +31,7 @@ export async function countCheckM(email) {
         }
 
         const value = user[field];
-        const fieldCount = value.length;
+        const fieldCount = Array.isArray(value) ? value.length : 0;
 
         if (fieldCount === 0) {
             return {

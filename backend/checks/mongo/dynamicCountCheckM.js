@@ -1,9 +1,7 @@
 import { connectMongo } from "../../db/mongoDriver.js";
 import { emailEnding } from "../../utils/emailEnding.js";
-import { COUNT_CHECK_CONFIG } from "../../db/db.js";
 
 export async function dynamicCountCheckM(config, email) {
-    //const config = COUNT_CHECK_CONFIG[id];
     const fullEmail = emailEnding(email);
     const { title, collection, field } = config;
 

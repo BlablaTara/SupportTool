@@ -27,10 +27,10 @@ if (process.env.DB_TYPE === "MongoDB") {
     driver = {
         findEmail: (email) => emailCheckM(email),
         findRoles: (email) => rolesCheckM(email),
-        findCount: (config, email) => dynamicCountCheckM(config, email),
+        findCount: (config, email) => countCheckM(config, email),
     };
+
 } else if (process.env.DB_TYPE === "Couchbase") {
-    
     // imports here else node will crash bc CB will try to load native bindings
     // Therefor only couchbase import if couchbase is choosen.
     const { connectCouchbase } = await import( "./couchbaseDriver.js");
@@ -42,7 +42,7 @@ if (process.env.DB_TYPE === "MongoDB") {
     driver = {
         findEmail: (email) => emailCheckCB(email),
         findRoles: (email) => rolesCheckCB(email),
-        findCount: (email) => countCheckCB(email)
+        findCount: (config, email) => countCheckCB(config, email)
     };
 }
 

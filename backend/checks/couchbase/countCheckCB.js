@@ -1,11 +1,9 @@
 import { connectCouchbase, BUCKET, SCOPE } from "../../db/couchbaseDriver.js";
 import { emailEnding } from "../../utils/emailEnding.js";
 
-export async function countCheckCB(email) {
+export async function countCheckCB(config, email) {
     const fullEmail = emailEnding(email);
-    const collection = process.env.COUNT_COLLECTION;
-    const field = process.env.COUNT_FIELD;
-    const title = process.env.COUNT_TITLE
+    const { title, collection, field } = config;
     const { cluster } = await connectCouchbase();
 
     const query = `
