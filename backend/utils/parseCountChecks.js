@@ -14,7 +14,7 @@ export function parseCountChecks(envString) {
             id,
             collection,
             field,
-            title: title || "CountCheck"
+            title: title || "Count Check"
         };
         
     });
