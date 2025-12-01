@@ -2,22 +2,10 @@ import { connectMongo } from "../../db/mongoDriver.js";
 import { emailEnding } from "../../utils/emailEnding.js";
 import { COUNT_CHECK_CONFIG } from "../../db/db.js";
 
-export async function dynamicCountCheckM(id, email) {
-    const config = COUNT_CHECK_CONFIG[id];
-
-    if (!config) {
-        return {
-            status: "fail",
-            title: "Unknown Check",
-            message: `No count-check configuration found for id '${id}'`,
-            detail: "",
-            data: []
-        };
-    }
-
+export async function dynamicCountCheckM(config, email) {
+    //const config = COUNT_CHECK_CONFIG[id];
     const fullEmail = emailEnding(email);
-
-    const { collection, field, title } = config;
+    const { title, collection, field } = config;
 
     try {
         const db = await connectMongo();

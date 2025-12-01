@@ -27,7 +27,7 @@ if (process.env.DB_TYPE === "MongoDB") {
     driver = {
         findEmail: (email) => emailCheckM(email),
         findRoles: (email) => rolesCheckM(email),
-        findCount: (id, email) => dynamicCountCheckM(id, email),
+        findCount: (config, email) => dynamicCountCheckM(config, email),
     };
 } else if (process.env.DB_TYPE === "Couchbase") {
     

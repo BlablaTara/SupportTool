@@ -1,23 +1,14 @@
-export function parseCountChecks(envString) {
-    if (!envString) return {};
+export function parseCountChecks(countEnvString) {
+    if (!countEnvString) return [];
 
-    const checks = {};
-
-    envString.split(",").forEach(entry => {
-        const  [id, collectionField, title] = entry.split(":");
-
-        if (!id || !collectionField) return;
-
+    return countEnvString.split(",").filter(Boolean).map(entry => {
+        const [title, collectionField] = entry.split(":");
         const [collection, field] = collectionField.split(".");
 
-        checks[id] = {
-            id,
-            collection,
-            field,
-            title: title || "Count Check"
+        return {
+            title: title?.trim() || "Count Check",
+            collection: collection?.trim(),
+            field: field?.trim()
         };
-        
     });
-
-    return checks;
 }
