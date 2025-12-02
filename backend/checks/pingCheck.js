@@ -1,5 +1,5 @@
 
-export async function pingCheckM() {
+export async function pingCheck() {
     const pingURL = process.env.PING_URL
 
     try {
@@ -25,7 +25,7 @@ export async function pingCheckM() {
     } catch (error) {
         return {
             status: "error",
-            message: "Failed to get PingURL",
+            message: "Couln't ping this domain - Check the URL for misspelling.",
             detail: error.message,
         };
     }
