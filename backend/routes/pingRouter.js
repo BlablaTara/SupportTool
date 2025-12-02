@@ -1,5 +1,5 @@
 import { Router } from "express";
-import { pingCheckM } from "../checks/mongo/pingCheckM.js";
+import { pingCheckM } from "../checks/pingCheck.js";
 
 const router = Router();
 
