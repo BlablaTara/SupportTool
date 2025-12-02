@@ -1,7 +1,10 @@
 import { jest } from "@jest/globals";
 
-process.env.COUNT_COLLECTION = "users";
-process.env.COUNT_FIELD = "orders";
+const config = {
+    title: "Orders Check",
+    collection: "users",
+    field: "orders",
+};
 
 // Mock Couchbase driver
 let mockQuery;
@@ -30,10 +33,11 @@ describe("countCheckCB", () => {
             ]
         }));
 
-        const result = await countCheckCB("user@test.dk");
+        const result = await countCheckCB(config, "user@test.dk");
 
         expect(result).toEqual({
             status: "success",
+            title: "Orders Check",
             message: "user@test.dk, has 3 orders",
             detail: "Collection: ' users '.  Field: ' orders '",
             data: 3
@@ -47,10 +51,11 @@ describe("countCheckCB", () => {
             ]
         }));
 
-        const result = await countCheckCB("empty@test.dk");
+        const result = await countCheckCB(config, "empty@test.dk");
 
         expect(result).toEqual({
             status: "fail",
+            title: "Orders Check",
             message: "empty@test.dk, has 0 orders",
             detail: "Collection: ' users '.  Field: ' orders '",
             data: []
@@ -64,10 +69,11 @@ describe("countCheckCB", () => {
             ]
         }));
 
-        const result = await countCheckCB("nofield@test.dk");
+        const result = await countCheckCB(config, "nofield@test.dk");
 
         expect(result).toEqual({
             status: "fail",
+            title: "Orders Check",
             message: "nofield@test.dk has no 'orders' field",
             detail: "Collection: 'users', Field: 'orders'",
             data: []
@@ -79,10 +85,11 @@ describe("countCheckCB", () => {
             rows: []
         }));
 
-        const result = await countCheckCB("ghost@test.dk");
+        const result = await countCheckCB(config, "ghost@test.dk");
 
         expect(result).toEqual({
             status: "fail",
+            title: "Orders Check",
             message: "Email not found: ghost@test.dk",
             detail: "Collection: 'users'",
             data: []
@@ -96,10 +103,11 @@ describe("countCheckCB", () => {
             ]
         }));
 
-        const result = await countCheckCB("wrongtype@test.dk");
+        const result = await countCheckCB(config, "wrongtype@test.dk");
 
         expect(result).toEqual({
             status: "fail",
+            title: "Orders Check",
             message: "'orders' exists, but is not an array.",
             detail: "Found type: string",
             data: []
@@ -113,10 +121,11 @@ describe("countCheckCB", () => {
             throw error;
         });
 
-        const result = await countCheckCB("index@test.dk");
+        const result = await countCheckCB(config, "index@test.dk");
 
         expect(result).toEqual({
             status: "error",
+            title: "Orders Check",
             message: "Required index is missing",
             detail:
                 "CREATE INDEX idx_email ON `mockBucket`.`mockScope`.`users`(email);"
@@ -130,10 +139,11 @@ describe("countCheckCB", () => {
             throw error;
         });
 
-        const result = await countCheckCB("keyspace@test.dk");
+        const result = await countCheckCB(config, "keyspace@test.dk");
 
         expect(result).toEqual({
             status: "error",
+            title: "Orders Check",
             message: "The bucket/scope/collection does not exist",
             detail: "Keyspace not found"
         });
@@ -144,10 +154,11 @@ describe("countCheckCB", () => {
             throw new Error("Some random failure");
         });
 
-        const result = await countCheckCB("unknown@test.dk");
+        const result = await countCheckCB(config, "unknown@test.dk");
 
         expect(result).toEqual({
             status: "error",
+            title: "Orders Check",
             message: "Unknown Couchbase error",
             detail: "Some random failure"
         });

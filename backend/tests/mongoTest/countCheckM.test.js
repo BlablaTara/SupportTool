@@ -1,8 +1,11 @@
 import { jest } from "@jest/globals";
 
 // ENV for test
-process.env.COUNT_COLLECTION = "users";
-process.env.COUNT_FIELD = "orders";
+const config = {
+    title: "Orders Check",
+    collection: "users",
+    field: "orders",
+};
 
 // Mock mongoDriver before import
 let mockFindOne;
@@ -25,10 +28,11 @@ describe("countCheckM", () => {
             orders: ["a", "b", "c"]
         }));
 
-        const result = await countCheckM("array@test.dk");
+        const result = await countCheckM(config, "array@test.dk");
 
         expect(result).toEqual({
             status: "success",
+            title: "Orders Check",
             message: "array@test.dk, has 3 orders",
             detail: "Collection: ' users '.  Field: ' orders '",
             data: 3
@@ -41,10 +45,11 @@ describe("countCheckM", () => {
             orders: []
         }));
 
-        const result = await countCheckM("empty@test.dk");
+        const result = await countCheckM(config, "empty@test.dk");
 
         expect(result).toEqual({
             status: "fail",
+            title: "Orders Check",
             message: "empty@test.dk, has 0 orders",
             detail: "Collection: ' users '.  Field: ' orders '",
             data: []
@@ -57,10 +62,11 @@ describe("countCheckM", () => {
             otherField: []
         }));
 
-        const result = await countCheckM("nofield@test.dk");
+        const result = await countCheckM(config, "nofield@test.dk");
 
         expect(result).toEqual({
             status: "fail",
+            title: "Orders Check",
             message: "Field 'orders' does not exist on nofield@test.dk",
             detail: "Collection: 'users'. Field: 'orders'",
             data: []
@@ -70,10 +76,11 @@ describe("countCheckM", () => {
     test("returns fail when email not found", async () => {
         mockFindOne = jest.fn(async () => null);
 
-        const result = await countCheckM("ghost@test.dk");
+        const result = await countCheckM(config, "ghost@test.dk");
 
         expect(result).toEqual({
             status: "fail",
+            title: "Orders Check",
             message: "Email not found: ghost@test.dk",
             detail: "Collection: 'users'",
             data: []
@@ -85,10 +92,11 @@ describe("countCheckM", () => {
             throw new Error("Mongo boom");
         });
 
-        const result = await countCheckM("error@test.dk");
+        const result = await countCheckM(config, "error@test.dk");
 
         expect(result).toEqual({
             status: "error",
+            title: "Orders Check",
             message: "MongoDB role-query failed",
             detail: "Mongo boom"
         });
