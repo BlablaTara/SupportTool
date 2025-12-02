@@ -4,7 +4,7 @@ import { jest } from "@jest/globals";
 const config = {
     title: "Orders Check",
     collection: "users",
-    field: "orders",
+    field: "orders"
 };
 
 // Mock mongoDriver before import
