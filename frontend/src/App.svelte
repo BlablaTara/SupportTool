@@ -4,6 +4,8 @@ import Section from "./components/sections/Section.svelte";
   import Header from "./components/header/Header.svelte";
   import RolesCheck from "./components/RolesCheck.svelte";
   import CountCheck from "./components/CountCheck.svelte";
+  
+  import PingCheck from "./components/PingCheck.svelte";
 
   let email = "";
 </script>
@@ -19,6 +21,7 @@ import Section from "./components/sections/Section.svelte";
     </Section>
 
     <Section title="DB Validation" section="db">
+      <PingCheck />
     </Section>
 
     <Section title="BTP Service Validation" section="btp">

@@ -23,9 +23,9 @@ router.get("/users/email", async (req, res) => {
         return res.status(500).json(result);
     }
 
-    if (result.status === "fail") {
-        return res.status(404).json(result);
-    }
+    // if (result.status === "fail") {
+    //     return res.status(404).json(result);
+    // }
 
     return res.json(result);
 });
