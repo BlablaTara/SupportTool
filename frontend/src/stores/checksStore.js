@@ -17,15 +17,7 @@ export function addCheck(section, check) {
 
         const existingIndex = all[section].findIndex(c => c.title === check.title);
 
-        // if checks with this title exists -> replace it
-        // if (existingIndex !== -1) {
-        //     all[section] [existingIndex] = check;
-        // } else {
-        //     // else add new
-        //     all[section].push(check);
-        // }
         if (existingIndex !== -1) {
-            // replace med NYT array så Svelte registrerer ændring
             all[section] = [
                 ...all[section].slice(0, existingIndex),
                 check,

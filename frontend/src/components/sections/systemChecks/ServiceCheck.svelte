@@ -2,8 +2,6 @@
   import { onMount } from "svelte";
   import { addCheck } from "../../../stores/checksStore.js";
 
-
-
     let loading = false;
 
     onMount(() => {
@@ -18,8 +16,6 @@
             const res = await fetch("http://localhost:8080/api/services");
             const data = await res.json();
 
-            console.log("DEBUG: /api/services returned:", data);
-
             addCheck("system", {
                 id: crypto.randomUUID(),
                 title: "Service Check",
@@ -29,11 +25,6 @@
                 table: data.data
             });
 
-            // confirm store update immediately
-            console.log("DEBUG: added check to store:", {
-            title: "Service Check",
-            table: data.data
-            });
 
         } catch (error) {
             addCheck("system", {
@@ -44,7 +35,7 @@
                 detail: error.message,
                 table: []
             });
-            console.error("DEBUG: fetch error", error);
+
         }
 
         loading = false;

@@ -15,7 +15,7 @@
 
         try {
             const res = await fetch(`http://localhost:8080/api/users/count?email=${email}`);
-            const data = await res.json(); // data er et array af check-resultater
+            const data = await res.json(); 
 
             for (const check of data) {
                 addCheck("user", {

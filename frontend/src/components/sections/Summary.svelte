@@ -9,7 +9,6 @@
     $: successCount = allChecks.filter(c => c.status === "success").length;
     $: failCount = allChecks.filter(c => c.status === "fail").length;
 
-
 </script>
 
 <div class="summary-container">

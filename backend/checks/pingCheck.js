@@ -12,7 +12,6 @@ export async function pingCheck() {
                 detail: pingURL,
                 data: [],
             };
-
         }
 
         return {
