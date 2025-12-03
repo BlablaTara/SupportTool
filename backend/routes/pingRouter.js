@@ -1,11 +1,11 @@
 import { Router } from "express";
-import { pingCheckM } from "../checks/pingCheck.js";
+import { pingCheck } from "../checks/pingCheck.js";
 
 const router = Router();
 
 router.get("/ping", async (req, res) => {
 
-    const result = await pingCheckM();
+    const result = await pingCheck();
 
     if (result.status === "error") {
         return res.status(500).json(result);

@@ -15,7 +15,7 @@
             const res = await fetch('http://localhost:8080/api/ping');
             const data = await res.json();
 
-            addCheck("btp", {
+            addCheck("system", {
                 id: crypto.randomUUID(),
                 title: "Ping Check",
                 status: data.status,
@@ -24,7 +24,7 @@
             });
 
         } catch (error) {
-            addCheck("btp", {
+            addCheck("system", {
                 id: crypto.randomUUID(),
                 title: "Ping Check",
                 status: "error",

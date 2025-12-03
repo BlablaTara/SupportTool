@@ -1,4 +1,4 @@
-import { parseServices } from "../utils/parseServices";
+import { parseServices } from "../utils/parseServices.js";
 
 export async function serviceCheck(config) {
     //const { name, devURL, testURL, prodURL } = parseServices(process.env.SERVICE_CHECKS);

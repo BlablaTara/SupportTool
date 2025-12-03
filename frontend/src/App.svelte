@@ -24,7 +24,7 @@ import Section from "./components/sections/Section.svelte";
       <PingCheck />
     </Section>
 
-    <Section title="BTP Service Validation" section="btp">
+    <Section title="System Service Validation" section="system">
     </Section>
 </div>
 

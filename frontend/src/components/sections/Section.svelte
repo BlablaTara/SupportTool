@@ -5,7 +5,7 @@
   import Summary from './Summary.svelte';
 
     export let title = "Section Title";
-    export let section; // user, db, btp
+    export let section; // user, db, system
 </script>
 
 <section class="section">

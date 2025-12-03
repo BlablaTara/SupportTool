@@ -3,7 +3,7 @@ import { writable } from "svelte/store";
 export const checks = writable({
     user: [],
     db: [],
-    btp: []
+    system: []
 });
 
 // adding check to a specifik section

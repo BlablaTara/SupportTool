@@ -5,7 +5,7 @@
     $: all = [
         ...$checks.user,
         ...$checks.db,
-        ...$checks.btp
+        ...$checks.system
     ];
 </script>
 
