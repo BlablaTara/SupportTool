@@ -1,5 +1,9 @@
 import { parseServices } from "../utils/parseServices.js";
 
+
+console.log("SERVICE_CHECKS raw:", process.env.SERVICE_CHECKS);
+console.log("Parsed services:", parseServices(process.env.SERVICE_CHECKS));
+
 export async function serviceCheck(config) {
     //const { name, devURL, testURL, prodURL } = parseServices(process.env.SERVICE_CHECKS);
     const services = parseServices(process.env.SERVICE_CHECKS);
@@ -48,7 +52,7 @@ export async function serviceCheck(config) {
 
             } catch (error) {
                 row[label] = "Down";
-                row.errors.push(`(label) error: ${error.message}`);
+                row.errors.push(`${label} error: ${error.message}`);
             }
 
         }

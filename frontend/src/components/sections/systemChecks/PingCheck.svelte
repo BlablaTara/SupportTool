@@ -1,6 +1,6 @@
 <script>
     import { onMount } from "svelte";
-    import { addCheck } from "../stores/checksStore.js";
+    import { addCheck } from "../../../stores/checksStore.js";
 
     let loading = false;
 

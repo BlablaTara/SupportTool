@@ -1,11 +1,11 @@
 <script>
   import '../../css/section.css'
-  import { checks } from '../../stores/checksStore.js';
-  import ResultItem from '../ResultItem.svelte';
+  import ChecksList from '../ChecksList.svelte';
   import Summary from './Summary.svelte';
 
     export let title = "Section Title";
     export let section; // user, db, system
+
 </script>
 
 <section class="section">
@@ -18,9 +18,7 @@
           <Summary section={section} />
         </div>
 
-        {#each $checks[section] as check}
-          <ResultItem {...check} />
-        {/each}  
+        <ChecksList {section}/>
     </div>
 
 </section>

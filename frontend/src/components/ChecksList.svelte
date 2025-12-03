@@ -1,16 +1,17 @@
 <script>
     import { checks } from "../stores/checksStore.js";
     import ResultItem from "./ResultItem.svelte";
+    import ResultItemWithTable from "./ResultItemWithTable.svelte";
 
-    $: all = [
-        ...$checks.user,
-        ...$checks.db,
-        ...$checks.system
-    ];
+    export let section;
+
+    $: sectionChecks = $checks[section] || [];
 </script>
 
-<h2>Results</h2>
-
-{#each all as check}
-    <ResultItem {...check} />
+{#each sectionChecks as check (check.id)}
+    {#if check.title === "Service Check"}
+        <ResultItemWithTable {...check} />
+    {:else}
+        <ResultItem {...check} />
+    {/if}
 {/each}

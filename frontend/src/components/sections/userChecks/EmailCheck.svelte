@@ -1,7 +1,7 @@
 <script>
   import { onMount } from "svelte";
   import { createEventDispatcher } from "svelte";
-  import { addCheck, clearSection } from "../stores/checksStore.js";
+  import { addCheck, clearSection } from "../../../stores/checksStore.js";
   //let email = "test@test.dk";
   let email = "";
   let loading = false;

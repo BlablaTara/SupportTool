@@ -1,5 +1,5 @@
 <script>
-    import { addCheck } from "../stores/checksStore.js";
+    import { addCheck } from "../../../stores/checksStore.js";
 
     export let email = "";
     let loading = false;

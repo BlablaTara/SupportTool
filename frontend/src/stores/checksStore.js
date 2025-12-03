@@ -9,14 +9,30 @@ export const checks = writable({
 // adding check to a specifik section
 export function addCheck(section, check) {
     checks.update(all => {
+
+        if (check.title === "Service Check") {
+            all[section] = [...all[section], check];
+            return all;
+        }
+
         const existingIndex = all[section].findIndex(c => c.title === check.title);
 
         // if checks with this title exists -> replace it
+        // if (existingIndex !== -1) {
+        //     all[section] [existingIndex] = check;
+        // } else {
+        //     // else add new
+        //     all[section].push(check);
+        // }
         if (existingIndex !== -1) {
-            all[section] [existingIndex] = check;
+            // replace med NYT array så Svelte registrerer ændring
+            all[section] = [
+                ...all[section].slice(0, existingIndex),
+                check,
+                ...all[section].slice(existingIndex+1)
+            ];
         } else {
-            // else add new
-            all[section].push(check);
+            all[section] = [...all[section], check];
         }
 
         return all;
