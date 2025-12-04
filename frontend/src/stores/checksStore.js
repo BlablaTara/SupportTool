@@ -10,11 +10,6 @@ export const checks = writable({
 export function addCheck(section, check) {
     checks.update(all => {
 
-        if (check.title === "Service Check") {
-            all[section] = [...all[section], check];
-            return all;
-        }
-
         const existingIndex = all[section].findIndex(c => c.title === check.title);
 
         if (existingIndex !== -1) {

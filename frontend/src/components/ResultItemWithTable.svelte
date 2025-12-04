@@ -8,10 +8,11 @@
   export let table = [];
 
   let open = false;
+  
   function toggle() {
     open = !open;
-        console.log("DEBUG toggle clicked, open =", open);
   }
+
 </script>
 
 <div class="result-item {status}">
@@ -87,7 +88,7 @@
     border-radius: 6px;
     cursor: pointer;
   }
-  
+
 
   .toggle-btn:hover {
     background: #eee;

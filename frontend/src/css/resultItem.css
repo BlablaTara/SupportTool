@@ -14,6 +14,11 @@
   border-left: 3px solid #e13c3c;
 }
 
+.result-item.error {
+  background: #fffbe0;
+  border-left: 3px solid #e1d63c;
+}
+
 .result-item h4 {
   margin-bottom: 0.4rem;
 }

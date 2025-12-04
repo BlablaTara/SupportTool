@@ -11,7 +11,6 @@ export async function serviceCheck(config) {
         return {
             status: "error",
             message: "No services configured in backend (SERVICE_CHECKS)",
-            detail: null,
             data: []
         };
     }
@@ -68,9 +67,6 @@ export async function serviceCheck(config) {
     return {
         status: hasFailures ? "fail" :  "success",
         message: `${results.length} service(s) checked`,
-        detail: hasFailures
-            ? "One or more services could not be reached."
-            : "All services reachable.",
         data: results
     };
 

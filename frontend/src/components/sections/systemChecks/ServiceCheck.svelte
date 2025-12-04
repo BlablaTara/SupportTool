@@ -21,7 +21,6 @@
                 title: "Service Check",
                 status: data.status,
                 message: data.message,
-                detail: data.detail,
                 table: data.data
             });
 
