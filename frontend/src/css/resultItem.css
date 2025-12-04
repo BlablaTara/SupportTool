@@ -21,10 +21,11 @@
 
 .result-item h4 {
   margin-bottom: 0.4rem;
+  font-size: 1rem;
 }
 
 .result-item p {
-    font-size: 0.9rem;
+  font-size: 0.9rem;
   margin: 0.7rem 0 0.3rem;
 }
 
@@ -32,6 +33,75 @@
   display: block;
   font-size: 0.8rem;
   font-style: italic;
-  margin-top: 0.3rem;
+  margin-top: 0.4rem;
   color: #575757;
 }
+
+/* STYLING FOR ITEMS WITH TABLE */
+
+.toggle-btn {
+  display: flex;
+  width: 100%;
+  font-size: 0.9rem;
+  margin: 0.7rem 0 0.3rem;
+  border: 0px solid #ccc;
+  background: #fafafa00;
+  cursor: pointer;
+  gap: 5px;
+
+}
+
+.chevron {
+  transition: transform 0.2s ease;
+  width: 20px;
+  height: 20px;
+}
+
+.chevron.rotated {
+  transform: rotate(180deg);
+}
+
+.chevron path {
+  stroke-width: 3;
+  stroke: currentColor;
+  fill: none;
+}
+
+.item-table-wrapper {
+  background: #ffffffbf;          
+  margin-top: 15px;
+  border-radius: 6px;
+}
+
+.item-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.item-table th,
+.item-table td {
+  padding: 8px;
+  border: 1px solid #ccc;
+  font-size: 0.9rem;
+  text-align: center;
+}
+
+.item-table th:first-child,
+.item-table td:first-child {
+  text-align: left;
+}
+
+
+/* VERSION BADGE */
+
+.badge {
+  padding: 2px 6px;
+  border-radius: 4px;
+  font-size: 0.8rem;
+  font-weight: bold;
+  color: #fff;
+}
+
+.badge.success { background: #57ac57; }
+.badge.fail { background: #e13c3c; }
+.badge.error { background: #e1d63c; }

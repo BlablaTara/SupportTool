@@ -1,8 +1,8 @@
 import { parseServices } from "../utils/parseServices.js";
 
 
-console.log("SERVICE_CHECKS raw:", process.env.SERVICE_CHECKS);
-console.log("Parsed services:", parseServices(process.env.SERVICE_CHECKS));
+// console.log("SERVICE_CHECKS raw:", process.env.SERVICE_CHECKS);
+// console.log("Parsed services:", parseServices(process.env.SERVICE_CHECKS));
 
 export async function serviceCheck(config) {
     const services = parseServices(process.env.SERVICE_CHECKS);
@@ -31,28 +31,39 @@ export async function serviceCheck(config) {
         async function checkServiceVersionEnv(label, url) {
             if (!url) {
                 row[label] = "No URL";
+                row.errors.push(`${label} error: URL missing`);
                 return;
             }
 
-            try {
-                // Hvad hvis det er en https???
-                const res = await fetch(`http://${url}/version`);
+            const protocols = ["http", "https"];
+            let success = false;
 
-                if (!res.ok) {
-                    row[label] = `HTTP ${res.status}`;
-                    row.errors.push(`${label} failed: HTTP ${res.status}`);
-                    return;
+            for (const protocol of protocols) {
+                try {
+
+                    const res = await fetch(`${protocol}://${url}/version`);
+
+                    if (res.ok) {
+                        const json = await res.json();
+                        row[label] = json.version ?? "Unknown";
+                        success = true;
+                        break;
+                    } else {
+                        row[label] = `HTTP ${res.status}`;
+                        row.errors.push(`${label} failed: HTTP ${res.status}`); 
+                    }
+                
+                } catch (error) {
+                    row[label] = "Down";
+                    row.errors.push(`${label} fail: ${error.message}`);
                 }
 
-                const json = await res.json();
-
-                row[label] = json.version ?? "Unknown";
-
-            } catch (error) {
-                row[label] = "Down";
-                row.errors.push(`${label} error: ${error.message}`);
             }
 
+            if (!success && !row.errors.find(e => e.startsWith(label))) {
+                row[label] = "Down";
+                row.errors.push(`${label} fail: Could not reach service`);
+            }
         }
 
         await checkServiceVersionEnv("dev", service.devURL);
