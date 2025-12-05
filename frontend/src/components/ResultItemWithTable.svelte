@@ -13,8 +13,8 @@
     }
 
     function getBadgeClass(value) {
-        if (!value || value === "No URL") return "error";
-        if (value === "Down") return "fail";
+        if (!value || value === "error") return "error";
+        if (value === "down") return "fail";
         if (value.startsWith("HTTP")) return "fail";
         if (value === "Unknown") return "fail";
         return "success";

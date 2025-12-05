@@ -30,7 +30,7 @@ export async function serviceCheck(config) {
         // Helper that checks every environment for a service
         async function checkServiceVersionEnv(label, url) {
             if (!url) {
-                row[label] = "No URL";
+                row[label] = "error";
                 row.errors.push(`${label} error: URL missing`);
                 return;
             }
@@ -45,7 +45,7 @@ export async function serviceCheck(config) {
 
                     if (res.ok) {
                         const json = await res.json();
-                        row[label] = json.version ?? "Unknown";
+                        row[label] = json.version;
                         success = true;
                         break;
                     } else {
@@ -54,16 +54,13 @@ export async function serviceCheck(config) {
                     }
                 
                 } catch (error) {
-                    row[label] = "Down";
+                    row[label] = "down";
                     row.errors.push(`${label} fail: ${error.message}`);
                 }
 
             }
 
-            if (!success && !row.errors.find(e => e.startsWith(label))) {
-                row[label] = "Down";
-                row.errors.push(`${label} fail: Could not reach service`);
-            }
+
         }
 
         await checkServiceVersionEnv("dev", service.devURL);
