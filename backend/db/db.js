@@ -7,6 +7,8 @@ import { emailCheckM } from "../checks/mongo/emailCheckM.js";
 import { rolesCheckM } from "../checks/mongo/rolesCheckM.js";
 import { countCheckM } from "../checks/mongo/countCheckM.js";
 import { parseCountChecks } from "../utils/parseCountChecks.js";
+import { collectionsCheckM } from "../checks/mongo/collectionsCheckM.js";
+import { parseCollectionsCheck } from "../utils/parseCollectionsCheck.js";
 
 
 const __filename = fileURLToPath(import.meta.url);
@@ -17,6 +19,7 @@ dotenv.config({
 });
 
 export const COUNT_CHECK_CONFIG = parseCountChecks(process.env.COUNT_CHECKS);
+export const COLLECTIONS_CHECK_CONFIG = parseCollectionsCheck(process.env.COLLECTIONS_CHECK);
 
 let driver = {};
 
@@ -27,6 +30,7 @@ if (process.env.DB_TYPE === "MongoDB") {
         findEmail: (email) => emailCheckM(email),
         findRoles: (email) => rolesCheckM(email),
         findCount: (config, email) => countCheckM(config, email),
+        checkCollections: () => collectionsCheck
     };
 
 } else if (process.env.DB_TYPE === "Couchbase") {
