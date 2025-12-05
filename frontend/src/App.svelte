@@ -7,6 +7,7 @@ import Section from "./components/sections/Section.svelte";
   
   import PingCheck from "./components/sections/systemChecks/PingCheck.svelte";
   import ServiceCheck from "./components/sections/systemChecks/ServiceCheck.svelte";
+  import CollectionsCheck from "./components/sections/dbChecks/CollectionsCheck.svelte";
 
   let email = "";
 </script>
@@ -22,10 +23,11 @@ import Section from "./components/sections/Section.svelte";
     </Section>
 
     <Section title="DB Validation" section="db">
-      <PingCheck />
+      <CollectionsCheck />
     </Section>
 
     <Section title="System Service Validation" section="system">
+      <PingCheck />
       <ServiceCheck />
     </Section>
 </div>

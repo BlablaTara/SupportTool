@@ -30,7 +30,7 @@ if (process.env.DB_TYPE === "MongoDB") {
         findEmail: (email) => emailCheckM(email),
         findRoles: (email) => rolesCheckM(email),
         findCount: (config, email) => countCheckM(config, email),
-        checkCollections: () => collectionsCheck
+        checkCollections: () => collectionsCheckM(COLLECTIONS_CHECK_CONFIG),
     };
 
 } else if (process.env.DB_TYPE === "Couchbase") {

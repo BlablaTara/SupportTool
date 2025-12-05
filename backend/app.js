@@ -11,6 +11,8 @@ import usersRouter from "./routes/usersRouter.js";
 import rolesRouter from "./routes/rolesRouter.js";
 import countRouter from "./routes/countRouter.js";
 
+import collectionsRouter from "./routes/collectionsRouter.js";
+
 import pingRouter from "./routes/pingRouter.js";
 import serviceRouter from "./routes/serviceRouter.js";
 
@@ -35,6 +37,8 @@ app.use("/api", headerRouter);
 app.use("/api", usersRouter);
 app.use("/api", rolesRouter);
 app.use("/api", countRouter);
+
+app.use("/api", collectionsRouter);
 
 app.use("/api", pingRouter);
 app.use("/api", serviceRouter);
