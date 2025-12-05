@@ -36,32 +36,29 @@ export async function serviceCheck(config) {
             }
 
             const protocols = ["http", "https"];
-            let success = false;
+            let lastError = null;
 
             for (const protocol of protocols) {
                 try {
-
                     const res = await fetch(`${protocol}://${url}/version`);
 
                     if (res.ok) {
                         const json = await res.json();
                         row[label] = json.version;
-                        success = true;
-                        break;
+                        return;
                     } else {
-                        row[label] = `HTTP ${res.status}`;
-                        row.errors.push(`${label} failed: HTTP ${res.status}`); 
+                        lastError = `HTTP ${res.status}`;
                     }
-                
-                } catch (error) {
-                    row[label] = "down";
-                    row.errors.push(`${label} fail: ${error.message}`);
-                }
 
+                } catch (error) {
+                    lastError = error.message;
+                }
             }
 
-
+            row[label] = "down";
+            row.errors.push(`${label} fail: ${lastError}`);
         }
+
 
         await checkServiceVersionEnv("dev", service.devURL);
         await checkServiceVersionEnv("test", service.testURL);
