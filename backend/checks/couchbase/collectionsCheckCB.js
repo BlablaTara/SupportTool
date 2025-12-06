@@ -1,4 +1,4 @@
-import { connectCouchbase } from "../../db/couchbaseDriver.js";
+import { connectCouchbase, BUCKET, SCOPE } from "../../db/couchbaseDriver.js";
 
 export async function collectionsCheckCB(collections) {
     try {
