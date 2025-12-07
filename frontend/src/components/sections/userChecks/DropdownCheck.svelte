@@ -24,7 +24,7 @@
                     title: check.title,
                     status: check.status,
                     message: check.message,
-                    items: check.detail,
+                    items: check.data || [],
                     renderType: "dropdown"
                 
                 });

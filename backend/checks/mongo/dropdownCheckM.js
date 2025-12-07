@@ -72,7 +72,7 @@ export async function dropdownCheckM(config, email) {
             message: `${count} recent '${field}' found`,
             detail: `Collection: '${collection}'.  Field: '${field}'`,
             count,
-            data: fieldCount
+            data: items
         };
 
     } catch (error) {
