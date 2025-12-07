@@ -1,10 +1,6 @@
 import { parseServices } from "../utils/parseServices.js";
 
-
-// console.log("SERVICE_CHECKS raw:", process.env.SERVICE_CHECKS);
-// console.log("Parsed services:", parseServices(process.env.SERVICE_CHECKS));
-
-export async function serviceCheck(config) {
+export async function serviceCheck() {
     const services = parseServices(process.env.SERVICE_CHECKS);
 
     if (services.length === 0) {

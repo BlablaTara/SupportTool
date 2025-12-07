@@ -1,11 +1,11 @@
 import { Router } from "express";
-import db from "../db/db.js";
+import db from "../db/db.js"
 
 const router = Router();
 
-router.get("/collections", async (req, res) => {
+router.get("/users/dropdown", async (req, res) => {
     try {
-        const result = await db.checkCollections();
+        const result = await db.dropdownCheck();
         return res.json(result);
 
     } catch (error) {

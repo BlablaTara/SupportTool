@@ -12,7 +12,7 @@
         loading = true;
 
         try {
-            const res = await fetch("http://localhost:8080/api/collections/check");
+            const res = await fetch("http://localhost:8080/api/collections");
             const data = await res.json();
 
             addCheck("db", {

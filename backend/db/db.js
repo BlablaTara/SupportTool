@@ -6,7 +6,7 @@ import { connectMongo } from "./mongoDriver.js";
 import { emailCheckM } from "../checks/mongo/emailCheckM.js";
 import { rolesCheckM } from "../checks/mongo/rolesCheckM.js";
 import { countCheckM } from "../checks/mongo/countCheckM.js";
-import { parseCountChecks } from "../utils/parseCountChecks.js";
+import { parseChecks } from "../utils/parseChecks.js";
 import { collectionsCheckM } from "../checks/mongo/collectionsCheckM.js";
 import { parseEnvWithComma } from "../utils/parseEnvWithComma.js";
 
@@ -18,7 +18,7 @@ dotenv.config({
     path: path.join(__dirname, "..", "..", ".env")
 });
 
-export const COUNT_CHECK_CONFIG = parseCountChecks(process.env.COUNT_CHECKS);
+export const COUNT_CHECK_CONFIG = parseChecks(process.env.COUNT_CHECKS);
 export const COLLECTIONS_CHECK_CONFIG = parseEnvWithComma(process.env.COLLECTIONS_CHECK);
 
 let driver = {};
