@@ -10,6 +10,7 @@ import headerRouter from "./routes/headerRouter.js";
 import usersRouter from "./routes/usersRouter.js";
 import rolesRouter from "./routes/rolesRouter.js";
 import countRouter from "./routes/countRouter.js";
+import dropdownRouter from "./routes/dropdownRouter.js";
 
 import collectionsRouter from "./routes/collectionsRouter.js";
 
@@ -37,6 +38,7 @@ app.use("/api", headerRouter);
 app.use("/api", usersRouter);
 app.use("/api", rolesRouter);
 app.use("/api", countRouter);
+app.use("/api", dropdownRouter);
 
 app.use("/api", collectionsRouter);
 

@@ -9,6 +9,7 @@ import { countCheckM } from "../checks/mongo/countCheckM.js";
 import { parseChecks } from "../utils/parseChecks.js";
 import { collectionsCheckM } from "../checks/mongo/collectionsCheckM.js";
 import { parseEnvWithComma } from "../utils/parseEnvWithComma.js";
+import { dropdownCheckM } from "../checks/mongo/dropdownCheckM.js";
 
 
 const __filename = fileURLToPath(import.meta.url);
@@ -18,6 +19,7 @@ dotenv.config({
     path: path.join(__dirname, "..", "..", ".env")
 });
 
+export const DROPDOWN_CHECK_CONFIG = parseChecks(process.env.DROPDOWN_CHECKS);
 export const COUNT_CHECK_CONFIG = parseChecks(process.env.COUNT_CHECKS);
 export const COLLECTIONS_CHECK_CONFIG = parseEnvWithComma(process.env.COLLECTIONS_CHECK);
 
@@ -31,6 +33,7 @@ if (process.env.DB_TYPE === "MongoDB") {
         findRoles: (email) => rolesCheckM(email),
         findCount: (config, email) => countCheckM(config, email),
         checkCollections: () => collectionsCheckM(COLLECTIONS_CHECK_CONFIG),
+        checkDropdown: (config, email) => dropdownCheckM(config, email),
     };
 
 } else if (process.env.DB_TYPE === "Couchbase") {

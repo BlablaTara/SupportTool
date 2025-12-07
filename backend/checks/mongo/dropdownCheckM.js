@@ -1,5 +1,6 @@
 import { connectMongo } from "../../db/mongoDriver.js";
 import { emailEnding } from "../../utils/emailEnding.js";
+import crypto from "crypto";
 
 export async function dropdownCheckM(config, email) {
     const fullEmail = emailEnding(email);
@@ -59,11 +60,17 @@ export async function dropdownCheckM(config, email) {
             }; 
         }
 
+        // generating uniqe id's for each item
+        const items = dataArray.map((item) => ({
+            id: crypto.randomUUID(),
+            value: item
+        }));
+
         return {
             status: "success",
             title,
             message: `${count} recent '${field}' found`,
-            detail: `Collection: ' ${collection} '.  Field: ' ${field} '`,
+            detail: `Collection: '${collection}'.  Field: '${field}'`,
             count,
             data: fieldCount
         };
