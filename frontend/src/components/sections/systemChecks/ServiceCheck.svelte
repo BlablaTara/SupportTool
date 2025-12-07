@@ -21,7 +21,8 @@
                 title: "Service Check",
                 status: data.status,
                 message: data.message,
-                table: data.data
+                table: data.data,
+                renderType: "table"
             });
 
 
@@ -32,7 +33,8 @@
                 status: "error",
                 message: "Failed to fetch service data",
                 detail: error.message,
-                table: []
+                table: [],
+                renderType: "table"
             });
 
         }
