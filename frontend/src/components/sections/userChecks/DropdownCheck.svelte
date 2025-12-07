@@ -5,17 +5,18 @@
     let loading = false;
 
     $: if (email) {
-        runCountChecks();
+        runDropdownCheck();
     }
 
-    async function runCountChecks() {
+
+    async function runDropdownCheck() {
         if (!email) return;
 
         loading = true;
 
         try {
-            const res = await fetch(`http://localhost:8080/api/users/count?email=${email}`);
-            const data = await res.json(); 
+            const res = await fetch(`http://localhost:8080/api/users/dropdown?email=${email}`);
+            const data = await res.json();
 
             for (const check of data) {
                 addCheck("user", {
@@ -23,17 +24,21 @@
                     title: check.title,
                     status: check.status,
                     message: check.message,
-                    detail: check.detail
+                    items: check.detail,
+                    renderType: "dropdown"
+                
                 });
+            
             }
 
         } catch (error) {
             addCheck("user", {
                 id: crypto.randomUUID(),
-                title: "Count Check",
+                title: "Dropdown Check",
                 status: "error",
                 message: "Failed to fetch from backend",
-                detail: error.message
+                items: error.message,
+                renderType: "dropdown"
             });
         }
 

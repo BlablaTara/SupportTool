@@ -8,6 +8,7 @@ import Section from "./components/sections/Section.svelte";
   import PingCheck from "./components/sections/systemChecks/PingCheck.svelte";
   import ServiceCheck from "./components/sections/systemChecks/ServiceCheck.svelte";
   import CollectionsCheck from "./components/sections/dbChecks/CollectionsCheck.svelte";
+  import DropdownCheck from "./components/sections/userChecks/DropdownCheck.svelte";
 
   let email = "";
 </script>
@@ -20,6 +21,7 @@ import Section from "./components/sections/Section.svelte";
         <EmailCheck on:validate={(e) => email = e.detail.email }/>
         <RolesCheck {email} />
         <CountCheck {email} />
+        <DropdownCheck {email}/>
     </Section>
 
     <Section title="DB Validation" section="db">
