@@ -5,7 +5,7 @@ import { DROPDOWN_CHECK_CONFIG } from "../db/db.js";
 const router = Router();
 
 router.get("/users/dropdown", async (req, res) => {
-    // try {
+    try {
     
         const email = req.query.email;
             if (!email) {
@@ -35,17 +35,17 @@ router.get("/users/dropdown", async (req, res) => {
                 }
             }   
         res.json(results);
-    // } catch (error) {
+    } catch (error) {
 
-    //     return res.status(500).json({
-    //         status: "error",
-    //         title: "Dropdown Check",
-    //         message: "Dropdown check failed",
-    //         detail: error.message,
-    //         data: []
-    //     });
+        return res.status(500).json({
+            status: "error",
+            title: "Dropdown Check",
+            message: "Dropdown check failed",
+            detail: error.message,
+            data: []
+        });
 
-    // }
+    }
 
 });
 

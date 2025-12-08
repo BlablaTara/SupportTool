@@ -44,6 +44,7 @@ if (process.env.DB_TYPE === "MongoDB") {
     const { rolesCheckCB } = await import ("../checks/couchbase/rolesCheckCB.js");
     const { countCheckCB } = await import("../checks/couchbase/countCheckCB.js");
     const { collectionsCheckCB } = await import("../checks/couchbase/collectionsCheckCB.js");
+    const { dropdownCheckCB } = await import("../checks/couchbase/dropdownCheckCB.js");
     
     await connectCouchbase();
     driver = {
@@ -51,6 +52,7 @@ if (process.env.DB_TYPE === "MongoDB") {
         findRoles: (email) => rolesCheckCB(email),
         findCount: (config, email) => countCheckCB(config, email),
         checkCollections: () => collectionsCheckCB(COLLECTIONS_CHECK_CONFIG),
+        checkDropdown: (config, email) => dropdownCheckCB(config, email),
     };
 }
 
