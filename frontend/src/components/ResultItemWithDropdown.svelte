@@ -12,6 +12,13 @@
         open = !open;
     }
 
+    function format(value) {
+        if (typeof value === "object") {
+            return JSON.stringify(value, null, 2);
+        }
+        return value;
+    }
+
 </script>
 
 <div class="result-item {status}">
@@ -35,17 +42,7 @@
         <div class="dropdown-content">
             {#each items as item (item.id)}
                 <div class="dropdown-item">
-                    <p><strong>{item.field}</strong></p>
-                    <p>Status: {item.status}</p>
-                    <p>{item.message}</p>
-
-                    {#if item.values && item.values.length > 0}
-                        <ul>
-                            {#each item.values as val}
-                                <li>{val}</li> 
-                            {/each}
-                        </ul>
-                    {/if}
+                    <pre>{format(item.value)}</pre>
                 </div>
             {/each}
         </div>
