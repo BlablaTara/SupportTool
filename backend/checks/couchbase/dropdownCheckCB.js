@@ -20,7 +20,7 @@ export async function dropdownCheckCB(config, email) {
             parameters: { email: fullEmail }
         });
 
-        if (!reesult.rows || result.rows.length === 0) {
+        if (!result.rows || result.rows.length === 0) {
             return {
                 status: "fail",
                 title,
@@ -31,7 +31,7 @@ export async function dropdownCheckCB(config, email) {
             };
         }
 
-        const value = result.rows[0] [field];
+        const value = result.rows[0][field];
 
         if (value === undefined) {
             return {
