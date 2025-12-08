@@ -105,3 +105,35 @@
 .badge.success { background: #57ac57; }
 .badge.fail { background: #e13c3c; }
 .badge.error { background: #e1d63c; }
+
+/* DROPDOWN ITEMS */
+
+
+.dropdown-item-wrapper {
+  margin-bottom: 10px;
+  padding: 0.8rem;
+  border-radius: 6px;
+}
+
+.dropdown-content {
+  margin-left: 1.5rem;
+}
+
+.dropdown-item-wrapper pre {
+  background: #ffffff84;
+  padding: 10px;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+  overflow-x: auto;
+  font-size: 0.85rem;
+  margin-top: 8px;
+}
+
+.result-header.small h4,
+.result-header.small span {
+  font-size: 0.85rem;
+}
+
+.result-item + .dropdown-content {
+    margin-top: -8px; 
+}

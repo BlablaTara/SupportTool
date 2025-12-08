@@ -38,13 +38,15 @@
         {/if}
     </div>
 
-    {#if open && items && items.length > 0}
-        <div class="dropdown-content">
-            {#each items as item (item.id)}
-                <div class="dropdown-item">
-                    <pre>{format(item.value)}</pre>
-                </div>
-            {/each}
-        </div>
-    {/if}
 </div>
+
+{#if open && items && items.length > 0}
+    <div class="dropdown-content">
+        {#each items as item (item.id)}
+            <div class="dropdown-item-wrapper result-item {status}">
+                <div class="result-header small"></div>
+                <pre>{format(item.value)}</pre>
+            </div>
+        {/each}
+    </div>
+{/if}
