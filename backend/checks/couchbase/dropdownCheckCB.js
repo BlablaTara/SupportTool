@@ -37,7 +37,7 @@ export async function dropdownCheckCB(config, email) {
             return {
                 status: "fail",
                 title,
-                message: `Field '${field}' does not exist on ${fullEmail}`,
+                message: `${fullEmail} has no '${field}' field in Couchbase`,
                 detail: `Collection: '${collection}', Field: '${field}'`,
                 count: 0,
                 data: []
