@@ -19,6 +19,11 @@
   border-left: 3px solid #e1d63c;
 }
 
+.result-item.neutral {
+  background: #e2e2e2;
+  border-left: 3px solid #090909;
+}
+
 .result-item h4 {
   margin-bottom: 0.4rem;
   font-size: 1rem;

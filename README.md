@@ -14,3 +14,11 @@ CREATE PRIMARY INDEX ON `<BUCKET>`.`<SCOPE>`.`<COLLECTION>`;
 CHECKS:
 
 
+DROPDOWN-CHECK:
+You can make several different dropdown-checks.
+
+The items in the dropdown,will show a status, if you payload contains:
+
+"status:" "x":
+x = error, fail === check fail
+x = success, ok, sent === check success
