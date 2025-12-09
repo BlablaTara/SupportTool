@@ -7,7 +7,7 @@ router.get("/environment", (req, res) => {
     const env = process.env.ENVIRONMENT || "UNKNOWN"
     const colors = {
         DEV: "#28a745", 
-        TEST: "#ebbd27ff", 
+        TEST: "#ffe082", 
         PROD: "#d32f2f",
         UNKNOWN: "#757575"
     };

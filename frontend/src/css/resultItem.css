@@ -5,23 +5,23 @@
 }
 
 .result-item.success {
-  background: #cceacc;
-  border-left: 3px solid #57ac57;
+  background: #d4edda;
+  border-left: 3px solid #28a745;
 }
 
 .result-item.fail {
-  background: #ffe0e0;
-  border-left: 3px solid #e13c3c;
+  background: #f9d7da;
+  border-left: 3px solid #dc3545;
 }
 
 .result-item.error {
-  background: #fffbe0;
-  border-left: 3px solid #e1d63c;
+  background: #fffbda;
+  border-left: 3px solid #ffe082;
 }
 
 .result-item.neutral {
-  background: #e2e2e2;
-  border-left: 3px solid #090909;
+  background: #e3e5e8;
+  border-left: 3px solid #202020;
 }
 
 .result-item h4 {
@@ -73,7 +73,7 @@
 }
 
 .item-table-wrapper {
-  background: #ffffffbf;          
+  background: #ffffffd6;          
   margin-top: 15px;
   border-radius: 6px;
 }
@@ -85,7 +85,7 @@
 
 .item-table th,
 .item-table td {
-  padding: 8px;
+  padding: 12px;
   border: 1px solid #ccc;
   font-size: 0.9rem;
   text-align: center;
@@ -100,19 +100,18 @@
 /* VERSION BADGE */
 
 .badge {
-  padding: 2px 6px;
-  border-radius: 4px;
+  padding: 5px 6px 4px;
+  border-radius: 6px;
   font-size: 0.8rem;
   font-weight: bold;
-  color: #fff;
 }
 
-.badge.success { background: #57ac57; }
-.badge.fail { background: #e13c3c; }
-.badge.error { background: #e1d63c; }
+.badge.success { background: #cceacc; color: #285d2b }
+.badge.fail { background: #fbcdd0; color: #b51a1d}
+.badge.error { background: #fff29c; color: #dca500}
+
 
 /* DROPDOWN ITEMS */
-
 
 .dropdown-item-wrapper {
   margin-bottom: 10px;
