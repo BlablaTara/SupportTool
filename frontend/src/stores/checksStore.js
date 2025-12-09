@@ -6,6 +6,12 @@ export const checks = writable({
     system: []
 });
 
+export const loadingChecks = writable({
+    user: false,
+    db: false,
+    system: false
+});
+
 // adding check to a specifik section
 export function addCheck(section, check) {
     checks.update(all => {

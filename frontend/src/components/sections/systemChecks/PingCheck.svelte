@@ -1,15 +1,13 @@
 <script>
     import { onMount } from "svelte";
-    import { addCheck } from "../../../stores/checksStore.js";
-
-    let loading = false;
+    import { addCheck, loadingChecks } from "../../../stores/checksStore.js";
 
     onMount(() => {
         runPingCheck();
     });
 
     async function runPingCheck() {
-        loading = true;
+        loadingChecks.update(v => ({ ...v, system: true }));
 
         try {
             const res = await fetch('http://localhost:8080/api/ping');
@@ -33,13 +31,7 @@
             });
             
         }
-        loading = false;
+        loadingChecks.update(v => ({ ...v, system: false }));
         
     }
 </script>
-
-<div>
-    {#if loading}
-        <p>Checking ping...</p>
-    {/if}
-</div>

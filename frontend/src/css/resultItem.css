@@ -15,7 +15,7 @@
 }
 
 .result-item.error {
-  background: #fffbda;
+  background: #fffac9;
   border-left: 3px solid #ffe082;
 }
 
@@ -100,10 +100,18 @@
 /* VERSION BADGE */
 
 .badge {
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+
+  width: 55px;  
+  min-height: 24px;
+
   padding: 5px 6px 4px;
   border-radius: 6px;
-  font-size: 0.8rem;
+  font-size: 0.9rem;
   font-weight: bold;
+  white-space: nowrap;
 }
 
 .badge.success { background: #cceacc; color: #285d2b }
@@ -129,7 +137,7 @@
   border-radius: 6px;
   border: 1px solid #ccc;
   overflow-x: auto;
-  font-size: 0.85rem;
+  font-size: 0.90rem;
   margin-top: 8px;
 }
 
