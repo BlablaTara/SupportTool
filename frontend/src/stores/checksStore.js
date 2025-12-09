@@ -15,27 +15,29 @@ export const loadingChecks = writable({
 // adding check to a specifik section
 export function addCheck(section, check) {
     checks.update(all => {
-
+        const sectionArray = all[section] || [];
         const existingIndex = all[section].findIndex(c => c.title === check.title);
 
+        let newSectionArray;
         if (existingIndex !== -1) {
-            all[section] = [
-                ...all[section].slice(0, existingIndex),
+            newSectionArray = [
+                ...sectionArray.slice(0, existingIndex),
                 check,
-                ...all[section].slice(existingIndex+1)
+                ...sectionArray.slice(existingIndex + 1)
             ];
-        } else {
-            all[section] = [...all[section], check];
+
+        } else  {
+            newSectionArray = [...sectionArray, check];
         }
 
-        return all;
+        return { ...all, [section]: newSectionArray };
+
     });
 }
 
 // Clear section
 export function clearSection(section) {
     checks.update(all => {
-        all[section] = [];
-        return all;
+        return { ...all, [section]: [] };
     });
 }

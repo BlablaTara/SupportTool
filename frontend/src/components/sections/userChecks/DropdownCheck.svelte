@@ -1,8 +1,7 @@
 <script>
-    import { addCheck } from "../../../stores/checksStore.js";
+    import { addCheck, loadingChecks } from "../../../stores/checksStore.js";
 
     export let email = "";
-    let loading = false;
 
     $: if (email) {
         runDropdownCheck();
@@ -10,9 +9,8 @@
 
 
     async function runDropdownCheck() {
+        loadingChecks.update(v => ({ ...v, user: true }));
         if (!email) return;
-
-        loading = true;
 
         try {
             const res = await fetch(`http://localhost:8080/api/users/dropdown?email=${email}`);
@@ -42,6 +40,6 @@
             });
         }
 
-        loading = false;
+        loadingChecks.update(v => ({ ...v, user: false }));
     }
 </script>

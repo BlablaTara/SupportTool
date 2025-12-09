@@ -1,18 +1,15 @@
 <script>
-    import { addCheck } from "../../../stores/checksStore.js";
+    import { addCheck, loadingChecks} from "../../../stores/checksStore.js";
     
     export let email = "";
-    let loading = false;
 
     $: if (email) {
         runRolesCheck();
-        
     }
 
     async function runRolesCheck() {
+        loadingChecks.update(v => ({ ...v, user: true }));
         if (!email) return;
-
-        loading = true;
 
         try {
             const res = await fetch(`http://localhost:8080/api/users/roles?email=${email}`);
@@ -35,7 +32,7 @@
                 detail: error.message
             });
         }
-        loading = false;
+        loadingChecks.update(v => ({ ...v, user: false }));
     }
 
 </script>

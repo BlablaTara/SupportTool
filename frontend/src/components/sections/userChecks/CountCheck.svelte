@@ -1,17 +1,15 @@
 <script>
-    import { addCheck } from "../../../stores/checksStore.js";
+    import { addCheck, loadingChecks } from "../../../stores/checksStore.js";
 
     export let email = "";
-    let loading = false;
 
     $: if (email) {
         runCountChecks();
     }
 
     async function runCountChecks() {
+        loadingChecks.update(v => ({ ...v, user: true }));
         if (!email) return;
-
-        loading = true;
 
         try {
             const res = await fetch(`http://localhost:8080/api/users/count?email=${email}`);
@@ -37,6 +35,6 @@
             });
         }
 
-        loading = false;
+        loadingChecks.update(v => ({ ...v, user: false }));
     }
 </script>

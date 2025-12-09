@@ -1,15 +1,13 @@
 <script>
     import { onMount } from "svelte";
-    import { addCheck } from "../../../stores/checksStore.js";
-
-    let loading = false;
+    import { addCheck, loadingChecks } from "../../../stores/checksStore.js";
 
     onMount(() =>{
         runCollectionsCheck();
     });
 
     async function runCollectionsCheck() {
-        loading = true;
+        loadingChecks.update(v => ({ ...v, db: true }));
 
         try {
             const res = await fetch("http://localhost:8080/api/collections");
@@ -32,12 +30,6 @@
                 detail: error.message
             });
         }
-        loading = false; 
+        loadingChecks.update(v => ({ ...v, db: false })); 
     }
 </script>
-
-<div>
-    {#if loading}
-        <p>Checking collections...</p>
-    {/if}
-</div>

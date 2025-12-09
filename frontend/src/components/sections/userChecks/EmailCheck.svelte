@@ -1,13 +1,15 @@
 <script>
+  import '../../../css/emailInput.css'
   import { onMount } from "svelte";
   import { createEventDispatcher } from "svelte";
-  import { addCheck, clearSection } from "../../../stores/checksStore.js";
+  import { addCheck, clearSection, loadingChecks } from "../../../stores/checksStore.js";
+  
   //let email = "test@test.dk";
   let email = "";
-  let loading = false;
   let emailEnding = "";
-
   const dispatch = createEventDispatcher();
+
+  $: loading = $loadingChecks.user;
 
   onMount(async () => {
     const res = await fetch("http://localhost:8080/api/users/email-ending");
@@ -16,7 +18,7 @@
   })
 
   async function runCheck() {
-    loading = true;
+    loadingChecks.update(v => ({ ...v, user: true }));
 
     let finalEmail =
     emailEnding && !email.includes("@") ? email + emailEnding : email;
@@ -45,12 +47,14 @@
             detail: ""
         });
     }
-    loading = false;
+    loadingChecks.update(v => ({ ...v, user: false }));
   }
 
   function clearCheck() {
     clearSection("user");
     email = "";
+
+    dispatch("validate", { email: "" });
   }
 </script>
 
@@ -61,11 +65,11 @@
     placeholder={`Enter email... ${emailEnding ? `(${emailEnding})` : ""}`}
     />
 
-    <button on:click={runCheck} disabled={loading || email.length === 0}>
+    <button class="validate-btn" on:click={runCheck} disabled={loading || email.length === 0}>
         {loading ? "Validating..." : "Validate"}
     </button>
 
-    <button on:click={clearCheck} disabled={loading}>
+    <button class="validate-btn" on:click={clearCheck} disabled={loading}>
         Clear
     </button>
 </div>
@@ -78,22 +82,3 @@
   </div>
 {/if}
 
-<style>
-.email-check {
-  display: flex;
-  gap: 0.5rem;
-  margin-bottom: 1rem;
-}
-input {
-  flex: 1;
-  padding: 0.5rem;
-}
-.email-preview {
-  font-size: 0.9rem;
-  color: #666;
-  margin-bottom: 1rem;
-}
-button {
-  padding: 0.5rem 1rem;
-}
-</style>
