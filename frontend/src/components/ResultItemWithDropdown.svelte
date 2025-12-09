@@ -14,7 +14,7 @@
         if (mapped.includes("success")) return "success";
 
         // if all is neutral
-        return "succeess"
+        return "success"
     }) ();
 
     let open = false;
