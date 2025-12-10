@@ -10,6 +10,7 @@ import { parseChecks } from "../utils/parseChecks.js";
 import { collectionsCheckM } from "../checks/mongo/collectionsCheckM.js";
 import { parseEnvWithComma } from "../utils/parseEnvWithComma.js";
 import { dropdownCheckM } from "../checks/mongo/dropdownCheckM.js";
+import { metricsCheckM } from "../checks/mongo/metricsCheckM.js";
 
 
 const __filename = fileURLToPath(import.meta.url);
@@ -34,6 +35,7 @@ if (process.env.DB_TYPE === "MongoDB") {
         findCount: (config, email) => countCheckM(config, email),
         checkCollections: () => collectionsCheckM(COLLECTIONS_CHECK_CONFIG),
         checkDropdown: (config, email) => dropdownCheckM(config, email),
+        checkMetrics: () => metricsCheckM(),
     };
 
 } else if (process.env.DB_TYPE === "Couchbase") {

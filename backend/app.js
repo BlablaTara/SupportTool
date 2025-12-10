@@ -13,6 +13,7 @@ import countRouter from "./routes/countRouter.js";
 import dropdownRouter from "./routes/dropdownRouter.js";
 
 import collectionsRouter from "./routes/collectionsRouter.js";
+import metricsRouter from "./routes/metricsRouter.js";
 
 import pingRouter from "./routes/pingRouter.js";
 import serviceRouter from "./routes/serviceRouter.js";
@@ -41,6 +42,7 @@ app.use("/api", countRouter);
 app.use("/api", dropdownRouter);
 
 app.use("/api", collectionsRouter);
+app.use("/api", metricsRouter);
 
 app.use("/api", pingRouter);
 app.use("/api", serviceRouter);
