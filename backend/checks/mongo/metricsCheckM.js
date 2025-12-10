@@ -39,7 +39,7 @@ export async function metricsCheckM() {
                     maxCache,
                     chacheUsagePercent
                 },
-                netowk: {
+                network: {
                     bytesIn: network.bytesIn,
                     bytesOut: network.bytesOut,
                     numRequests: network.numRequests

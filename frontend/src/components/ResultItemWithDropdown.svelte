@@ -78,7 +78,7 @@
     <div class="dropdown-content">
         {#each items as item (item.id)}
             <div class="dropdown-item-wrapper result-item {mapStatus(item.value?.status)}">
-                <div class="result-header small"></div>
+                <div class="result-header small">{item.label}</div>
                 <pre>{format(item.value)}</pre>
             </div>
         {/each}

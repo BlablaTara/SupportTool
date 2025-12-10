@@ -4,10 +4,12 @@ import Section from "./components/sections/Section.svelte";
   import Header from "./components/header/Header.svelte";
   import RolesCheck from "./components/sections/userChecks/RolesCheck.svelte";
   import CountCheck from "./components/sections/userChecks/CountCheck.svelte";
+
+  import CollectionsCheck from "./components/sections/dbChecks/CollectionsCheck.svelte";
+  import MetricsCheck from "./components/sections/dbChecks/MetricsCheck.svelte";
   
   import PingCheck from "./components/sections/systemChecks/PingCheck.svelte";
   import ServiceCheck from "./components/sections/systemChecks/ServiceCheck.svelte";
-  import CollectionsCheck from "./components/sections/dbChecks/CollectionsCheck.svelte";
   import DropdownCheck from "./components/sections/userChecks/DropdownCheck.svelte";
 
   let email = "";
@@ -26,6 +28,7 @@ import Section from "./components/sections/Section.svelte";
 
     <Section title="DB Validation" section="db">
       <CollectionsCheck />
+      <MetricsCheck />
     </Section>
 
     <Section title="System Service Validation" section="system">
