@@ -12,10 +12,10 @@ export async function metricsCheckM() {
 
 
         // Memory / Chache metrics
-        const cache = status.wiredTiger?.cahce || {};
+        const cache = status.wiredTiger?.cache || {};
         const bytesInCache = cache.bytesCurrentlyInChache || 0;
         const maxCache = cache.maximumBytesConfigured || 1;
-        const chacheUsagePercent = ((bytesInCache / maxCache) * 100).toFixed(2);
+        const cacheUsagePercent = ((bytesInCache / maxCache) * 100).toFixed(2);
 
         // Network metrics
         const network = status.network;
@@ -37,7 +37,7 @@ export async function metricsCheckM() {
                 cache: {
                     bytesInCache,
                     maxCache,
-                    chacheUsagePercent
+                    cacheUsagePercent
                 },
                 network: {
                     bytesIn: network.bytesIn,

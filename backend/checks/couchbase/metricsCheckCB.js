@@ -76,6 +76,7 @@ export async function metricsCheckCB() {
         };
 
     } catch (error) {
+        console.error("Couchbase metrics error:", error);
         return {
             status: "error",
             title: "Couchbase Metrics",
