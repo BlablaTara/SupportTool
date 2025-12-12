@@ -4,6 +4,7 @@
     export let title;
     export let status;
     export let message;
+    export let detail;
     export let items = [];
 
     $: overallStatus= (() => {
@@ -69,6 +70,7 @@
             </button>
         {:else}
             <p>{message}</p>
+            <small>{detail}</small>
         {/if}
     </div>
 
