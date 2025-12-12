@@ -13,32 +13,15 @@
             const res = await fetch("http://localhost:8080/api/metrics");
             const data = await res.json();
 
-            const items = [
-                {
-                    id: crypto.randomUUID(),
-                    label: "Connections",
-                    value: data.data.connections
-                },
-                {
-                    id: crypto.randomUUID(),
-                    label: "Cache",
-                    value: data.data.cache
-                },
-                {
-                    id: crypto.randomUUID(),
-                    label: "Network",
-                    value: data.data.network
-                },
-                {
-                    id: crypto.randomUUID(),
-                    label: "CPU",
-                    value: data.data.cpu
-                }
-            ];
+            const items = Object.entries(data.data || {}).map(([key, value]) => ({
+                id: crypto.randomUUID(),
+                label: key.charAt(0).toUpperCase() + key.slice(1),
+                value
+            }));
 
             addCheck("db", {
                 id: crypto.randomUUID(),
-                title: "MongoDB Metrics",
+                title: data.title,
                 status: data.status,
                 message: data.message,
                 detail: data.detail,
@@ -49,7 +32,7 @@
         } catch (error) {
             addCheck("db", {
                 id: crypto.randomUUID(),
-                title: "MongoDB Metrics",
+                title: "DB Metrics",
                 status: "error",
                 message: "Failed to fetch metrics",
                 detail: error.message

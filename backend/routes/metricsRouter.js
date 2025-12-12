@@ -11,7 +11,7 @@ router.get("/metrics", async (req, res) => {
     } catch (error) {
         return res.status(500).json({
             status: "error",
-            title: "MMongoDB Metrics",
+            title: "DB Metrics",
             message: "Metrics check failed",
             detail: error.message,
             data: {}
