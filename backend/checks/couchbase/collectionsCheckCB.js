@@ -7,7 +7,6 @@ export async function collectionsCheckCB(collections) {
 
         for (const name of collections) {
 
-            //N1QL cant make COUNT(*) without an existing collection + index
             const query = `
                 SELECT COUNT(*) AS count
                 FROM \`${BUCKET}\`.\`${SCOPE}\`.\`${name}\`

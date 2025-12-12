@@ -15,7 +15,6 @@ dotenv.config({
 
 let cluster = null;
 let bucket = null;
-//let collection;
 
 const BUCKET = process.env.CB_BUCKET;
 const SCOPE = process.env.CB_SCOPE;

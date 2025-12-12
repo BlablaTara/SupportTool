@@ -4,7 +4,6 @@ import db from "../db/db.js";
 const router = Router();
 
 router.get("/users/email", async (req, res) => {
-    //const collection = req.query.collection || process.env.EMAIL_COLLECTION;
     const email = req.query.email;
 
     if(!email) {
@@ -22,10 +21,6 @@ router.get("/users/email", async (req, res) => {
     if (result.status === "error") {
         return res.status(500).json(result);
     }
-
-    // if (result.status === "fail") {
-    //     return res.status(404).json(result);
-    // }
 
     return res.json(result);
 });

@@ -70,7 +70,6 @@ export async function countCheckCB(config, email) {
         };
 
     } catch (error) {
-        // Couchbase errors: missing index / keyspace not found
         const missingIndex = error?.cause?.first_error_code === 4000;
         const keyspaceNotFound =
             error?.cause?.first_error_message?.includes("Keyspace not found");

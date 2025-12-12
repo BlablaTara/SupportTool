@@ -6,11 +6,6 @@ export async function emailCheckCB(email) {
   const collection = process.env.EMAIL_COLLECTION;
   const { cluster } = await connectCouchbase();
 
-  // console.log("Querying Couchbase with:");
-  // console.log("Bucket:", BUCKET);
-  // console.log("Scope:", SCOPE);
-  // console.log("Collection:", collection);
-
   const query = `
         SELECT * 
         FROM \`${BUCKET}\`.\`${SCOPE}\`.\`${collection}\`
@@ -21,7 +16,6 @@ export async function emailCheckCB(email) {
     const result = await cluster.query(query, {
       parameters: { email: fullEmail },
     });
-    // console.log("Query result:", result.rows);
     const data = result.rows.map((r) => r[collection]);
 
     return {
@@ -31,7 +25,6 @@ export async function emailCheckCB(email) {
       data,
     };
   } catch (error) {
-    // console.error("Couchbase query error:", err);
     const missingIndex = error?.cause?.first_error_code === 4000;
     const keyspaceNotFound =
       error?.cause?.first_error_message?.includes("Keyspace not found");

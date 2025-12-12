@@ -33,10 +33,6 @@ export async function dropdownCheckM(config, email) {
         }
 
         const value = user[field];
-        // const fieldCount = Array.isArray(value) ? value.length : 0;
-
-        // If its an array -> count = length
-        // If field isn't an array, but has a value -> show single value as an array
 
         let dataArray;
         if (Array.isArray(value)) {

@@ -21,7 +21,6 @@ export async function emailCheckM(email) {
       data,
     };
   } catch (error) {
-    // console.error("Mongo query error:", error);
     return {
       status: "error",
       message: "MongoDB query failed",
