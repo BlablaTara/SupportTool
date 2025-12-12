@@ -85,7 +85,7 @@ export async function metricsCheckCB() {
                 bucketRamUsage,
                 connections,
                 network
-                // other metrics
+
             }
         };
 
