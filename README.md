@@ -6,6 +6,11 @@ Frontend:
 $ cd frontend
 $ npm run dev
 
+Unittest:
+To run unittest:
+$ cd backend
+$ npm test
+
 Couchbase indexes:
 For couchbase to work with the support-tool and the different checks - make these indexes:
 
