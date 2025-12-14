@@ -104,6 +104,8 @@ $ `npm i`
 - If success -> shows all the collections you choose.
 - If fail -> shows all the empty collections
 
+---
+
 #### **METRICS-CHECK:**
 
 > This check has different metrics when it comes to either mongoDB og Couchbase.
@@ -119,11 +121,15 @@ $ `npm i`
 - Connections
 - Netowork
 
+---
+
 ### System Validations:
 
 #### **PING-CHECK:**
 
 > This check, pings a url, to see if it's reachable. Fx. SAP identiry server.
+
+---
 
 #### **SERVICE-CHECK:**
 
