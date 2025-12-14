@@ -33,7 +33,7 @@ $ `docker compose up -d`
 
 > For couchbase to work with the support-tool and the different checks - make these indexes:*
 
-`CREATE PRIMARY INDEX ON `<BUCKET>`.`<SCOPE>`.`<COLLECTION>`;`
+CREATE PRIMARY INDEX ON `<BUCKET>`.`<SCOPE>`.`<COLLECTION>`;
 
 
 ### **Couchbase error**
@@ -56,27 +56,27 @@ $ `npm i`
 
 #### **EMAIL-CHECK:**
 
-- Checking if the users email is in the choosen database.
+> Checking if the users email is in the choosen database.
 
 ---
 
 #### **ROLES-CHECK:**
 
-- Checking if the user has a role and displays it.
+> Checking if the user has a role and displays it.
 
 ---
 
 #### **COUNT-CHECK:**
 
-- Counts how many of - fx 'orders' the user have.
+> Counts how many of - fx 'orders' the user have.
 - You can make several of these
 
 ---
 
 #### **DROPDOWN-CHECK:**
 
-- This is a check, where you see the payload for det choosen field.
- - You can make several of these
+> This is a check, where you see the payload for det choosen field.
+- You can make several of these
 
 **Status:**
 > If you have a 'status'-field in your payload matching one of these, this is will be the status of your items - everything else will be neutral.
@@ -96,15 +96,11 @@ Check success:
 | 'fail'         | 'fail'       |
 | 'cancelled'    | 'fail'       |
 |----------------|--------------|
-|----------------|--------------|
-| 'success'        'success'    |
-|----------------|--------------|
-| 'ok'             'success'    |
-|----------------|--------------|
-| 'sent'           'success'    |
-|----------------|--------------|
-| 'shipped'        'success'    |
-|----------------|--------------|
+| 'success'      | 'success'    |
+| 'ok'           | 'success'    |
+| 'sent'         | 'success'    |
+| 'shipped'      | 'success'    |
+
 
 ---
 
@@ -112,25 +108,32 @@ Check success:
 
 ### **COLLECTIONS-CHECK:**
 
-- Checks all the collections your environment variables has for data.
+> Checks all the collections your environment variables has for data.
 - If success -> shows all the collections you choose.
 - If fail -> shows all the empty collections
 
 ### **METRICS-CHECK:**
 
-- This check has different metrics when it comes to either mongoDB og Couchbase.
+> This check has different metrics when it comes to either mongoDB og Couchbase.
 
 **MongoDB-metrics**
+- Connections
+- Memory/Chache
+- Network
+- CPU 
 
 **Couchbase-metrics**
+- Ram Usage in bucket
+- Connections
+- Netowork
 
 ### System Validations:
 
 ### **PING-CHECK:**
 
-- This check, pings a url, to see if it's reachable. Fx. SAP identiry server.
+> This check, pings a url, to see if it's reachable. Fx. SAP identiry server.
 
 ### **SERVICE-CHECK:**
 
-- This check, is like af health-check, but it renders the choosen services' '/version'-endpoints, so you at the same time can see which version is now deployet.
+> This check, is like af health-check, but it renders the choosen services' '/version'-endpoints, so you at the same time can see which version is now deployet.
 
