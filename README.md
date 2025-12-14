@@ -2,7 +2,7 @@
 
 > The purpose with this Support-tool is that its usable for different customers. Fork it - use it, on one custumer - fork it again, and use it for another customer.
 
-> It works wheither the customer use MongoDB or Couchbase int the backend.
+> It works wheither the customer use MongoDB or Couchbase in the backend.
 
 ## RUN LOCAL:
 
@@ -13,19 +13,19 @@ $ `node backend/app.js`
 **FRONTEND:**
 
 $ `cd frontend`
-$ `npm run dev`
 
+$ `npm run dev`
 
 **TESTS:**
 
 $ `cd backend`
-$ `npm test`
 
+$ `npm test`
 
 ## DATABASE:
 
 **Testdatabase:**
-- Docker compose starts two containers, one with mongoDB and the other one with Couchbase. 
+> Docker compose starts two containers, one with mongoDB and the other one with Couchbase. 
 
 $ `docker compose up -d`
 
@@ -33,7 +33,7 @@ $ `docker compose up -d`
 
 > For couchbase to work with the support-tool and the different checks - make these indexes:*
 
-CREATE PRIMARY INDEX ON `<BUCKET>`.`<SCOPE>`.`<COLLECTION>`;
+`CREATE PRIMARY INDEX ON `<BUCKET>`.`<SCOPE>`.`<COLLECTION>`;`
 
 
 ### **Couchbase error**
@@ -41,6 +41,7 @@ CREATE PRIMARY INDEX ON `<BUCKET>`.`<SCOPE>`.`<COLLECTION>`;
 > If you come across a 'native-build'-error when starting you couchbase database then follow these steps:
 
 $ `rm -rf node_modules package-lock.json`
+
 $ `npm i`
 
 
@@ -55,20 +56,20 @@ $ `npm i`
 
 #### **EMAIL-CHECK:**
 
-- Checking if the users email is in the choosen database.*
+- Checking if the users email is in the choosen database.
 
 ---
 
 #### **ROLES-CHECK:**
 
-- Checking if the user has a role and displays it.*
+- Checking if the user has a role and displays it.
 
 ---
 
 #### **COUNT-CHECK:**
 
 - Counts how many of - fx 'orders' the user have.
-- You can make several of these*
+- You can make several of these
 
 ---
 
@@ -78,7 +79,7 @@ $ `npm i`
  - You can make several of these
 
 **Status:**
-- If you have a 'status'-field in your payload matching one of these, this is will be the status of your items - everything else will be neutral.
+> If you have a 'status'-field in your payload matching one of these, this is will be the status of your items - everything else will be neutral.
 
 *"status:" "foo":*
 Check fail:
@@ -91,13 +92,10 @@ Check success:
 
 | Payload status | Check Status |
 |----------------|--------------|
-| 'error'          'fail'       |
+| 'error'        | 'fail'       |
+| 'fail'         | 'fail'       |
+| 'cancelled'    | 'fail'       |
 |----------------|--------------|
-| 'fail'           'fail'       |
-|----------------|--------------|
-| 'cancelled'      'fail'       |
-|----------------|--------------|
-
 |----------------|--------------|
 | 'success'        'success'    |
 |----------------|--------------|
