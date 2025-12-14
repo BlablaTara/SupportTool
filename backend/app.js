@@ -5,7 +5,6 @@ import cors from 'cors';
 import path from "path";
 import { fileURLToPath } from "url";
 
-import homeRouter from "./routes/homeRouter.js";
 import headerRouter from "./routes/headerRouter.js";
 import usersRouter from "./routes/usersRouter.js";
 import rolesRouter from "./routes/rolesRouter.js";
@@ -32,8 +31,6 @@ app.use(cors({
 }));
 
 app.use(express.json());
-
-app.use("/", homeRouter);
 
 app.use("/api", headerRouter);
 app.use("/api", usersRouter);

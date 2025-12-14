@@ -15,7 +15,6 @@ import Section from "./components/sections/Section.svelte";
   let email = "";
 </script>
 
-
 <Header />
 
 <div class="section-container">
