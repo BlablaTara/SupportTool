@@ -3,45 +3,49 @@
 
 ## RUN LOCAL:
 
-* BACKEND:
+**BACKEND:**
+
 $ node backend/app.js
 
 **FRONTEND:**
+
 $ cd frontend
 $ npm run dev
 
 **TESTS:**
-To run unittest:
+
 $ cd backend
 $ npm test
 
 
-**DATABASE:**
+### DATABASE:
 
-Testdatabase:
+**TESTDATABASE:**
+
 $ docker compose up -d
 
-COUCHBASEINDEXES:
+**COUCHBASEINDEXES:**
+
 For couchbase to work with the support-tool and the different checks - make these indexes:
 
-CREATE PRIMARY INDEX ON `<BUCKET>`.`<SCOPE>`.`<COLLECTION>`;
+*CREATE PRIMARY INDEX ON `<BUCKET>`.`<SCOPE>`.`<COLLECTION>`;*
 
 
 
-**CHECKS:**
+## **CHECKS:**
 
-EMAIL-CHECK:
+**EMAIL-CHECK:**
 Checking if the users email is in the choosen database.
 
-ROLES-CHECK:
+**ROLES-CHECK:**
 Checking if the user has a role and displays it.
 
-COUNT-CHECK:
+**COUNT-CHECK:**
 Counts how many of - fx 'orders' the user have.
 
 
 
-DROPDOWN-CHECK:
+**DROPDOWN-CHECK:**
 You can make several different dropdown-checks.
 
 The items in the dropdown,will show a status, if you payload contains:
