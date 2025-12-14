@@ -1,22 +1,44 @@
-Run local:
-Backend:
+# GENERIC SUPPORT-TOOL w. COUCHBASE or MONGODB BACKEND
+
+
+## RUN LOCAL:
+
+* BACKEND:
 $ node backend/app.js
 
-Frontend:
+**FRONTEND:**
 $ cd frontend
 $ npm run dev
 
-Unittest:
+**TESTS:**
 To run unittest:
 $ cd backend
 $ npm test
 
-Couchbase indexes:
+
+**DATABASE:**
+
+Testdatabase:
+$ docker compose up -d
+
+COUCHBASEINDEXES:
 For couchbase to work with the support-tool and the different checks - make these indexes:
 
 CREATE PRIMARY INDEX ON `<BUCKET>`.`<SCOPE>`.`<COLLECTION>`;
 
-CHECKS:
+
+
+**CHECKS:**
+
+EMAIL-CHECK:
+Checking if the users email is in the choosen database.
+
+ROLES-CHECK:
+Checking if the user has a role and displays it.
+
+COUNT-CHECK:
+Counts how many of - fx 'orders' the user have.
+
 
 
 DROPDOWN-CHECK:
