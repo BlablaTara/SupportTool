@@ -1,10 +1,12 @@
-# GENERIC SUPPORT-TOOL w. COUCHBASE or MONGODB BACKEND
+# Generic Support Tool with Couchbase or MongoDB Backend
 
-> The purpose with this Support-tool is that its usable for different customers. Fork it - use it, on one custumer - fork it again, and use it for another customer.
+> The purpose of this support tool is to make it reusable for different customers.
+> Fork it, use it for one customer, then fork it again and use it for another.
 
-> It works wheither the customer use MongoDB or Couchbase in the backend.
+> It works whether the customer uses MongoDB or Couchbase as the backend.
 
-## RUN LOCAL:
+
+## Run Locally
 
 **BACKEND:**
 
@@ -25,20 +27,20 @@ $ `npm test`
 ## DATABASE:
 
 **Testdatabase:**
-> Docker compose starts two containers, one with mongoDB and the other one with Couchbase. 
+> Docker Compose starts two containers: one with MongoDB and one with Couchbase.
 
 $ `docker compose up -d`
 
 ### **Couchbase-indexes:**
 
-> For couchbase to work with the support-tool and the different checks - make these indexes:*
+> For Couchbase to work with the support tool and the different checks, create the following index:
 
 CREATE PRIMARY INDEX ON `<BUCKET>`.`<SCOPE>`.`<COLLECTION>`;
 
 
 ### **Couchbase error**
 
-> If you come across a 'native-build'-error when starting you couchbase database then follow these steps:
+> If you encounter a "native-build" error when starting your Couchbase database, follow these steps:
 
 $ `rm -rf node_modules package-lock.json`
 
@@ -48,8 +50,9 @@ $ `npm i`
 
 ## **CHECKS:**
 
-> How to configure the different checks, look in .env-example.
-> Notice that some checks has the possibility to "multiply" - if your configurations are sat correct.
+> To configure the different checks, see `.env-example`.
+> Note that some checks can be "multiplied" if your configuration is set correctly.
+
 > Fx - with the count-check, you can have a check that counts 'orders' and also a count-check that counts 'products'.
 
 ### User Validations:
@@ -68,18 +71,18 @@ $ `npm i`
 
 #### **COUNT-CHECK:**
 
-> Counts how many of - fx 'orders' the user have.
+> Counts how many items (e.g. "orders") the user has.
 - You can make several of these
 
 ---
 
 #### **DROPDOWN-CHECK:**
 
-> This is a check, where you see the payload for det choosen field.
+> This check displays the payload for the chosen field.
 - You can make several of these
 
 **Status:**
-> If you have a 'status'-field in your payload matching one of these, this is will be the status of your items - everything else will be neutral.
+> If your payload contains a `status` field matching one of the values below, this will determine the item status. All other values will be treated as neutral.
 
 
 | Payload status | Item Status  |
@@ -100,7 +103,7 @@ $ `npm i`
 
 #### **COLLECTIONS-CHECK:**
 
-> Checks all the collections your environment variables has for data.
+> Checks all collections defined in your environment variables for data.
 - If success -> shows all the collections you choose.
 - If fail -> shows all the empty collections
 
@@ -108,7 +111,7 @@ $ `npm i`
 
 #### **METRICS-CHECK:**
 
-> This check has different metrics when it comes to either mongoDB og Couchbase.
+> This check provides different metrics depending on whether MongoDB or Couchbase is used.
 
 **MongoDB-metrics**
 - Connections
@@ -127,11 +130,11 @@ $ `npm i`
 
 #### **PING-CHECK:**
 
-> This check, pings a url, to see if it's reachable. Fx. SAP identiry server.
+> This check pings a URL to see if it is reachable, e.g. an SAP Identity Server.
 
 ---
 
 #### **SERVICE-CHECK:**
 
-> This check, is like af health-check, but it renders the choosen services' '/version'-endpoints, so you at the same time can see which version is now deployet.
+> This check is similar to a health check, but it renders the selected services' `/version` endpoints, allowing you to see which versions are currently deployed.
 
