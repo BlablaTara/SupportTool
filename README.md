@@ -81,16 +81,8 @@ $ `npm i`
 **Status:**
 > If you have a 'status'-field in your payload matching one of these, this is will be the status of your items - everything else will be neutral.
 
-*"status:" "foo":*
-Check fail:
-- foo = 'error'
 
-Check success:
-- foo = 'ok'
-- foo = 'success'
-- foo = 'sent'
-
-| Payload status | Check Status |
+| Payload status | Item Status  |
 |----------------|--------------|
 | 'error'        | 'fail'       |
 | 'fail'         | 'fail'       |
@@ -106,13 +98,13 @@ Check success:
 
 ### DB Validations:
 
-### **COLLECTIONS-CHECK:**
+#### **COLLECTIONS-CHECK:**
 
 > Checks all the collections your environment variables has for data.
 - If success -> shows all the collections you choose.
 - If fail -> shows all the empty collections
 
-### **METRICS-CHECK:**
+#### **METRICS-CHECK:**
 
 > This check has different metrics when it comes to either mongoDB og Couchbase.
 
@@ -129,11 +121,11 @@ Check success:
 
 ### System Validations:
 
-### **PING-CHECK:**
+#### **PING-CHECK:**
 
 > This check, pings a url, to see if it's reachable. Fx. SAP identiry server.
 
-### **SERVICE-CHECK:**
+#### **SERVICE-CHECK:**
 
 > This check, is like af health-check, but it renders the choosen services' '/version'-endpoints, so you at the same time can see which version is now deployet.
 
