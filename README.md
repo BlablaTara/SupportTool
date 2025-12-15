@@ -73,6 +73,7 @@ $ `npm i`
 
 > Counts how many items (e.g. "orders") the user has.
 - You can make several of these
+- Notice not to give your Count-check and Dropdown-check the same title
 
 ---
 
@@ -80,6 +81,7 @@ $ `npm i`
 
 > This check displays the payload for the chosen field.
 - You can make several of these
+- Notice not to give your Count-check and Dropdown-check the same title
 
 **Status:**
 > If your payload contains a `status` field matching one of the values below, this will determine the item status. All other values will be treated as neutral.
