@@ -24,4 +24,10 @@ router.get("/database", (req, res) => {
     });
 });
 
+router.get("/customer", (req, res) => {
+    res.json({
+        customer: process.env.CUSTOMER
+    })
+})
+
 export default router;
