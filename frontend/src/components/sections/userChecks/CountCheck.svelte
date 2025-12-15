@@ -12,7 +12,7 @@
         if (!email) return;
 
         try {
-            const res = await fetch(`http://localhost:8080/api/users/count?email=${email}`);
+            const res = await fetch(`/api/users/count?email=${email}`);
             const data = await res.json(); 
 
             for (const check of data) {

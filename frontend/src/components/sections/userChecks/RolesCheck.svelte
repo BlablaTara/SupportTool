@@ -12,7 +12,7 @@
         if (!email) return;
 
         try {
-            const res = await fetch(`http://localhost:8080/api/users/roles?email=${email}`);
+            const res = await fetch(`/api/users/roles?email=${email}`);
             const data = await res.json();
 
             addCheck("user", {

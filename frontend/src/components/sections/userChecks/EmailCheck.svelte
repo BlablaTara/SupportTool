@@ -12,7 +12,7 @@
   $: loading = $loadingChecks.user;
 
   onMount(async () => {
-    const res = await fetch("http://localhost:8080/api/users/email-ending");
+    const res = await fetch("/api/users/email-ending");
     const data = await res.json();
     emailEnding = data.ending || "";
   })
@@ -24,7 +24,7 @@
     emailEnding && !email.includes("@") ? email + emailEnding : email;
 
     try {
-      const res = await fetch(`http://localhost:8080/api/users/email?email=${finalEmail}`);
+      const res = await fetch(`/api/users/email?email=${finalEmail}`);
       const data = await res.json();
 
         addCheck("user", {

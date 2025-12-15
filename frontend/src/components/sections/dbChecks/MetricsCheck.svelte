@@ -10,7 +10,7 @@
         loadingChecks.update(v => ({ ...v, db: true }));
 
         try {
-            const res = await fetch("http://localhost:8080/api/metrics");
+            const res = await fetch("/api/metrics");
             const data = await res.json();
 
             const items = Object.entries(data.data || {}).map(([key, value]) => ({

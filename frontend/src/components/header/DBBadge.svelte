@@ -5,7 +5,7 @@
 
   onMount(async () => {
     try {
-        const res = await fetch("http://localhost:8080/api/database");
+        const res = await fetch("/api/database");
         const data = await res.json();
         database = data.database || "UNKNOWN";
     } catch (error) {

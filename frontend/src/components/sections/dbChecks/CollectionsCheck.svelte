@@ -10,7 +10,7 @@
         loadingChecks.update(v => ({ ...v, db: true }));
 
         try {
-            const res = await fetch("http://localhost:8080/api/collections");
+            const res = await fetch("/api/collections");
             const data = await res.json();
 
             addCheck("db", {

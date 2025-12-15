@@ -10,7 +10,7 @@
         loadingChecks.update(v => ({ ...v, system: true }));
         try {
 
-            const res = await fetch("http://localhost:8080/api/services");
+            const res = await fetch("/api/services");
             const data = await res.json();
 
             addCheck("system", {

@@ -13,7 +13,7 @@
         if (!email) return;
 
         try {
-            const res = await fetch(`http://localhost:8080/api/users/dropdown?email=${email}`);
+            const res = await fetch(`/api/users/dropdown?email=${email}`);
             const data = await res.json();
 
             for (const check of data) {

@@ -7,7 +7,7 @@
 
     onMount(async () => {
         try {
-            const res = await fetch("http://localhost:8080/api/environment");
+            const res = await fetch("/api/environment");
             const data = await res.json();
             environment = data.environment || "UNKNOWN";
             color = data.color || "grey";
