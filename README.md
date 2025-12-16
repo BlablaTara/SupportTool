@@ -24,12 +24,23 @@ $ `cd backend`
 
 $ `npm test`
 
+
+
 ## DATABASE:
 
 **Testdatabase:**
 > Docker Compose starts two containers: one with MongoDB and one with Couchbase.
 
 $ `docker compose up -d`
+
+### Seeding
+> To seed the testdatabase follow these steps:
+
+$ `cd backend`
+
+$ `npm run seed`
+
+> Your DATABASE_TYPE has to be on the database you wanne seed before it works
 
 ### **Couchbase-indexes:**
 
