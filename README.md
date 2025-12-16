@@ -14,9 +14,8 @@ $ `node backend/app.js`
 
 **FRONTEND:**
 
-$ `cd frontend`
-
-$ `npm run dev`
+`$ cd frontend
+$ npm run dev`
 
 **TESTS:**
 
