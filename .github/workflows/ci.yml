@@ -9,7 +9,7 @@ on:
 jobs:
   backend:
     name: Backend - build & test
-    runs-on: ubuntu-ubuntu-latest
+    runs-on: ubuntu-latest
 
     defaults:
       run:
