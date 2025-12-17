@@ -13,11 +13,13 @@
             const res = await fetch("/api/metrics");
             const data = await res.json();
 
-            const items = Object.entries(data.data || {}).map(([key, value]) => ({
-                id: crypto.randomUUID(),
-                label: key.charAt(0).toUpperCase() + key.slice(1),
-                value
-            }));
+            // const items = Object.entries(data.data || {}).map(([key, value]) => ({
+            //     id: crypto.randomUUID(),
+            //     label: key.charAt(0).toUpperCase() + key.slice(1),
+            //     value
+            // }));
+
+            
 
             addCheck("db", {
                 id: crypto.randomUUID(),
@@ -25,8 +27,8 @@
                 status: data.status,
                 message: data.message,
                 detail: data.detail,
-                renderType: "dropdown",
-                items
+                renderType: "metrics",
+                metrics: normalizeMetrics(data.data)
             });
 
         } catch (error) {
@@ -42,4 +44,30 @@
         loadingChecks.update(v => ({ ...v, db: false }));
         
     }
+
+    function normalizeMetrics(raw) {
+    return {
+        connections: {
+            value: raw.connections.current,
+            status: raw.connections.status,
+            unit: ""
+        },
+        cache: {
+            value: raw.cache.usagePercent,
+            status: raw.cache.status,
+            unit: "%"
+        },
+        network: {
+            value: raw.network.requests,
+            status: raw.network.status,
+            unit: ""
+        },
+        cpu: {
+            value: raw.cpu.pageFaults,
+            status: raw.cpu.status,
+            unit: ""
+        }
+    };
+}
+
 </script>

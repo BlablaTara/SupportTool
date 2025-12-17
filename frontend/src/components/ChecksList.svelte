@@ -3,6 +3,7 @@
     import ResultItem from "./ResultItem.svelte";
     import ResultItemWithTable from "./ResultItemWithTable.svelte";
     import ResultItemWithDropdown from "./ResultItemWithDropdown.svelte";
+    import ResultItemWithMetrics from "./ResultItemWithMetrics.svelte";
 
     export let section;
 
@@ -12,6 +13,7 @@
     function pickComponentType(check) {
         if (check.renderType === "table") return ResultItemWithTable;
         if (check.renderType === "dropdown") return ResultItemWithDropdown;
+        if (check.renderType === "metrics") return ResultItemWithMetrics;
         return ResultItem;
     }
 

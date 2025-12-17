@@ -1,64 +1,58 @@
 import { connectMongo } from "../../db/mongoDriver.js";
 
 export async function metricsCheckM() {
-    try {
-        const db = await connectMongo();
-        const admin = db.admin();
+  try {
+    const db = await connectMongo();
+    const status = await db.admin().command({ serverStatus: 1 });
 
-        const status = await admin.command({ serverStatus: 1 });
+    const connections = status.connections;
+    const cache = status.wiredTiger?.cache || {};
+    const network = status.network || {};
+    const cpu = status.extra_info || {};
 
-        // Connections metrics
-        const connections = status.connections;
+    const bytesInCache = cache.bytesCurrentlyInCache || 0;
+    const maxCache = cache.maximumBytesConfigured || 1;
+    const cacheUsage = (bytesInCache / maxCache) * 100;
 
-
-        // Memory / Chache metrics
-        const cache = status.wiredTiger?.cache || {};
-        const bytesInCache = cache.bytesCurrentlyInChache || 0;
-        const maxCache = cache.maximumBytesConfigured || 1;
-        const cacheUsagePercent = ((bytesInCache / maxCache) * 100).toFixed(2);
-
-        // Network metrics
-        const network = status.network;
-
-        // CPU metrics
-        const cpu = status.extra_info || {};
-
-        return {
-            status: "success",
-            title: "MongoDB Metrics",
-            message: "All Metrics is OK",
-            detail: "Metrics monitored: connections, memory/cache, network & CPU usage",
-            data: {
-                connections: {
-                    current: connections.current,
-                    available: connections.available,
-                    totalCreated: connections.totalCreated
-                },
-                cache: {
-                    bytesInCache,
-                    maxCache,
-                    cacheUsagePercent
-                },
-                network: {
-                    bytesIn: network.bytesIn,
-                    bytesOut: network.bytesOut,
-                    numRequests: network.numRequests
-                },
-                cpu: {
-                    userMs: cpu.userTime,
-                    sysMs: cpu.systemTime,
-                    pageFaults: cpu.page_faults
-                }
-            }
-        };
-
-    } catch (error) {
-        return {
-            status: "error",
-            title: "MongoDB Metrics",
-            message: "Failed to retrieve MongoDB metrics",
-            detail: error.message,
-            data: {}
-        };
+    function statusFromPercent(p) {
+      if (p < 70) return "ok";
+      if (p < 85) return "warning";
+      return "critical";
     }
+
+    return {
+      status: "success",
+      title: "MongoDB Metrics",
+      message: "Live system health overview",
+      data: {
+        connections: {
+          current: connections.current,
+          available: connections.available,
+          status:
+            connections.current < 100 ? "ok" : "warning"
+        },
+        cache: {
+          usagePercent: Number(cacheUsage.toFixed(1)),
+          status: statusFromPercent(cacheUsage)
+        },
+        network: {
+          requests: network.numRequests,
+          status: "ok"
+        },
+        cpu: {
+          pageFaults: cpu.page_faults,
+          status:
+            cpu.page_faults > 10000 ? "warning" : "ok"
+        }
+      }
+    };
+
+  } catch (error) {
+    return {
+      status: "error",
+      title: "MongoDB Metrics",
+      message: "Failed to retrieve MongoDB metrics",
+      detail: error.message
+    };
+  }
 }

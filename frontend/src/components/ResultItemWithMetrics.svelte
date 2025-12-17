@@ -1,0 +1,40 @@
+<script>
+    import "../css/resultItem.css";
+    import MetricGauge from "./sections/dbChecks/MetricGauge.svelte";
+
+    export let title;
+    export let status;
+    export let message;
+    export let detail;
+    export let metrics = {};
+</script>
+
+<div class="result-item {status}">
+    <div class="result-header">
+        <h4>{title}</h4>
+        <p>{message}</p>
+        {#if detail}
+            <small>{detail}</small>
+        {/if}
+    </div>
+
+    <div class="metrics-grid">
+        {#each Object.entries(metrics) as [key, metric]}
+            <MetricGauge
+                label={key}
+                value={metric.value}
+                status={metric.status}
+                unit={metric.unit}
+            />
+        {/each}
+    </div>
+</div>
+
+<style>
+.metrics-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 1rem;
+    margin-top: 1rem;
+}
+</style>
