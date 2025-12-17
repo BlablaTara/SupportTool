@@ -3,31 +3,15 @@ import { connectCouchbase, BUCKET, SCOPE } from "../db/couchbaseDriver.js";
 export async function seedCouchbase() {
   const { cluster, bucket } = await connectCouchbase();
 
-  // looks if scope exists
-  await cluster.query(`
-    CREATE SCOPE IF NOT EXISTS \`${BUCKET}\`.\`${SCOPE}\`
-  `);
+  // collections
+  await createCollection(cluster, BUCKET, SCOPE, "users");
+  await createCollection(cluster, BUCKET, SCOPE, "appusers");
 
-    // creating users
-  await cluster.query(`
-    CREATE COLLECTION IF NOT EXISTS \`${BUCKET}\`.\`${SCOPE}\`.users
-  `);
+  // indexes
+  await createPrimaryIndex(cluster, BUCKET, SCOPE, "users");
+  await createPrimaryIndex(cluster, BUCKET, SCOPE, "appusers");
 
-  // creating appusers
-  await cluster.query(`
-    CREATE COLLECTION IF NOT EXISTS \`${BUCKET}\`.\`${SCOPE}\`.appusers
-  `);
 
-  // creating primary indexes
-  await cluster.query(`
-    CREATE PRIMARY INDEX IF NOT EXISTS
-    ON \`${BUCKET}\`.\`${SCOPE}\`.users
-  `);
-
-  await cluster.query(`
-    CREATE PRIMARY INDEX IF NOT EXISTS
-    ON \`${BUCKET}\`.\`${SCOPE}\`.appusers
-  `);
 
   const usersCollection = bucket.scope(SCOPE).collection("users");
   const appUsersCollection = bucket.scope(SCOPE).collection("appusers");
@@ -125,3 +109,33 @@ export async function seedCouchbase() {
 
   console.log("Couchbase fully initialized & seeded");
 }
+
+async function createCollection(cluster, bucket, scope, collection) {
+  try {
+    await cluster.query(`
+      CREATE COLLECTION \`${bucket}\`.\`${scope}\`.\`${collection}\`
+    `);
+  } catch (error) {
+    if (error?.cause?.first_error_code === 12027) {
+      return;
+    }
+    throw error;
+  }
+}
+
+async function createPrimaryIndex(cluster, bucket, scope, collection) {
+  try {
+    await cluster.query(`
+      CREATE PRIMARY INDEX ON \`${bucket}\`.\`${scope}\`.\`${collection}\`
+    `);
+  } catch (error) {
+    if (
+      error?.cause?.first_error_code === 4300 ||
+      error.message?.includes("already exists")
+    ) {
+      return;
+    }
+    throw error;
+  }
+}
+

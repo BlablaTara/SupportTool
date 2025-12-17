@@ -135,7 +135,7 @@ $ `npm i`
 **Couchbase-metrics**
 - Ram Usage in bucket
 - Connections
-- Netowork
+- Network
 
 ---
 
