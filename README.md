@@ -36,11 +36,18 @@ $ `docker compose up -d`
 ### Seeding
 > To seed the testdatabase follow these steps:
 
+1. Create your database with mongo or couchbase
+2. Fill out the connections to the database in you .env-file (follow .env-example)
+3. Start the database in the containers with:
+
+$ `docker compose up -d`
+
+4. Now you can seed the database that you have choosen in your .env-file (DATABASE_TYPE)
+
 $ `cd backend`
 
 $ `npm run seed`
 
-> Your DATABASE_TYPE has to be on the database you wanne seed before it works
 
 ### **Couchbase-indexes:**
 
