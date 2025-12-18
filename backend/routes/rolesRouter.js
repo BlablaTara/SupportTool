@@ -1,7 +1,10 @@
 import { Router } from "express";
 import db from "../db/db.js";
+import { requireCheckEnabled } from "../middleware/requireCheckEnabled.js";
 
 const router = Router();
+
+router.use(requireCheckEnabled("ROLES_CHECK_ENABLED"))
 
 router.get("/users/roles", async (req, res) => {
     const email = req.query.email;
