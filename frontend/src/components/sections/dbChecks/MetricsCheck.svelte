@@ -48,12 +48,20 @@
     function normalizeMetrics(raw) {
     return {
         connections: {
+            type: "connections",
+            title: "Connections",
             value: raw.connections.current,
+            min: 0,
+            max: raw.connections.max,
+            percent: raw.connections.percent,
             status: raw.connections.status,
-            unit: ""
+            message: raw.connections.message
         },
         cache: {
+            type: "gauge",
+            title: "Cache usage",
             value: raw.cache.usagePercent,
+            percent: raw.cache.usagePercent,
             status: raw.cache.status,
             unit: "%"
         },

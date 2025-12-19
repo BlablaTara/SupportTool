@@ -1,6 +1,6 @@
 <script>
     import "../css/resultItem.css";
-    import MetricGauge from "./sections/dbChecks/MetricGauge.svelte";
+    import MetricsBar from "./sections/dbChecks/MetricsBar.svelte";
 
     export let title;
     export let status;
@@ -20,11 +20,8 @@
 
     <div class="metrics-grid">
         {#each Object.entries(metrics) as [key, metric]}
-            <MetricGauge
-                label={key}
-                value={metric.value}
-                status={metric.status}
-                unit={metric.unit}
+            <MetricsBar
+            {...metric}
             />
         {/each}
     </div>
