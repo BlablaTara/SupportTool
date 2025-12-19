@@ -47,7 +47,8 @@ export async function metricsCheckM() {
         connections: {
           current: connections.current,
           max: maxConnections,
-          percent: Math.max(Number(connectionPercent.toFixed(2)), 0.5),
+          percentActual: Number(connectionPercent.toFixed(5)),
+          percentVisual: Math.max(connectionPercent, 0.5),
           status: connectionStatus(connections.current, maxConnections),
           message: connectionMessage(connectionStatus(connections.current, maxConnections))
         },

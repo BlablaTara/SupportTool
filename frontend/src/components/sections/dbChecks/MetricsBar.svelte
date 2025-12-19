@@ -4,6 +4,7 @@
     export let value;
     export let min = 0;
     export let max;
+    export let rawPercent;
     export let percent;
     export let status;
     export let message;
@@ -17,7 +18,6 @@
 <div class="metric">
     <h5>{title}</h5>
     <p class="message">{message}</p>
-    <!-- <div class="label">{label}</div> -->
 
     <div class="bar" title="{`Current: ${value} / Max: ${max}`}">
         <div
@@ -27,12 +27,11 @@
     </div>
     <div class="range">
         <span>{min}</span>
-        <span>{value} / {max}</span>
+        <span>{rawPercent}%</span>
         <span>{max}</span>
 
     </div>
 
-    <!-- <div class="value">{value}{unit}</div> -->
 </div>
 
 <style>

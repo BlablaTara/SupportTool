@@ -51,9 +51,9 @@
             type: "connections",
             title: "Connections",
             value: raw.connections.current,
-            min: 0,
             max: raw.connections.max,
-            percent: raw.connections.percent,
+            percent: raw.connections.percentVisual,
+            rawPercent: raw.connections.percentActual,
             status: raw.connections.status,
             message: raw.connections.message
         },
