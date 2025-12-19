@@ -19,12 +19,12 @@
             //     value
             // }));
 
-            
+            const normalized = normalizeMetrics(data.data);
 
             addCheck("db", {
                 id: crypto.randomUUID(),
                 title: data.title,
-                status: data.status,
+                status: overallStatus(normalized),
                 message: data.message,
                 detail: data.detail,
                 renderType: "metrics",
@@ -45,6 +45,16 @@
         
     }
 
+    function overallStatus(metrics) {
+        const statuses = Object.values(metrics).map(m => m.status);
+
+        if (statuses.includes("fail")) return "fail";
+        if (statuses.includes("warning")) return "warning";
+        if (statuses.includes("success")) return "success";
+
+        return "neutral";
+    }
+
     function normalizeMetrics(raw) {
     return {
         connections: {
@@ -56,7 +66,9 @@
             percent: 92.4,
             // rawPercent: raw.connections.percentActual,
             rawPercent: 92.4,
-            // status: raw.connections.status,
+            // status: raw.connections.status === "critical" ? "fail" :
+                // raw.connections.status === "warning" ? "warning" :
+                // "success",
             status: "critical",
             // message: raw.connections.message
             message: "Connections limit is close - risk of saturation"
@@ -80,6 +92,7 @@
             unit: ""
         }
     };
+
 }
 
 </script>

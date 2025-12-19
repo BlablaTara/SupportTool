@@ -10,9 +10,10 @@
     export let message;
 
     $: color =
-        status === "ok" ? "#4caf50" :
+        status === "ok" ? "#28a745" :
         status === "warning" ? "#ff9800" :
-        "#f44336";
+        "#dc3545";
+
 </script>
 
 <div class="metric {status}">
@@ -35,19 +36,19 @@
 </div>
 
 <style>
-.metric {
-    background: #fafafa;
-    padding: 0.75rem;
-    border-radius: 6px;
-}
-
 /* .title {
     font-size: 0.85rem;
     margin-bottom: 0.25rem;
 } */
 
+.metric {
+    background: #fafafaa5;
+    padding: 0.75rem;
+    border-radius: 6px;
+}
+
 .metric.critical {
-  background: #f9d7da;
+  background: #ffeaeb;
   border-left: 3px solid #dc3545;
 }
 
@@ -57,9 +58,10 @@
 }
 
 .metric.ok {
-    background: #d4edda;
+    background: #effff2;
   border-left: 3px solid #28a745;
 }
+
 
 .bar {
     background: #e0e0e0;
