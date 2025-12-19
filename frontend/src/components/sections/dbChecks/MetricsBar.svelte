@@ -15,7 +15,7 @@
         "#f44336";
 </script>
 
-<div class="metric">
+<div class="metric {status}">
     <h5>{title}</h5>
     <p class="message">{message}</p>
 
@@ -45,6 +45,21 @@
     font-size: 0.85rem;
     margin-bottom: 0.25rem;
 } */
+
+.metric.critical {
+  background: #f9d7da;
+  border-left: 3px solid #dc3545;
+}
+
+.metric.warning {
+    background: #ffeccf;
+  border-left: 3px solid #ff9800;
+}
+
+.metric.ok {
+    background: #d4edda;
+  border-left: 3px solid #28a745;
+}
 
 .bar {
     background: #e0e0e0;

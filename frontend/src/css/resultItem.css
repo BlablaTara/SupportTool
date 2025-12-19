@@ -149,3 +149,7 @@
 .result-item + .dropdown-content {
     margin-top: -8px; 
 }
+
+.metric-item-wrapper {
+  background: #ffffffd6;
+}

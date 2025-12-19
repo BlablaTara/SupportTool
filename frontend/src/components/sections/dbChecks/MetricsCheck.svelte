@@ -52,10 +52,14 @@
             title: "Connections",
             value: raw.connections.current,
             max: raw.connections.max,
-            percent: raw.connections.percentVisual,
-            rawPercent: raw.connections.percentActual,
-            status: raw.connections.status,
-            message: raw.connections.message
+            // percent: raw.connections.percentVisual,
+            percent: 92.4,
+            // rawPercent: raw.connections.percentActual,
+            rawPercent: 92.4,
+            // status: raw.connections.status,
+            status: "critical",
+            // message: raw.connections.message
+            message: "Connections limit is close - risk of saturation"
         },
         cache: {
             type: "gauge",
