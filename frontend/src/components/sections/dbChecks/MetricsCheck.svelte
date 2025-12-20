@@ -48,9 +48,9 @@
     function overallStatus(metrics) {
         const statuses = Object.values(metrics).map(m => m.status);
 
-        if (statuses.includes("fail")) return "fail";
+        if (statuses.includes("critial")) return "fail";
         if (statuses.includes("warning")) return "warning";
-        if (statuses.includes("success")) return "success";
+        if (statuses.includes("ok")) return "success";
 
         return "neutral";
     }
