@@ -20,23 +20,23 @@ export async function metricsCheckM() {
     // CONNECTIONS
     function connectionStatus(current, maxConnections) {
         const percent = (current / maxConnections) * 100;
-        if (percent< 60) return "ok";
+        if (percent< 60) return "success";
         if (percent < 80) return "warning";
-        return "critical";
+        return "fail";
     }
 
     // CONNECTIONS
     function connectionMessage(status) {
-        if (status === "ok") return "Connections usage is within normal range";
+        if (status === "success") return "Connections usage is within normal range";
         if (status === "warning") return "High number of active connections";
         return "Connections limit is close - risk of saturation";
     }
 
 
     function statusFromPercent(p) {
-      if (p < 70) return "ok";
+      if (p < 70) return "success";
       if (p < 85) return "warning";
-      return "critical";
+      return "fail";
     }
 
     return {
@@ -58,12 +58,12 @@ export async function metricsCheckM() {
         },
         network: {
           requests: network.numRequests,
-          status: "ok"
+          status: "success"
         },
         cpu: {
           pageFaults: cpu.page_faults,
           status:
-            cpu.page_faults > 10000 ? "warning" : "ok"
+            cpu.page_faults > 10000 ? "warning" : "success"
         }
       }
     };

@@ -10,8 +10,8 @@
     export let message;
 
     $: color =
-        status === "ok" ? "#28a745" :
-        status === "warning" ? "#ff9800" :
+        status === "success" ? "#28a745" :
+        status === "warning" ? "#ff9100" :
         "#dc3545";
 
 </script>
@@ -47,18 +47,18 @@
     border-radius: 6px;
 }
 
-.metric.critical {
-  background: #ffeaeb;
+.metric.fail {
+  background: #ffedee7d;
   border-left: 3px solid #dc3545;
 }
 
 .metric.warning {
-    background: #ffeccf;
-  border-left: 3px solid #ff9800;
+  background: #fbf2eb84;
+  border-left: 3px solid #ff9100;
 }
 
-.metric.ok {
-    background: #effff2;
+.metric.success {
+    background: #f0fdf387;
   border-left: 3px solid #28a745;
 }
 

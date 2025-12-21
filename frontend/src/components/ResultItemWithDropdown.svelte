@@ -13,6 +13,7 @@
         const mapped = items.map(i => mapStatus(i.value?.status));
         if (mapped.includes("fail")) return "fail";
         if (mapped.includes("success")) return "success";
+        if (mapped.includes("warning")) return "warning";
 
         // if all is neutral
         return "success"
@@ -50,6 +51,11 @@
             s.includes("shipped")
         ) 
         return "success";
+
+        // WARNING
+        if (s.includes("warning")
+        )
+        return "warning"
 
         return "neutral";
     }

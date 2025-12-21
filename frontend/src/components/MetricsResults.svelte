@@ -13,9 +13,39 @@
     function toggle() {
         open = !open;
     }
+    
+
+    $: overallStatus = (() => {
+        if (!metrics || Object.keys(metrics).length === 0) {
+            return status ?? "neutral";
+        }
+
+        const statuses = Object.values(metrics).map(m => mapStatus(m.status));
+
+        if (statuses.includes("fail")) return "fail";
+        if (statuses.includes("warning")) return "warning";
+        if (statuses.includes("success")) return "success";
+
+        return "neutral";
+    })();
+
+
+    function mapStatus(raw) {
+        if (!raw) return "neutral";
+
+        const s = String(raw).toLowerCase();
+
+        if (s === "fail" || s === "critical") return "fail";
+        if (s === "warning") return "warning";
+        if (s === "success" || s === "ok") return "success";
+
+        return "neutral";
+    }
+
+
 </script>
 
-<div class="result-item {status}">
+<div class="result-item {overallStatus}">
     <div class="result-header">
         <h4>{title}</h4>
         <button class="toggle-btn" on:click={toggle} type="button" aria-expanded={open}>

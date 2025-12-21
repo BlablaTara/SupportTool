@@ -24,6 +24,11 @@
   border-left: 3px solid #202020;
 }
 
+.result-item.warning {
+  background: #ffe4cf;
+  border-left: 3px solid #ff9100;
+}
+
 .result-item h4 {
   margin-bottom: 0.4rem;
   font-size: 1rem;
