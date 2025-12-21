@@ -16,12 +16,15 @@
     
 
     $: overallStatus = (() => {
+        if (status === "error") return "error";
+        
         if (!metrics || Object.keys(metrics).length === 0) {
             return status ?? "neutral";
         }
 
         const statuses = Object.values(metrics).map(m => mapStatus(m.status));
 
+        if (statuses.includes("error")) return "error";
         if (statuses.includes("fail")) return "fail";
         if (statuses.includes("warning")) return "warning";
         if (statuses.includes("success")) return "success";
@@ -35,6 +38,7 @@
 
         const s = String(raw).toLowerCase();
 
+        if (s === "error") return "error";
         if (s === "fail" || s === "critical") return "fail";
         if (s === "warning") return "warning";
         if (s === "success" || s === "ok") return "success";

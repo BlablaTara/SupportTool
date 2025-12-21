@@ -47,6 +47,7 @@
     }
 
     function normalizeMetrics(raw) {
+        if (!raw) return {};
     return {
         connections: {
             type: "connections",
@@ -65,12 +66,15 @@
             // message: "Connections limit is close - risk of saturation"
         },
         cache: {
-            type: "gauge",
+            type: "cache",
             title: "Cache usage",
-            value: raw.cache.usagePercent,
-            percent: raw.cache.usagePercent,
-            status: "warning",
-            unit: "%"
+            value: raw.cache.current,
+            max: raw.cache.max,
+            percent: raw.cache.percentVisual,
+            rawPercent: raw.cache.percentActual,
+            status: raw.cache.status === "fail" ? "fail" :
+                    raw.cache.status === "warning" ? "warning" :
+                    "success",
         },
         network: {
             value: raw.network.requests,

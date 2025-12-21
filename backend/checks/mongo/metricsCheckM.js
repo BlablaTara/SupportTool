@@ -13,9 +13,10 @@ export async function metricsCheckM() {
     const network = status.network || {};
     const cpu = status.extra_info || {};
 
-    const bytesInCache = cache.bytesCurrentlyInCache || 0;
-    const maxCache = cache.maximumBytesConfigured || 1;
+    const bytesInCache = cache.bytesCurrentlyInCache;
+    const maxCache = cache.maximumBytesConfigured;
     const cacheUsage = (bytesInCache / maxCache) * 100;
+    const cacheStatusValue = cacheStatus(cacheUsage);
 
     // CONNECTIONS
     function connectionStatus(current, maxConnections) {
@@ -32,12 +33,18 @@ export async function metricsCheckM() {
         return "Connections limit is close - risk of saturation";
     }
 
-
-    function statusFromPercent(p) {
-      if (p < 70) return "success";
-      if (p < 85) return "warning";
+    function cacheStatus(cache) {
+      if (cache < 70) return "success";
+      if (cache < 85) return "warning";
       return "fail";
     }
+
+    function cacheMessage(status) {
+        if (status === "success") return "Cache usage is within healthy range";
+        if (status === "warning") return "Cache usage is high – monitor memory pressure";
+        return "Cache usage is near capacity – risk of eviction and degraded performance";
+    }
+
 
     return {
       status: "success",
@@ -53,8 +60,12 @@ export async function metricsCheckM() {
           message: connectionMessage(connectionStatus(connections.current, maxConnections))
         },
         cache: {
-          usagePercent: Number(cacheUsage.toFixed(1)),
-          status: statusFromPercent(cacheUsage)
+            current: bytesInCache,
+            max: maxCache,
+            percentActual: Number(cacheUsage.toFxed(1)),
+            percentVisual: Math.max(cacheUsage, 0.5),
+            status: cacheStatusValue,
+            message: cacheMessage(cacheStatusValue)
         },
         network: {
           requests: network.numRequests,
