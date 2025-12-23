@@ -27,9 +27,9 @@
         ></div>
     </div>
     <div class="range">
-        <span>{min}</span>
-        <span>{rawPercent}%</span>
-        <span>{max}</span>
+        <span>Min: {min}</span>
+        <span>Current: {rawPercent}%</span>
+        <span>Max: {max}</span>
 
     </div>
 
@@ -80,7 +80,7 @@
 .range {
   display: flex;
   justify-content: space-between;
-  font-size: 0.75rem;
+  font-size: 0.65rem;
   color: #555;
 }
 

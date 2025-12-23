@@ -58,12 +58,6 @@ export async function metricsCheckM() {
         return { value: Number(mb.toFixed(1)), unit: "MB" };
     }
 
-    // console.log("CACHE RAW:", {
-    //     bytesInCache,
-    //     maxCache,
-    //     cache
-    // });
-
 
     return {
       status: "success",
@@ -81,7 +75,7 @@ export async function metricsCheckM() {
         cache: {
             current: currentCache,
             max: maxCacheFormatted,
-            percentActual: Number(cacheUsage.toFixed(1)),
+            percentActual: Number(cacheUsage.toFixed(5)),
             percentVisual: Math.max(cacheUsage, 0.5),
             status: cacheStatusValue,
             message: cacheMessage(cacheStatusValue)
