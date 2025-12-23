@@ -2,6 +2,9 @@
     import { onMount } from "svelte";
     import { addCheck, loadingChecks } from "../../../stores/checksStore.js";
 
+
+    //const TEST_CACHE_STATUS = "warning";
+
     onMount(() => {
         runMetricsCheck();
     });
@@ -12,12 +15,6 @@
         try {
             const res = await fetch("/api/metrics");
             const data = await res.json();
-
-            // const items = Object.entries(data.data || {}).map(([key, value]) => ({
-            //     id: crypto.randomUUID(),
-            //     label: key.charAt(0).toUpperCase() + key.slice(1),
-            //     value
-            // }));
 
             addCheck("db", {
                 id: crypto.randomUUID(),
@@ -55,15 +52,11 @@
             value: raw.connections.current,
             max: raw.connections.max,
             percent: raw.connections.percentVisual,
-            // percent: 92.4,
             rawPercent: raw.connections.percentActual,
-            // rawPercent: 92.4,
             status: raw.connections.status === "fail" ? "fail" :
                     raw.connections.status === "warning" ? "warning" :
                     "success",
-            // status: "success",
             message: raw.connections.message
-            // message: "Connections limit is close - risk of saturation"
         },
         cache: {
             type: "cache",
@@ -78,6 +71,49 @@
                 "success",
             message: raw.cache.message
         },
+
+        // cache: (() => {
+        //     const base = {
+        //         type: "cache",
+        //         title: "Cache usage (GB)",
+        //         value: `${raw.cache.current.value} ${raw.cache.current.unit}`,
+        //         max: `${raw.cache.max.value} ${raw.cache.max.unit}`,
+        //         percent: raw.cache.percentVisual,
+        //         rawPercent: raw.cache.percentActual,
+        //         status:
+        //             raw.cache.status === "fail" ? "fail" :
+        //             raw.cache.status === "warning" ? "warning" :
+        //             "success",
+        //         message: raw.cache.message
+        //     };
+
+        //     // 🟡 TEST: WARNING
+        //     if (TEST_CACHE_STATUS === "warning") {
+        //         return {
+        //             ...base,
+        //             percent: 75,
+        //             rawPercent: 75,
+        //             status: "warning",
+        //             value: "1.05 GB",
+        //             message: "TEST: Cache usage is high"
+        //         };
+        //     }
+
+        //     // 🔴 TEST: FAIL / CRITICAL
+        //     if (TEST_CACHE_STATUS === "fail") {
+        //         return {
+        //             ...base,
+        //             percent: 95,
+        //             rawPercent: 95,
+        //             status: "fail",
+        //             value: "1.34 GB",
+        //             message: "TEST: Cache usage is near capacity"
+        //         };
+        //     }
+
+        //     return base;
+        // })(),
+
         network: {
             value: raw.network.requests,
             status: raw.network.status,

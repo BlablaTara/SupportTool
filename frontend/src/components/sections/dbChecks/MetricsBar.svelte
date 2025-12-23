@@ -48,17 +48,17 @@
 }
 
 .metric.fail {
-  background: #ffedee7d;
+  background: #ffffffbe;
   border-left: 3px solid #dc3545;
 }
 
 .metric.warning {
-  background: #fbf2eb84;
+  background: #ffffffbe;
   border-left: 3px solid #ff9100;
 }
 
 .metric.success {
-    background: #f0fdf387;
+    background: #ffffffbe;
   border-left: 3px solid #28a745;
 }
 
