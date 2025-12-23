@@ -79,6 +79,34 @@ export async function metricsCheckM() {
 
     // CPU //
     const cpu = status.extra_info || {};
+    const cpuUser = cpu.cpu_user ?? 0;
+    const cpuSys = cpu.cpu_sys ?? 0;
+    const totalCpuMs = cpuUser + cpuSys;
+    let lastCpuSample = null;
+    let cpuPercent = 0;
+
+    if (lastCpuSample) {
+        const deltaCpuMs = totalCpuMs -lastCpuSample.totalCpuMs;
+        const deltaTimeMs = Date.now() - lastCpuSample.timestamp;
+
+        // antager 1 core = 100%
+        cpuPercent = Math.min((deltaCpuMs / deltaTimeMs) * 100, 100);
+    }
+    lastCpuSample = {
+        totalCpuMs,
+        timestamp: Date.now()
+    };
+    function cpuStatus(percent) {
+        if (percent < 50) return "success";
+        if (percent < 80) return "warning";
+        return "fail";
+    }
+    function cpuMessage(status) {
+        if (status === "success") return "CPU usage is within normal range";
+        if (status === "fail") return "CPU usage is high - monitor workload";
+        return "CPU usage is critical - risk of perfomance degradation"; 
+    }
+
 
 
     return {
@@ -111,9 +139,12 @@ export async function metricsCheckM() {
             message: networkMessage(networkStatusValue)
         },
         cpu: {
-          pageFaults: cpu.page_faults,
-          status:
-            cpu.page_faults > 10000 ? "warning" : "success"
+            current: Number(cpuPercent.toFixed(1)),
+            max: 100,
+            percentActual: Number(cpuPercent.toFixed(2)),
+            percentVisual: Math.max(cpuPercent, 0.5),
+            status: cpuStatus(cpuPercent),
+            message: cpuMessage(cpuStatus(cpuPercent))
         }
       }
     };

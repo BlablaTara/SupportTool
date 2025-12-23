@@ -150,9 +150,17 @@
         },
 
         cpu: {
-            value: raw.cpu.pageFaults,
-            status: raw.cpu.status,
-            unit: ""
+            type: "cpu",
+            title: "CPU usage",
+            value: `${raw.cpu.current}%`,
+            max: `${raw.cpu.max}%`,
+            percent: raw.cpu.percentVisual,
+            rawPercent: raw.cpu.percentActual,
+            status:
+                raw.cpu.status === "fail" ? "fail" :
+                raw.cpu.status === "warning" ? "warning" :
+                "success",
+            message: raw.cpu.message
         }
     };
 
