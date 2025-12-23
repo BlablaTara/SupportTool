@@ -1,12 +1,18 @@
 <script>
-    import { onMount } from "svelte";
+    import { onDestroy, onMount } from "svelte";
     import { addCheck, loadingChecks } from "../../../stores/checksStore.js";
 
+    let interval;
 
     //const TEST_CACHE_STATUS = "warning";
 
     onMount(() => {
         runMetricsCheck();
+        interval = setInterval(runMetricsCheck, 5000); // updating every 5s
+    });
+
+    onDestroy(() => {
+        clearInterval(interval);
     });
 
     async function runMetricsCheck() {
@@ -115,10 +121,19 @@
         // })(),
 
         network: {
-            value: raw.network.requests,
-            status: raw.network.status,
-            unit: ""
+            type: "network",
+            title: "Network requests",
+            value: raw.network.current,
+            max: raw.network.max,
+            percent: raw.network.percentVisual,
+            rawPercent: raw.network.percentActual,
+            status:
+                raw.network.status === "fail" ? "fail" :
+                raw.network.status === "warning" ? "warning" :
+                "success",
+            message: raw.network.message
         },
+
         cpu: {
             value: raw.cpu.pageFaults,
             status: raw.cpu.status,

@@ -5,14 +5,25 @@ export async function metricsCheckM() {
     const db = await connectMongo();
     const status = await db.admin().command({ serverStatus: 1 });
 
+    // CONNECTIONS //
     const connections = status.connections;
-    const maxConnections = connections.current + connections.available
+    const maxConnections = connections.current + connections.available;
     const connectionPercent = (connections.current / maxConnections) * 100;
 
-    const cache = status.wiredTiger?.cache || {};
-    const network = status.network || {};
-    const cpu = status.extra_info || {};
+    function connectionStatus(current, maxConnections) {
+        const percent = (current / maxConnections) * 100;
+        if (percent< 60) return "success";
+        if (percent < 80) return "warning";
+        return "fail";
+    }
+    function connectionMessage(status) {
+        if (status === "success") return "Connections usage is within normal range";
+        if (status === "warning") return "High number of active connections";
+        return "Connections limit is close - risk of saturation";
+    }
 
+    // CACHE //
+    const cache = status.wiredTiger?.cache || {};
     const bytesInCache = cache["bytes currently in the cache"] ?? 0;
     const maxCache = cache["maximum bytes configured"] ?? 1;
     const cacheUsage =
@@ -21,33 +32,22 @@ export async function metricsCheckM() {
     const currentCache = formatBytes(bytesInCache);
     const maxCacheFormatted = formatBytes(maxCache);
 
-    // CONNECTIONS
-    function connectionStatus(current, maxConnections) {
-        const percent = (current / maxConnections) * 100;
-        if (percent< 60) return "success";
-        if (percent < 80) return "warning";
-        return "fail";
-    }
+    // console.log("CACHE RAW:", {
+    //     bytesInCache,
+    //     maxCache,
+    //     cache
+    // });
 
-    // CONNECTIONS
-    function connectionMessage(status) {
-        if (status === "success") return "Connections usage is within normal range";
-        if (status === "warning") return "High number of active connections";
-        return "Connections limit is close - risk of saturation";
-    }
-
-    function cacheStatus(cache) {
-      if (cache < 70) return "success";
-      if (cache < 85) return "warning";
+    function cacheStatus(percent) {
+      if (percent < 70) return "success";
+      if (percent < 90) return "warning";
       return "fail";
     }
-
     function cacheMessage(status) {
         if (status === "success") return "Cache usage is within healthy range";
         if (status === "warning") return "Cache usage is high – monitor memory pressure";
         return "Cache usage is near capacity – risk of eviction and degraded performance";
     }
-
     function formatBytes(bytes) {
         const gb = bytes / 1024 / 1024 / 1024;
         if (gb >= 0.1) {
@@ -57,6 +57,28 @@ export async function metricsCheckM() {
         const mb = bytes / 1024 / 1024;
         return { value: Number(mb.toFixed(1)), unit: "MB" };
     }
+
+    // NETWORKS //
+    const network = status.network || {};
+    const networkRequests = network.numRequests ?? 0;
+    //Our soft max
+    const MAX_NETWORK_REQUESTS = 100000;
+    const networkPercent = (networkRequests / MAX_NETWORK_REQUESTS) * 100;
+    const networkStatusValue = networkStatus(networkPercent);
+
+    function networkStatus(percent) {
+        if (percent < 60) return "success";
+        if (percent < 80 ) return "warning";
+        return "fail";
+    }
+    function networkMessage(status) {
+        if (status === "success") return "Network traffic is within normal range";
+        if (status === "warning") return "High network activity detected";
+        return "Network traffic is very high – potential bottleneck";
+    }
+
+    // CPU //
+    const cpu = status.extra_info || {};
 
 
     return {
@@ -80,9 +102,13 @@ export async function metricsCheckM() {
             status: cacheStatusValue,
             message: cacheMessage(cacheStatusValue)
         },
-        network: {
-          requests: network.numRequests,
-          status: "success"
+       network: {
+            current: networkRequests,
+            max: MAX_NETWORK_REQUESTS,
+            percentActual: Number(networkPercent.toFixed(2)),
+            percentVisual: Math.max(networkPercent, 0.5),
+            status: networkStatusValue,
+            message: networkMessage(networkStatusValue)
         },
         cpu: {
           pageFaults: cpu.page_faults,
