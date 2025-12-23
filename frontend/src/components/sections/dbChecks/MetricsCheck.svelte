@@ -1,37 +1,51 @@
 <script>
     import { onDestroy, onMount } from "svelte";
-    import { addCheck, loadingChecks } from "../../../stores/checksStore.js";
+    import { addCheck, loadingChecks, updateCheck } from "../../../stores/checksStore.js";
 
     let interval;
+    let initialized = false;
 
     //const TEST_CACHE_STATUS = "warning";
 
     onMount(() => {
-        runMetricsCheck();
-        interval = setInterval(runMetricsCheck, 5000); // updating every 5s
+        runMetricsCheck(true);
+        interval = setInterval(() => runMetricsCheck(false), 5000); // updating every 5s
     });
 
     onDestroy(() => {
         clearInterval(interval);
     });
 
-    async function runMetricsCheck() {
-        loadingChecks.update(v => ({ ...v, db: true }));
+    async function runMetricsCheck(isInitial = false) {
+        if (isInitial) {
+            loadingChecks.update(v => ({ ...v, db: true }));
+        }
 
         try {
             const res = await fetch("/api/metrics");
             const data = await res.json();
 
-            addCheck("db", {
-                id: crypto.randomUUID(),
-                title: data.title,
-                status: data.status,
-                message: data.message,
-                detail: data.detail,
-                metrics: normalizeMetrics(data.data),
-                renderType: "metrics"
-    
-            });
+            const metrics = normalizeMetrics(data.data);
+
+            if (!initialized) {
+                addCheck("db", {
+                    id: crypto.randomUUID(),
+                    title: data.title,
+                    status: data.status,
+                    message: data.message,
+                    detail: data.detail,
+                    metrics,
+                    renderType: "metrics"
+                });
+                initialized = true;
+            } else {
+                updateCheck("db", data.title, {
+                    status: data.status,
+                    message: data.message,
+                    detail: data.detail,
+                    metrics
+                });
+            }
 
         } catch (error) {
             addCheck("db", {
@@ -40,12 +54,13 @@
                 status: "error",
                 message: "Failed to fetch metrics",
                 detail: error.message,
-                metrics: error.message,
                 renderType: "metrics"
             });
         }
 
-        loadingChecks.update(v => ({ ...v, db: false }));
+        if (isInitial) {
+            loadingChecks.update(v => ({ ...v, db: false }));
+        }
         
     }
 

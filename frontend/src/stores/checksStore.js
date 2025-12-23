@@ -35,6 +35,20 @@ export function addCheck(section, check) {
     });
 }
 
+export function updateCheck(section, title, patch) {
+    checks.update(all => {
+        const sectionArray = all[section] || [];
+        return {
+            ...all,
+            [section]: sectionArray.map(c =>
+                c.title === title
+                ? { ...c, ...patch } //No new id
+                : c
+            )
+        }
+    })
+}
+
 // Clear section
 export function clearSection(section) {
     checks.update(all => {
