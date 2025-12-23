@@ -67,14 +67,16 @@
         },
         cache: {
             type: "cache",
-            title: "Cache usage",
-            value: raw.cache.current,
-            max: raw.cache.max,
+            title: "Cache usage (GB)",
+            value: `${raw.cache.current.value} ${raw.cache.current.unit}`,
+            max: `${raw.cache.max.value} ${raw.cache.max.unit}`,
             percent: raw.cache.percentVisual,
             rawPercent: raw.cache.percentActual,
-            status: raw.cache.status === "fail" ? "fail" :
-                    raw.cache.status === "warning" ? "warning" :
-                    "success",
+            status: 
+                raw.cache.status === "fail" ? "fail" :
+                raw.cache.status === "warning" ? "warning" :
+                "success",
+            message: raw.cache.message
         },
         network: {
             value: raw.network.requests,
@@ -89,5 +91,6 @@
     };
 
 }
+
 
 </script>

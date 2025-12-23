@@ -13,10 +13,13 @@ export async function metricsCheckM() {
     const network = status.network || {};
     const cpu = status.extra_info || {};
 
-    const bytesInCache = cache.bytesCurrentlyInCache;
-    const maxCache = cache.maximumBytesConfigured;
-    const cacheUsage = (bytesInCache / maxCache) * 100;
+    const bytesInCache = cache["bytes currently in the cache"] ?? 0;
+    const maxCache = cache["maximum bytes configured"] ?? 1;
+    const cacheUsage =
+        maxCache > 0 ? (bytesInCache / maxCache) * 100 : 0;
     const cacheStatusValue = cacheStatus(cacheUsage);
+    const currentCache = formatBytes(bytesInCache);
+    const maxCacheFormatted = formatBytes(maxCache);
 
     // CONNECTIONS
     function connectionStatus(current, maxConnections) {
@@ -45,6 +48,22 @@ export async function metricsCheckM() {
         return "Cache usage is near capacity – risk of eviction and degraded performance";
     }
 
+    function formatBytes(bytes) {
+        const gb = bytes / 1024 / 1024 / 1024;
+        if (gb >= 0.1) {
+            return { value: Number(gb.toFixed(2)), unit: "GB" };
+        }
+
+        const mb = bytes / 1024 / 1024;
+        return { value: Number(mb.toFixed(1)), unit: "MB" };
+    }
+
+    // console.log("CACHE RAW:", {
+    //     bytesInCache,
+    //     maxCache,
+    //     cache
+    // });
+
 
     return {
       status: "success",
@@ -60,9 +79,9 @@ export async function metricsCheckM() {
           message: connectionMessage(connectionStatus(connections.current, maxConnections))
         },
         cache: {
-            current: bytesInCache,
-            max: maxCache,
-            percentActual: Number(cacheUsage.toFxed(1)),
+            current: currentCache,
+            max: maxCacheFormatted,
+            percentActual: Number(cacheUsage.toFixed(1)),
             percentVisual: Math.max(cacheUsage, 0.5),
             status: cacheStatusValue,
             message: cacheMessage(cacheStatusValue)
