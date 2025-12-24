@@ -11,7 +11,17 @@
   export let warning = 0.7;   // fx 0.7
   export let critical = 0.9; // fx 0.9
 
-  export let windowSize = 20;
+  export let windowSize = 50;
+
+  let globalMax = 0;
+
+  $: {
+        for (const d of data) {
+            if (d.value > globalMax) {
+            globalMax = d.value;
+            }
+        }
+    }
 
   //let lastScaleMax = max;
 
@@ -36,10 +46,10 @@
 
 
     $: scaleTarget = Math.max(
-    observedMax * 1.3,
-    warning ?? 0,
-    critical ?? 0,
-    0.05 // minimum visuel amplitude
+        Math.max(observedMax, globalMax) * 1.3,
+        warning,
+        critical,
+        0.05
     );
 
     $: scaleMax = lastScaleMax = lastScaleMax * 0.8 + scaleTarget * 0.2;
@@ -84,7 +94,7 @@
     <polyline
       fill="none"
       stroke="currentColor"
-      stroke-width="0.7"
+      stroke-width="0.6"
       stroke-linecap="round"
       stroke-linejoin="round"
       {points}
@@ -124,10 +134,13 @@
       />
     {/if}
   </svg>
+  <div class="meta">
+    <span>Peak: {globalMax.toFixed(2)}</span>
+    </div>
 
    <!-- 📊 Seneste målinger -->
   <div class="values">
-    {#each visibleData.slice(-4) as d}
+    {#each visibleData.slice(-5) as d}
       <span>{d.value.toFixed(2)}</span>
     {/each}
   </div>

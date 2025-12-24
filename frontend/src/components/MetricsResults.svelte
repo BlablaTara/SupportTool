@@ -87,9 +87,9 @@
                         message={metric.message}
                         data={$metricsHistory[metric.metric]}
                         max={metric.metric === "network" ? 2000 : 1}
-                        windowSize={20}
-                        warning={0.7}
-                        critical={0.9}
+                        windowSize={50}
+                        warning={2}
+                        critical={3}
                         on:help={() => openHelpModal(metric.helpKey)}
                     />
                 {/if}

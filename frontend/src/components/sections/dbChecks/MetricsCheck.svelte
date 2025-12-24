@@ -30,6 +30,7 @@
 
             // pushing history for trends
             pushHistory("cpu", data.data.cpu.percentActual);
+            //pushHistory("cpu", Math.random() * 0.6);
             pushHistory("network", data.data.network.percentActual);
             pushHistory("cache", data.data.cache.percentActual);
             pushHistory("connections", data.data.connections.percentActual);
