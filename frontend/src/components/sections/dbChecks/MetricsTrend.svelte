@@ -8,21 +8,57 @@
   export let max = 100;
   export let height = 48;
 
+  export let warning = 0.7;   // fx 0.7
+  export let critical = 0.9; // fx 0.9
+
+  export let windowSize = 20;
+
+  //let lastScaleMax = max;
+
   const dispatch = createEventDispatcher();
 
   let hover = null;
+  let lastScaleMax = 1;
 
   function onHelp() {
     dispatch("help", { key: helpKey });
   }
 
-  $: points = data
-    .map((d, i) => {
-      const x = (i / Math.max(data.length - 1, 1)) * 100;
-      const y = height - (Math.min(d.value, max) / max) * height;
-      return `${x},${y}`;
-    })
-    .join(" ");
+  $: visibleData = data.slice(-windowSize);
+
+  //Highest observed value in viewbox
+    $: observedMax = Math.max(...visibleData.map(d => d.value), 0);
+
+    // gives air above highest value
+    $: paddedMax = observedMax * 1.2 || max;
+
+    // Brug aldrig mindre end warning / critical / global max
+
+
+    $: scaleTarget = Math.max(
+    observedMax * 1.3,
+    warning ?? 0,
+    critical ?? 0,
+    0.05 // minimum visuel amplitude
+    );
+
+    $: scaleMax = lastScaleMax = lastScaleMax * 0.8 + scaleTarget * 0.2;
+
+    // 80 % tidligere værdi, 20 % ny → smooth
+    // lastScaleMax = lastScaleMax * 0.8 + target * 0.2;
+    // return lastScaleMax;
+    // })();
+
+
+
+  $: points = visibleData
+  .map((d, i) => {
+    const x = (i / Math.max(visibleData.length - 1, 1)) * 100;
+    const y = height - (d.value / scaleMax) * height;
+    return `${x},${y}`;
+  })
+  .join(" ");
+
 </script>
 
 <div class="trend-card">
@@ -40,29 +76,61 @@
     on:mousemove={(e) => {
       const rect = e.currentTarget.getBoundingClientRect();
       const x = e.clientX - rect.left;
-      const index = Math.round((x / rect.width) * (data.length - 1));
-      hover = data[index];
+      const index = Math.round((x / rect.width) * (visibleData.length - 1));
+      hover = visibleData[index];
     }}
     on:mouseleave={() => (hover = null)}
   >
     <polyline
       fill="none"
       stroke="currentColor"
-      stroke-width="2"
+      stroke-width="0.7"
       stroke-linecap="round"
       stroke-linejoin="round"
       {points}
     />
 
+    {#if warning !== null}
+        <line
+            x1="0"
+            x2="100"
+            y1={height - (warning / scaleMax) * height}
+            y2={height - (warning / scaleMax) * height}
+            stroke="#f5a623"
+            stroke-width="0.5"
+            stroke-dasharray="4 2"
+        />
+        {/if}
+
+        {#if critical !== null}
+        <line
+            x1="0"
+            x2="100"
+            y1={height - (critical / scaleMax) * height}
+            y2={height - (critical / scaleMax) * height}
+            stroke="#d0021b"
+            stroke-width="0.5"
+            stroke-dasharray="4 2"
+        />
+    {/if}
+
+
     {#if hover}
       <circle
-        cx={(data.indexOf(hover) / (data.length - 1)) * 100}
-        cy={height - (hover.value / max) * height}
+        cx={(visibleData.indexOf(hover) / (visibleData.length - 1)) * 100}
+        cy={height - (hover.value / scaleMax) * height}
         r="2"
         fill="currentColor"
       />
     {/if}
   </svg>
+
+   <!-- 📊 Seneste målinger -->
+  <div class="values">
+    {#each visibleData.slice(-4) as d}
+      <span>{d.value.toFixed(2)}</span>
+    {/each}
+  </div>
 
   {#if hover}
     <div class="tooltip">
@@ -105,4 +173,14 @@
     border: none;
     cursor: pointer;
   }
+
+  .values {
+  display: flex;
+  gap: 0.5rem;
+  font-size: 0.7rem;
+  color: #555;
+  margin-top: 0.25rem;
+  font-family: monospace;
+}
+
 </style>

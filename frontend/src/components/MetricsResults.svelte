@@ -83,11 +83,14 @@
                 {#if metric.render === "trend"}
                     <MetricTrend
                         title={metric.title}
-                        message={metric.message}
                         helpKey={metric.helpKey}
+                        message={metric.message}
                         data={$metricsHistory[metric.metric]}
-                        max={metric.metric === "network" ? 100 : 100}
-                        on:help={(e) => openHelpModal(e.detail.key)}
+                        max={metric.metric === "network" ? 2000 : 1}
+                        windowSize={20}
+                        warning={0.7}
+                        critical={0.9}
+                        on:help={() => openHelpModal(metric.helpKey)}
                     />
                 {/if}
             {/each}
