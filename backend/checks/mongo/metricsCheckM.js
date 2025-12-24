@@ -1,5 +1,8 @@
 import { connectMongo } from "../../db/mongoDriver.js";
 
+let lastCpuSample = null;
+let lastNetworkSample = null;
+
 export async function metricsCheckM() {
   try {
     const db = await connectMongo();
@@ -62,13 +65,28 @@ export async function metricsCheckM() {
     const network = status.network || {};
     const networkRequests = network.numRequests ?? 0;
     //Our soft max
-    const MAX_NETWORK_REQUESTS = 100000;
-    const networkPercent = (networkRequests / MAX_NETWORK_REQUESTS) * 100;
-    const networkStatusValue = networkStatus(networkPercent);
+    // const MAX_NETWORK_REQUESTS = 100000;
+    // const networkPercent = (networkRequests / MAX_NETWORK_REQUESTS) * 100;
+    // const networkStatusValue = networkStatus(networkPercent);
+    let networkRps = 0;
+
+    if (lastNetworkSample) {
+        const deltaRequests = networkRequests - lastNetworkSample.total;
+        const deltaTimeSec = (Date.now() - lastNetworkSample.timestamp) / 1000;
+
+        if (deltaRequests >= 0 && deltaTimeSec > 0) {
+            networkRps = deltaRequests / deltaTimeSec;
+        }
+    }
+
+    lastNetworkSample = {
+        total: networkRequests,
+        timestamp: Date.now()
+    };
 
     function networkStatus(percent) {
-        if (percent < 60) return "success";
-        if (percent < 80 ) return "warning";
+        if (percent < 500) return "success";
+        if (percent < 2000 ) return "warning";
         return "fail";
     }
     function networkMessage(status) {
@@ -82,15 +100,16 @@ export async function metricsCheckM() {
     const cpuUser = cpu.cpu_user ?? 0;
     const cpuSys = cpu.cpu_sys ?? 0;
     const totalCpuMs = cpuUser + cpuSys;
-    let lastCpuSample = null;
     let cpuPercent = 0;
+
+    const cores = status.hostInfo?.system?.cpu?.cores ?? 1;
 
     if (lastCpuSample) {
         const deltaCpuMs = totalCpuMs -lastCpuSample.totalCpuMs;
         const deltaTimeMs = Date.now() - lastCpuSample.timestamp;
 
         // antager 1 core = 100%
-        cpuPercent = Math.min((deltaCpuMs / deltaTimeMs) * 100, 100);
+        cpuPercent = Math.min((deltaCpuMs / deltaTimeMs) / cores * 100, 100);
     }
     lastCpuSample = {
         totalCpuMs,
@@ -130,14 +149,23 @@ export async function metricsCheckM() {
             status: cacheStatusValue,
             message: cacheMessage(cacheStatusValue)
         },
-       network: {
-            current: networkRequests,
-            max: MAX_NETWORK_REQUESTS,
-            percentActual: Number(networkPercent.toFixed(2)),
-            percentVisual: Math.max(networkPercent, 0.5),
-            status: networkStatusValue,
-            message: networkMessage(networkStatusValue)
-        },
+    //    network: {
+    //         current: networkRequests,
+    //         max: MAX_NETWORK_REQUESTS,
+    //         percentActual: Number(networkPercent.toFixed(2)),
+    //         percentVisual: Math.max(networkPercent, 0.5),
+    //         status: networkStatusValue,
+    //         message: networkMessage(networkStatusValue)
+    //     },
+
+        network: {
+            current: Number(networkRps.toFixed(1)),
+            max: "requests/sec",
+            percentActual: networkRps,
+            percentVisual: Math.min(networkRps / 2000 * 100, 100),
+            status: networkStatus(networkRps),
+            message: networkMessage(networkStatus(networkRps))
+            },
         cpu: {
             current: Number(cpuPercent.toFixed(1)),
             max: 100,

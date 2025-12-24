@@ -1,4 +1,6 @@
 <script>
+  import { createEventDispatcher } from "svelte";
+
 
     export let title;
     export let value;
@@ -8,6 +10,14 @@
     export let percent;
     export let status;
     export let message;
+    //export let type;
+    export let helpKey;
+
+    const dispatch = createEventDispatcher();
+
+    function openHelp() {
+        dispatch("help", { type: helpKey });
+    }
 
     $: color =
         status === "success" ? "#28a745" :
@@ -18,6 +28,8 @@
 
 <div class="metric {status}">
     <h5>{title}</h5>
+    <button class="help" on:click={openHelp}>?</button>
+
     <p class="message">{message}</p>
 
     <div class="bar" title="{`Current: ${value} / Max: ${max}`}">

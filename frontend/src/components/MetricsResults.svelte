@@ -1,7 +1,11 @@
 <script>
     import "../css/resultItem.css";
     import MetricsBar from "./sections/dbChecks/MetricsBar.svelte";
+    import MetricTrend from "./sections/dbChecks/MetricsTrend.svelte";
+    import { metricsHistory } from "../stores/metricsHistoryStore.js";
 
+
+    export let openHelpModal;
     export let title;
     export let status;
     export let message;
@@ -49,6 +53,9 @@
 
 </script>
 
+<!-- <pre>{JSON.stringify($metricsHistory, null, 2)}</pre>
+<pre>{JSON.stringify(metrics, null, 2)}</pre> -->
+
 <div class="result-item {overallStatus}">
     <div class="result-header">
         <h4>{title}</h4>
@@ -65,9 +72,26 @@
     </div>
     {#if open}
         <div class="metrics-grid">
-        {#each Object.entries(metrics) as [, metric]}
-            <MetricsBar {...metric} />
-        {/each}
+            {#each Object.entries(metrics) as [, metric]}
+                {#if metric.render === "bar"}
+                    <MetricsBar
+                    {...metric}
+                    on:help={(e) => openHelpModal(metric.helpKey)}
+                    />
+                {/if}
+
+                {#if metric.render === "trend"}
+                    <MetricTrend
+                        title={metric.title}
+                        message={metric.message}
+                        helpKey={metric.helpKey}
+                        data={$metricsHistory[metric.metric]}
+                        max={metric.metric === "network" ? 100 : 100}
+                        on:help={(e) => openHelpModal(e.detail.key)}
+                    />
+                {/if}
+            {/each}
+
         </div>
     {/if}
 
@@ -78,6 +102,8 @@
                 />
             {/each}
         </div> -->
+
+        
 </div>
 
 <style>
@@ -87,4 +113,7 @@
     gap: 1rem;
     margin-top: 1rem;
 }
+
+
 </style>
+

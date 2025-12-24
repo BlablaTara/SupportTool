@@ -1,6 +1,7 @@
 <script>
     import { onDestroy, onMount } from "svelte";
     import { addCheck, loadingChecks, updateCheck } from "../../../stores/checksStore.js";
+    import { metricsHistory } from "../../../stores/metricsHistoryStore.js";
 
     let interval;
     let initialized = false;
@@ -26,6 +27,12 @@
             const data = await res.json();
 
             const metrics = normalizeMetrics(data.data);
+
+            // pushing history for trends
+            pushHistory("cpu", data.data.cpu.percentActual);
+            pushHistory("network", data.data.network.percentActual);
+            pushHistory("cache", data.data.cache.percentActual);
+            pushHistory("connections", data.data.connections.percentActual);
 
             if (!initialized) {
                 addCheck("db", {
@@ -68,7 +75,9 @@
         if (!raw) return {};
     return {
         connections: {
-            type: "connections",
+            metric: "connections",
+            helpKey: "connections",
+            render: "bar",
             title: "Connections",
             value: raw.connections.current,
             max: raw.connections.max,
@@ -80,7 +89,9 @@
             message: raw.connections.message
         },
         cache: {
-            type: "cache",
+            metric: "cache",
+            helpKey: "cache",
+            render: "bar",
             title: "Cache usage (GB)",
             value: `${raw.cache.current.value} ${raw.cache.current.unit}`,
             max: `${raw.cache.max.value} ${raw.cache.max.unit}`,
@@ -136,7 +147,9 @@
         // })(),
 
         network: {
-            type: "network",
+            metric: "network",
+            helpKey: "network",
+            render: "trend",
             title: "Network requests",
             value: raw.network.current,
             max: raw.network.max,
@@ -150,7 +163,9 @@
         },
 
         cpu: {
-            type: "cpu",
+            metric: "cpu",
+            helpKey: "cpu",
+            render: "trend",
             title: "CPU usage",
             value: `${raw.cpu.current}%`,
             max: `${raw.cpu.max}%`,
@@ -164,6 +179,18 @@
         }
     };
 
+}
+
+
+function pushHistory(type, value) {
+  metricsHistory.update(h => {
+    const arr = h[type] ?? [];
+    const next = [...arr, { ts: Date.now(), value }];
+    return {
+      ...h,
+      [type]: next.slice(-120) // fx 10 min @ 5s
+    };
+  });
 }
 
 
