@@ -5,6 +5,7 @@
   export let title;
   export let helpKey;
   export let message;
+  export let status;
   export let data = []; // [{ ts, value }]
   export let height = 48;
 
@@ -74,7 +75,7 @@ $: cx =
   }
 </script>
 
-<div class="trend-card">
+<div class="metric {status}">
   <h5>{title}</h5>
   <button class="help" on:click={openHelp}>?</button>
 

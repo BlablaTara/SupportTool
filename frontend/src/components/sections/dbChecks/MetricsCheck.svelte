@@ -2,19 +2,10 @@
     import { onDestroy, onMount } from "svelte";
     import { addCheck, loadingChecks, updateCheck } from "../../../stores/checksStore.js";
     import { metricsHistory } from "../../../stores/metricsHistoryStore.js";
-    // import HelpModal from "../../HelpModal.svelte";
-    // import { metricsHelp } from "../../../utils/metricsHelp.js";
 
     let interval;
     let initialized = false;
     let helpKey = null;
-   
-    // function onHelp(e) {
-    //     helpKey = e.detail.key;
-    // }
-    // function handleHelp(e) {
-    //     helpKey = e.detail.key;
-    // }
 
     //const TEST_CACHE_STATUS = "warning";
 
@@ -27,14 +18,6 @@
         clearInterval(interval);
     });
 
-
-    // function openHelpModal(key) {
-    //     helpKey = key;
-    // }
-
-    function closeHelpModal() {
-        helpKey = null;
-    }
 
     async function runMetricsCheck(isInitial = false) {
         if (isInitial) {

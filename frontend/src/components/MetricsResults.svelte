@@ -99,6 +99,7 @@
                         helpKey={metric.helpKey}
                         message={metric.message}
                         data={$metricsHistory[metric.metric]}
+                        status={metric.status}
                         windowSize={50}
                         warning={2}
                         critical={3}
