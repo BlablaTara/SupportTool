@@ -30,8 +30,13 @@
   });
 </script>
 
-<div class="help-backdrop" on:click={close}>
-  <div class="help-modal" on:click|stopPropagation>
+<div class="help-backdrop" role="presentation" on:click={close}>
+  <div
+  class="help-modal"
+  role="dialog"
+  aria-modal="true"
+  tabindex="0"
+>
     <header>
       <h3>{content?.title}</h3>
       <button class="close" on:click={close} aria-label="Close help">
