@@ -1,4 +1,5 @@
 <script>
+  import "../../../css/metrics.css"
   import { createEventDispatcher } from "svelte";
 
   export let title;

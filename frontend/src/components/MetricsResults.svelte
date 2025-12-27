@@ -1,4 +1,5 @@
 <script>
+    import "../css/metrics.css"
     import "../css/resultItem.css";
     import MetricsBar from "./sections/dbChecks/MetricsBar.svelte";
     import MetricTrend from "./sections/dbChecks/MetricsTrend.svelte";
@@ -108,15 +109,4 @@
 
         
 </div>
-
-<style>
-.metrics-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-    gap: 1rem;
-    margin-top: 1rem;
-}
-
-
-</style>
 

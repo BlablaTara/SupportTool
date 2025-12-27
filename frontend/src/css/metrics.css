@@ -1,0 +1,94 @@
+.metrics-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 1rem;
+    margin-top: 1rem;
+}
+
+.metric {
+    background: #fafafaa5;
+    padding: 0.75rem;
+    border-radius: 6px;
+}
+
+.metric.fail {
+    background: #ffffffbe;
+    border-left: 3px solid #dc3545;
+}
+
+.metric.warning {
+    background: #ffffffbe;
+    border-left: 3px solid #ff9100;
+}
+
+.metric.success {
+    background: #ffffffbe;
+    border-left: 3px solid #28a745;
+}
+
+
+.bar {
+    background: #e0e0e0;
+    height: 10px;
+    border-radius: 6px;
+    margin: 0.5rem 0;
+    position: relative;
+}
+
+.fill {
+    height: 100%;
+    border-radius: 6px;
+    transition: width 0.3s ease;
+}
+
+.range {
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.65rem;
+    color: #555;
+}
+
+.message {
+    font-size: 0.85rem;
+    margin-bottom: 0.25rem;
+}
+
+.trend-card {
+    background: #fafafaa5;
+    padding: 0.75rem;
+    border-radius: 6px;
+    border-left: 3px solid #888;
+}
+
+.message {
+    font-size: 0.8rem;
+    color: #555;
+    margin-bottom: 0.25rem;
+}
+
+.trend {
+    color: #555;
+    background: #ffffffc4;
+    border-radius: 6px;
+}
+
+.tooltip {
+    font-size: 0.7rem;
+    color: #333;
+    margin-top: 0.25rem;
+}
+
+help {
+    background: none;
+    border: none;
+    cursor: pointer;
+}
+
+.values {
+    display: flex;
+    gap: 0.5rem;
+    font-size: 0.7rem;
+    color: #555;
+    margin-top: 0.25rem;
+    font-family: monospace;
+}
