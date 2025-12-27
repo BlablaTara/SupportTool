@@ -111,14 +111,6 @@
         </div>
     {/if}
 
-        <!-- <div class="metrics-grid">
-            {#each Object.entries(metrics) as [key, metric]}
-                <MetricsBar
-                {...metric}
-                />
-            {/each}
-        </div> -->
-
         
 </div>
 
