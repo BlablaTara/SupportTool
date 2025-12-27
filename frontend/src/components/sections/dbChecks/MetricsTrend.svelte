@@ -25,7 +25,7 @@
   const tooltipHeight = 8;
   const tooltipYOffset = 10;
 
-  function onHelp() {
+  function openHelp() {
     dispatch("help", { key: helpKey });
   }
 
@@ -76,7 +76,7 @@ $: cx =
 
 <div class="trend-card">
   <h5>{title}</h5>
-  <button class="help" on:click={onHelp}>?</button>
+  <button class="help" on:click={openHelp}>?</button>
 
   <p class="message">{message}</p>
 

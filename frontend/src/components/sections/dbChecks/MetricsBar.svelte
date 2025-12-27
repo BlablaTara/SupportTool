@@ -11,13 +11,12 @@
     export let percent;
     export let status;
     export let message;
-    //export let type;
     export let helpKey;
 
     const dispatch = createEventDispatcher();
 
     function openHelp() {
-        dispatch("help", { type: helpKey });
+        dispatch("help", { key: helpKey });
     }
 
     $: color =

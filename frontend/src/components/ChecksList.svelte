@@ -6,6 +6,7 @@
     import MetricsResults from "./MetricsResults.svelte";
 
     export let section;
+    //export let onHelp;
 
     $: sectionChecks = $checks[section] || [];
     $: sectionLoading = $loadingChecks[section];
@@ -24,5 +25,6 @@
 {/if}
 
 {#each sectionChecks as check (check.id)}
-    <svelte:component this={pickComponentType(check)} {...check} />
+    <svelte:component this={pickComponentType(check)} {...check}
+     />
 {/each}

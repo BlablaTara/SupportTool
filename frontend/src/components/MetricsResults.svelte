@@ -1,12 +1,16 @@
 <script>
+    import { createEventDispatcher } from "svelte";
     import "../css/metrics.css"
     import "../css/resultItem.css";
     import MetricsBar from "./sections/dbChecks/MetricsBar.svelte";
     import MetricTrend from "./sections/dbChecks/MetricsTrend.svelte";
     import { metricsHistory } from "../stores/metricsHistoryStore.js";
+    import HelpModal from "./HelpModal.svelte";
+    import { metricsHelp } from "../utils/metricsHelp.js";
 
 
-    export let openHelpModal;
+    const dispatch = createEventDispatcher();
+
     export let title;
     export let status;
     export let message;
@@ -14,11 +18,19 @@
     export let metrics = {};
 
     let open = false;
+    let helpKey = null;
 
     function toggle() {
         open = !open;
     }
     
+    function openHelp(e) {
+        helpKey = e.detail.key;
+    }
+
+    function closeHelp() {
+        helpKey = null;
+    }
 
     $: overallStatus = (() => {
         if (status === "error") return "error";
@@ -77,7 +89,7 @@
                 {#if metric.render === "bar"}
                     <MetricsBar
                     {...metric}
-                    on:help={(e) => openHelpModal(metric.helpKey)}
+                    on:help={openHelp}
                     />
                 {/if}
 
@@ -90,7 +102,7 @@
                         windowSize={50}
                         warning={2}
                         critical={3}
-                        on:help={() => openHelpModal(metric.helpKey)}
+                        on:help={openHelp}
                     />
                 {/if}
             {/each}
@@ -108,4 +120,11 @@
 
         
 </div>
+
+{#if helpKey}
+  <HelpModal
+    content={metricsHelp[helpKey]}
+    on:close={closeHelp}
+  />
+{/if}
 
