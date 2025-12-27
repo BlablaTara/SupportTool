@@ -167,9 +167,9 @@ export async function metricsCheckM() {
             message: networkMessage(networkStatus(networkRps))
             },
         cpu: {
-            current: Number(cpuPercent.toFixed(1)),
+            current: Number(cpuPercent.toFixed(5)),
             max: 100,
-            percentActual: Number(cpuPercent.toFixed(2)),
+            percentActual: Number(cpuPercent.toFixed(5)),
             percentVisual: Math.max(cpuPercent, 0.5),
             status: cpuStatus(cpuPercent),
             message: cpuMessage(cpuStatus(cpuPercent))
