@@ -12,11 +12,11 @@
 
         const mapped = items.map(i => mapStatus(i.value?.status));
         if (mapped.includes("fail")) return "fail";
-        if (mapped.includes("success")) return "success";
         if (mapped.includes("warning")) return "warning";
+        if (mapped.includes("success")) return "success";
 
         // if all is neutral
-        return "success"
+        return status;
     }) ();
 
     let open = false;
