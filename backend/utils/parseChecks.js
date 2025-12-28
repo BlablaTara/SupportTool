@@ -12,3 +12,28 @@ export function parseChecks(envString) {
         };
     });
 }
+
+export function findDuplicateCheckTitles(...checkGroups) {
+    const seen = new Map();
+    const duplicates = [];
+
+    for (const group of checkGroups) {
+        for (const check of group) {
+            const title = check.title;
+            if (!title) continue;
+
+            if (seen.has(title)) {
+                duplicates.push({
+                    title,
+                    firstType: seen.get(title),
+                    secondType: check.type,
+                });
+            } else {
+                seen.set(title, check.type);
+            }
+        }
+    }
+
+    return duplicates;
+}
+

@@ -6,7 +6,7 @@ import { connectMongo } from "./mongoDriver.js";
 import { emailCheckM } from "../checks/mongo/emailCheckM.js";
 import { rolesCheckM } from "../checks/mongo/rolesCheckM.js";
 import { countCheckM } from "../checks/mongo/countCheckM.js";
-import { parseChecks } from "../utils/parseChecks.js";
+import { parseChecks, findDuplicateCheckTitles } from "../utils/parseChecks.js";
 import { collectionsCheckM } from "../checks/mongo/collectionsCheckM.js";
 import { parseEnvWithComma } from "../utils/parseEnvWithComma.js";
 import { dropdownCheckM } from "../checks/mongo/dropdownCheckM.js";
@@ -20,9 +20,14 @@ dotenv.config({
     path: path.join(__dirname, "..", "..", ".env")
 });
 
-export const DROPDOWN_CHECK_CONFIG = parseChecks(process.env.DROPDOWN_CHECKS);
-export const COUNT_CHECK_CONFIG = parseChecks(process.env.COUNT_CHECKS);
+export const DROPDOWN_CHECK_CONFIG = parseChecks(process.env.DROPDOWN_CHECKS).map(c => ({ ...c, type: "DROPDOWN_CHECK" }));
+export const COUNT_CHECK_CONFIG = parseChecks(process.env.COUNT_CHECKS).map(c => ({ ...c, type: "COUNT_CHECK" }));
 export const COLLECTIONS_CHECK_CONFIG = parseEnvWithComma(process.env.COLLECTIONS_CHECK);
+
+export const CHECK_CONFIG_ERRORS = findDuplicateCheckTitles(
+    COUNT_CHECK_CONFIG,
+    DROPDOWN_CHECK_CONFIG
+);
 
 let driver = {};
 
