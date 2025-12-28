@@ -2,7 +2,7 @@ export const metricsHelp = {
   cpu: {
     title: "CPU Usage",
     what: `
-Shows the percentage of CPU time consumed by MongoDB over time.
+The percentage of CPU time consumed by MongoDB over time.
 
 This metric is calculated by comparing MongoDB’s reported CPU time
 (cpu_user + cpu_sys) between two samples and normalizing it across
@@ -15,10 +15,9 @@ Data source:
 
 The displayed value represents average MongoDB CPU usage across all cores
 during the sampling interval.
+
     `,
     when: `
-Pay attention when:
-
 • CPU usage is sustained above 50% (warning threshold)
 • CPU usage exceeds 80% (fail threshold – risk of saturation)
 • CPU usage increases while cache usage remains healthy
@@ -36,7 +35,7 @@ These thresholds are defined manually and are not provided by MongoDB.
   cache: {
     title: "Cache Usage",
     what: `
-Shows how much of MongoDB’s WiredTiger cache is currently in use.
+How much of MongoDB’s WiredTiger cache is currently in use.
 
 This metric is calculated as a percentage of:
 • bytes currently in the cache
@@ -49,10 +48,9 @@ Data source:
 
 The bar visualizes memory pressure inside MongoDB’s storage engine,
 not total system memory usage.
+
     `,
     when: `
-Pay attention when:
-
 • Cache usage is sustained above 70% (warning threshold)
 • Cache usage exceeds 90% (fail threshold)
 • Query latency increases while cache usage is high
@@ -70,7 +68,7 @@ These thresholds are defined manually based on typical WiredTiger behavior.
   network: {
     title: "Network Throughput",
     what: `
-Shows the rate of incoming requests handled by MongoDB (requests per second).
+The rate of incoming requests handled by MongoDB (requests per second).
 
 This value is derived by measuring the increase in total network requests
 between two samples and dividing it by elapsed time.
@@ -80,10 +78,9 @@ Data source:
 
 The displayed value represents requests per second (RPS),
 not bandwidth or packet size.
+
     `,
     when: `
-Pay attention when:
-
 • Request rate exceeds 500 RPS (warning threshold)
 • Request rate exceeds 2000 RPS (fail threshold)
 • Sudden spikes correlate with latency or CPU pressure
@@ -102,7 +99,7 @@ to match the expected workload of your environment.
   connections: {
     title: "Connections",
     what: `
-Shows how many client connections are currently open to MongoDB
+How many client connections are currently open to MongoDB
 relative to the maximum available connections.
 
 The percentage is calculated as:
@@ -111,10 +108,9 @@ current connections / (current + available connections)
 Data source:
 • serverStatus.connections.current
 • serverStatus.connections.available
+
     `,
     when: `
-Pay attention when:
-
 • Connection usage exceeds 60% (warning threshold)
 • Connection usage exceeds 80% (fail threshold)
 • Connection count grows steadily without dropping
