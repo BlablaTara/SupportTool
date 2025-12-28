@@ -27,8 +27,10 @@
 </script>
 
 <div class="metric {status}">
-    <h5>{title}</h5>
-    <button class="help" on:click={openHelp}>?</button>
+    <div class="metric-header">
+      <h5>{title}</h5>
+      <button class="help" on:click={openHelp}>?</button>
+    </div>
 
     <p class="message">{message}</p>
 

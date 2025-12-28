@@ -77,12 +77,6 @@
     margin-top: 0.25rem;
 }
 
-help {
-    background: none;
-    border: none;
-    cursor: pointer;
-}
-
 .values {
     display: flex;
     gap: 0.5rem;
@@ -90,4 +84,38 @@ help {
     color: #555;
     margin-top: 0.25rem;
     font-family: monospace;
+}
+
+.metric-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.5rem;
+    margin-bottom: 0.25rem;
+}
+
+.metric-header h5 {
+    margin: 0;
+    font-size: 0.9rem;
+    font-weight: 600;
+}
+
+.help {
+    background: #eaeaea;
+    border: none;
+    cursor: pointer;
+    font-size: 0.8rem;
+    width: 18px;
+    height: 18px;
+    border-radius: 50%;
+    line-height: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #666;
+}
+
+.help:hover {
+    background: #cfcfcf;
+    color: #000;
 }
