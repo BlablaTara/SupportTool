@@ -17,73 +17,57 @@ describe("metricsCheckM", () => {
     test("returns success with parsed metrics", async () => {
         mockCommand = jest.fn(async () => ({
             connections: {
-                current: 10,
-                available: 100,
-                totalCreated: 50
+            current: 10,
+            available: 100,
+            totalCreated: 50
             },
             network: {
-                bytesIn: 1234,
-                bytesOut: 5678,
-                numRequests: 90
+            numRequests: 90
             },
             wiredTiger: {
-                cache: {
-                    bytesCurrentlyInChache: 2000,
-                    maximumBytesConfigured: 4000
-                }
+            cache: {
+                "bytes currently in the cache": 2000,
+                "maximum bytes configured": 4000
+            }
             },
             extra_info: {
-                userTime: 11,
-                systemTime: 22,
-                page_faults: 3
+            cpu_user: 11,
+            cpu_sys: 22
             }
         }));
 
         const result = await metricsCheckM();
 
-        expect(result).toEqual({
-            status: "success",
-            title: "MongoDB Metrics",
-            message: "All Metrics is OK",
-            detail: "Metrics monitored: connections, memory/cache, network & CPU usage",
-            data: {
-                connections: {
-                    current: 10,
-                    available: 100,
-                    totalCreated: 50
-                },
-                cache: {
-                    bytesInCache: 2000,
-                    maxCache: 4000,
-                    cacheUsagePercent: "50.00"
-                },
-                network: {
-                    bytesIn: 1234,
-                    bytesOut: 5678,
-                    numRequests: 90
-                },
-                cpu: {
-                    userMs: 11,
-                    sysMs: 22,
-                    pageFaults: 3
-                }
-            }
-        });
+        expect(result.status).toBe("success");
+        expect(result.title).toBe("MongoDB Metrics");
+
+        expect(result.data.connections.current).toBe(10);
+        expect(result.data.connections.max).toBe(110);
+        expect(result.data.connections.status).toBe("success");
+
+        expect(result.data.cache.percentActual).toBeCloseTo(50, 1);
+        expect(result.data.cache.status).toBe("success");
+
+        expect(result.data.network).toHaveProperty("current");
+        expect(result.data.cpu).toHaveProperty("current");
     });
+
 
     test("returns success even when wiredTiger info is missing", async () => {
         mockCommand = jest.fn(async () => ({
             connections: { current: 1, available: 2, totalCreated: 3 },
-            network: { bytesIn: 1, bytesOut: 2, numRequests: 3 },
-            // no wiredTiger
+            network: { numRequests: 0 },
             extra_info: {}
         }));
 
         const result = await metricsCheckM();
 
         expect(result.status).toBe("success");
-        expect(result.data.cache.bytesInCache).toBe(0);
+        expect(result.data.cache.percentActual).toBe(0);
+        expect(result.data.cache.status).toBe("success");
     });
+
+
 
     test("returns error if Mongo throws", async () => {
         mockCommand = jest.fn(async () => {

@@ -182,7 +182,8 @@ export async function metricsCheckM() {
       status: "error",
       title: "MongoDB Metrics",
       message: "Failed to retrieve MongoDB metrics",
-      detail: error.message
+      detail: error.message,
+      data: {}
     };
   }
 }
