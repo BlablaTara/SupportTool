@@ -9,7 +9,7 @@
   },
 
   "scripts": {
-    "seed": "node seeds/index.js",
+    "seed": "node seeds/seeding.js",
     "test": "NODE_OPTIONS=--experimental-vm-modules jest"
     },
   "devDependencies": {
