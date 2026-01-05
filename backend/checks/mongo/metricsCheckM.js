@@ -64,10 +64,6 @@ export async function metricsCheckM() {
     // NETWORKS //
     const network = status.network || {};
     const networkRequests = network.numRequests ?? 0;
-    //Our soft max
-    // const MAX_NETWORK_REQUESTS = 100000;
-    // const networkPercent = (networkRequests / MAX_NETWORK_REQUESTS) * 100;
-    // const networkStatusValue = networkStatus(networkPercent);
     let networkRps = 0;
 
     if (lastNetworkSample) {
