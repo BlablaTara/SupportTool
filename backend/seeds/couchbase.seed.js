@@ -6,13 +6,15 @@ export async function seedCouchbase() {
   // collections
   await createCollection(cluster, BUCKET, SCOPE, "users");
   await createCollection(cluster, BUCKET, SCOPE, "appusers");
+  
+  // NOTE:
+  // testusers has NO primary index on purpose
+  // Used for testing query error handling
   await createCollection(cluster, BUCKET, SCOPE, "testusers");
 
   // indexes
   await createPrimaryIndex(cluster, BUCKET, SCOPE, "users");
   await createPrimaryIndex(cluster, BUCKET, SCOPE, "appusers");
-
-
 
   const usersCollection = bucket.scope(SCOPE).collection("users");
   const appUsersCollection = bucket.scope(SCOPE).collection("appusers");
@@ -24,10 +26,6 @@ export async function seedCouchbase() {
 
   await cluster.query(`
     DELETE FROM \`${BUCKET}\`.\`${SCOPE}\`.appusers
-  `);
-
-  await cluster.query(`
-    DELETE FROM \`${BUCKET}\`.\`${SCOPE}\`.testusers
   `);
 
   // Seed users

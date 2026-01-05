@@ -87,7 +87,7 @@ export async function seedMongo() {
     },
     {
     email: "no@test.dk",
-    createdAt: newDatee()
+    createdAt: new Date()
     }
   ]);
 
