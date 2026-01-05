@@ -5,9 +5,11 @@ export async function seedMongo() {
 
     const users = db.collection("users");
     const appUsers = db.collection("appusers");
+    const testUsers = db.collection("testusers");
 
     await users.deleteMany({});
     await appUsers.deleteMany({});
+    await testUsers.deleteMany({});
 
     await users.insertMany([
         {
@@ -82,13 +84,17 @@ export async function seedMongo() {
         }
       ],
       createdAt: new Date()
+    },
+    {
+    email: "no@test.dk",
+    createdAt: newDatee()
     }
   ]);
 
   await appUsers.insertOne({
     email: "dev@dev.dk",
-    roles: ["developer"],
-    orders: [
+    role: ["developer"],
+    order: [
       {
         orderId: "order-900",
         items: [
