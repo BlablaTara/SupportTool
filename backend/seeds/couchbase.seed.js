@@ -6,6 +6,7 @@ export async function seedCouchbase() {
   // collections
   await createCollection(cluster, BUCKET, SCOPE, "users");
   await createCollection(cluster, BUCKET, SCOPE, "appusers");
+  await createCollection(cluster, BUCKET, SCOPE, "testusers");
 
   // indexes
   await createPrimaryIndex(cluster, BUCKET, SCOPE, "users");
@@ -23,6 +24,10 @@ export async function seedCouchbase() {
 
   await cluster.query(`
     DELETE FROM \`${BUCKET}\`.\`${SCOPE}\`.appusers
+  `);
+
+  await cluster.query(`
+    DELETE FROM \`${BUCKET}\`.\`${SCOPE}\`.testusers
   `);
 
   // Seed users
@@ -91,17 +96,30 @@ export async function seedCouchbase() {
     createdAt: new Date().toISOString()
   });
 
+  await usersCollection.upsert("user::no@test.dk", {
+    email: "no@test.dk",
+    createdAt: new Date().toISOString()
+  });
+
+
   // Seed appusers
   await appUsersCollection.upsert("appuser::dev@dev.dk", {
     email: "dev@dev.dk",
-    roles: ["developer"],
-    orders: [
+    role: ["developer"],
+    order: [
       {
         orderId: "order-900",
         items: [{ name: "Kiwi", quantity: 2, price: 4 }],
         total: 8,
         status: "success",
         createdAt: new Date().toISOString()
+      }
+    ],
+    product: [
+      {
+        productId: "product-xyz",
+        status: "inactive",
+        createdAt: "2025-01-03T11:20:00Z"
       }
     ],
     createdAt: new Date().toISOString()
