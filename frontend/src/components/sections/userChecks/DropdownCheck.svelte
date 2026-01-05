@@ -22,6 +22,7 @@
                     title: check.title,
                     status: check.status,
                     message: check.message,
+                    detail: check.detail,
                     items: check.data || [],
                     renderType: "dropdown"
                 
@@ -35,6 +36,7 @@
                 title: "Dropdown Check",
                 status: "error",
                 message: "Failed to fetch from backend",
+                detail: error.detail,
                 items: error.message,
                 renderType: "dropdown"
             });
