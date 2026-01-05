@@ -99,6 +99,11 @@ export async function seedCouchbase() {
     createdAt: new Date().toISOString()
   });
 
+  await usersCollection.upsert("user::norole@test.dk", {
+    email: "norole@test.dk",
+    roles: [],
+    createdAt: new Date().toISOString()
+  });
 
   // Seed appusers
   await appUsersCollection.upsert("appuser::dev@dev.dk", {
