@@ -90,7 +90,7 @@ export async function dropdownCheckCB(config, email) {
                 status: "error",
                 title,
                 message: "Required index is missing",
-                detail: `CREATE INDEX idx_email ON \`${BUCKET}\`.\`${SCOPE}\`.\`${collection}\`(email);`,
+                detail: `CREATE PRIMARY INDEX \`#primary\` ON \`${BUCKET}\`.\`${SCOPE}\`.\`${collection}\`;`,
                 count: 0,
                 data: []
             };

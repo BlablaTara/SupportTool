@@ -56,7 +56,6 @@ export async function rolesCheckCB(email) {
     };
 
   } catch (error) {
-    // Couchbase errors: missing index / keyspace not found
     const missingIndex = error?.cause?.first_error_code === 4000;
     const keyspaceNotFound =
       error?.cause?.first_error_message?.includes("Keyspace not found");
@@ -65,7 +64,7 @@ export async function rolesCheckCB(email) {
       return {
         status: "error",
         message: "Required index is missing",
-        detail: `CREATE INDEX idx_email ON \`${BUCKET}\`.\`${SCOPE}\`.\`${collection}\`(email);`,
+        detail: `CREATE PRIMARY INDEX \`#primary\` ON \`${BUCKET}\`.\`${SCOPE}\`.\`${collection}\`;`,
       };
     } else if (keyspaceNotFound) {
       return {
