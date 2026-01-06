@@ -88,6 +88,10 @@ export async function seedMongo() {
     {
     email: "no@test.dk",
     createdAt: new Date()
+    },
+    {
+      email: "norole@test.dk",
+      roles: []
     }
   ]);
 
