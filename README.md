@@ -116,11 +116,11 @@
 
 > Checking if the user has a role and displays it.
 
-<img 
-  src="frontend/public/images/role-check.png" 
-  alt="role lookup on user" 
-  width="400"
-/>
+> <img 
+>   src="frontend/public/images/role-check.png" 
+>   alt="role lookup on user" 
+>   width="400"
+> />
 
 ---
 
@@ -129,11 +129,11 @@
 > Counts how many items (e.g. "orders") the user has.
 > - You can make several of these
 
-<img 
-  src="frontend/public/images/count-check.png" 
-  alt="User field, count lookup" 
-  width="400"
-/>
+> <img 
+>   src="frontend/public/images/count-check.png" 
+>   alt="User field, count lookup" 
+>   width="400"
+> />
 
 ---
 
@@ -142,28 +142,28 @@
 > This check displays the payload for the chosen field.
 > - You can make several of these
 
-<img 
-  src="frontend/public/images/dropdown-check.png" 
-  alt="User field, payload lookup" 
-  width="400"
-/>
+> <img 
+>   src="frontend/public/images/dropdown-check.png" 
+>   alt="User field, payload lookup" 
+>   width="400"
+> />
 
 **Status:**
 > If your payload contains a `status` field matching one of the values below, this will determine the item status. All other values will be treated as neutral.
 
 
-| Payload status | Item Status  |
-|----------------|--------------|
-| 'error'        | 'fail'       |
-| 'fail'         | 'fail'       |
-| 'cancelled'    | 'fail'       |
-|----------------|--------------|
-| 'success'      | 'success'    |
-| 'ok'           | 'success'    |
-| 'sent'         | 'success'    |
-| 'shipped'      | 'success'    |
-|----------------|--------------|
-| 'warning'      | 'warning'    |
+> | Payload status | Item Status  |
+> |----------------|--------------|
+> | 'error'        | 'fail'       |
+> | 'fail'         | 'fail'       |
+> | 'cancelled'    | 'fail'       |
+> |----------------|--------------|
+> | 'success'      | 'success'    |
+> | 'ok'           | 'success'    |
+> | 'sent'         | 'success'    |
+> | 'shipped'      | 'success'    |
+> |----------------|--------------|
+> | 'warning'      | 'warning'    |
 
 
 ---
@@ -176,11 +176,11 @@
 > - If success -> shows all the collections you choose.
 > - If fail -> shows all the empty collections
 
-<img 
-  src="frontend/public/images/collections-check.png" 
-  alt="Collections lookup" 
-  width="400"
-/>
+> <img 
+>   src="frontend/public/images/collections-check.png" 
+>   alt="Collections lookup" 
+>   width="400"
+> />
 ---
 
 #### METRICS-CHECK:
@@ -193,17 +193,17 @@
 > - Network requests
 > - CPU usage
 
-<img 
-  src="frontend/public/images/mongo-metrics-checks1.png" 
-  alt="Mongo Metrics lookup 1" 
-  width="400"
-/>
+> <img 
+>   src="frontend/public/images/mongo-metrics-checks1.png" 
+>   alt="Mongo Metrics lookup 1" 
+>   width="400"
+> />
 
-<img 
-  src="frontend/public/images/mongo-metrics-check2.png" 
-  alt="Mongo Metrics lookup 2" 
-  width="400"
-/>
+> <img 
+>   src="frontend/public/images/mongo-metrics-check2.png" 
+>   alt="Mongo Metrics lookup 2" 
+>   width="400"
+> />
 
 **Couchbase-metrics**
 > - Ram Usage in bucket
@@ -218,11 +218,11 @@
 
 > This check pings an URL, to see if it is reachable, e.g. an SAP Identity Server.
 
-<img 
-  src="frontend/public/images/ping-check.png" 
-  alt="Ping lookup" 
-  width="400"
-/>
+> <img 
+>   src="frontend/public/images/ping-check.png" 
+>   alt="Ping lookup" 
+>   width="400"
+> />
 
 ---
 
@@ -230,8 +230,8 @@
 
 > This check is similar to a health check, but it renders the selected services' `/version` endpoints, allowing you to see which versions are currently deployed and which aren't running.
 
-<img 
-  src="frontend/public/images/service-check.png" 
-  alt="Service lookup" 
-  width="400"
-/>
+> <img 
+>   src="frontend/public/images/service-check.png" 
+>   alt="Service lookup" 
+>   width="400"
+> />
