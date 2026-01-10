@@ -82,6 +82,11 @@ $ `npm i`
 
 ![Validating a user through the Email-check](frontend/public/images/email-check.png)
 
+<img 
+  src="frontend/public/images/email-check.png" 
+  alt="Validating a user through the Email-check" 
+  width="400"
+/>
 
 
 ---
