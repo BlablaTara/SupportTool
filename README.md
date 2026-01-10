@@ -6,6 +6,27 @@
 > It works whether the customer uses MongoDB or Couchbase as the backend.
 
 
+## Table of Contents
+
+- [Run Locally](#run-locally)
+- [Database](#database)
+  - [Seeding](#seeding)
+  - [Couchbase Indexes](#couchbase-indexes)
+  - [Couchbase Error](#couchbase-error)
+- [Checks](#checks)
+  - [User Validations](#user-validations)
+    - [Email Check](#email-check)
+    - [Roles Check](#roles-check)
+    - [Count Check](#count-check)
+    - [Dropdown Check](#dropdown-check)
+  - [DB Validations](#db-validations)
+    - [Collections Check](#collections-check)
+    - [Metrics Check](#metrics-check)
+  - [System Validations](#system-validations)
+    - [Ping Check](#ping-check)
+    - [Service Check](#service-check)
+
+
 ## Run Locally
 
 **BACKEND:**
@@ -49,14 +70,14 @@ $ `cd backend`
 $ `npm run seed`
 
 
-### **Couchbase-indexes:**
+### Couchbase-indexes:
 
 > For Couchbase to work with the support tool and the different checks, create the following index:
 
 CREATE PRIMARY INDEX ON `<BUCKET>`.`<SCOPE>`.`<COLLECTION>`;
 
 
-### **Couchbase error**
+### Couchbase error:
 
 > If you encounter a "native-build" error when starting your Couchbase database, follow these steps:
 
@@ -66,12 +87,14 @@ $ `npm i`
 
 
 
-## **CHECKS:**
+## CHECKS:
 
 > To configure the different checks, see `.env-example`.
 > Note that some checks can be "multiplied" if your configuration is set correctly.
 
 > Fx - with the count-check, you can have a check that counts 'orders' and also a count-check that counts 'products'.
+
+> You can choose which checks you want to have in your tool, by choosing the FOO_ENABLED to be true/false (e.g. ROLES_CHECK_ENABLED=true).
 
 ### User Validations:
 
@@ -141,6 +164,8 @@ $ `npm i`
 | 'ok'           | 'success'    |
 | 'sent'         | 'success'    |
 | 'shipped'      | 'success'    |
+|----------------|--------------|
+| 'warning'      | 'warning'    |
 
 
 ---
@@ -166,9 +191,9 @@ $ `npm i`
 
 **MongoDB-metrics**
 - Connections
-- Memory/Chache
-- Network
-- CPU 
+- Chache usage
+- Network requests
+- CPU usage
 
 <img 
   src="frontend/public/images/mongo-metrics-checks1.png" 
@@ -193,7 +218,7 @@ $ `npm i`
 
 #### **PING-CHECK:**
 
-> This check pings a URL to see if it is reachable, e.g. an SAP Identity Server.
+> This check pings an URL, to see if it is reachable, e.g. an SAP Identity Server.
 
 <img 
   src="frontend/public/images/ping-check.png" 
@@ -205,7 +230,7 @@ $ `npm i`
 
 #### **SERVICE-CHECK:**
 
-> This check is similar to a health check, but it renders the selected services' `/version` endpoints, allowing you to see which versions are currently deployed.
+> This check is similar to a health check, but it renders the selected services' `/version` endpoints, allowing you to see which versions are currently deployed and which aren't running.
 
 <img 
   src="frontend/public/images/service-check.png" 
