@@ -95,7 +95,7 @@ $ `npm i`
 
 <img 
   src="frontend/public/images/role-check.png" 
-  alt="Looking up a users roles" 
+  alt="role lookup on user" 
   width="400"
 />
 
@@ -120,6 +120,12 @@ $ `npm i`
 > This check displays the payload for the chosen field.
 - You can make several of these
 - Notice not to give your Count-check and Dropdown-check the same title
+
+<img 
+  src="frontend/public/images/dropdown-check.png" 
+  alt="User field, payload lookup" 
+  width="400"
+/>
 
 **Status:**
 > If your payload contains a `status` field matching one of the values below, this will determine the item status. All other values will be treated as neutral.
@@ -147,6 +153,11 @@ $ `npm i`
 - If success -> shows all the collections you choose.
 - If fail -> shows all the empty collections
 
+<img 
+  src="frontend/public/images/collections-check.png" 
+  alt="Collections lookup" 
+  width="400"
+/>
 ---
 
 #### **METRICS-CHECK:**
@@ -178,3 +189,8 @@ $ `npm i`
 
 > This check is similar to a health check, but it renders the selected services' `/version` endpoints, allowing you to see which versions are currently deployed.
 
+<img 
+  src="frontend/public/images/service-check.png" 
+  alt="Service lookup" 
+  width="400"
+/>
