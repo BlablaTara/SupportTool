@@ -170,6 +170,18 @@ $ `npm i`
 - Network
 - CPU 
 
+<img 
+  src="frontend/public/images/mongo-metrics-checks1.png" 
+  alt="Mongo Metrics lookup 1" 
+  width="400"
+/>
+
+<img 
+  src="frontend/public/images/mongo-metrics-check2.png" 
+  alt="Mongo Metrics lookup 2" 
+  width="400"
+/>
+
 **Couchbase-metrics**
 - Ram Usage in bucket
 - Connections
@@ -182,6 +194,12 @@ $ `npm i`
 #### **PING-CHECK:**
 
 > This check pings a URL to see if it is reachable, e.g. an SAP Identity Server.
+
+<img 
+  src="frontend/public/images/ping-check.png" 
+  alt="Ping lookup" 
+  width="400"
+/>
 
 ---
 
