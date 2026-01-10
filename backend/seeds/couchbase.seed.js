@@ -115,7 +115,7 @@ export async function seedCouchbase() {
         items: [{ name: "Kiwi", quantity: 2, price: 4 }],
         total: 8,
         status: "success",
-        createdAt: new Date().toISOString()
+        createdAt: "2025-01-04T15:30:00Z"
       }
     ],
     product: [

@@ -42,7 +42,7 @@ export function updateCheck(section, title, patch) {
             ...all,
             [section]: sectionArray.map(c =>
                 c.title === title
-                ? { ...c, ...patch } //No new id
+                ? { ...c, ...patch } 
                 : c
             )
         }

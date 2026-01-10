@@ -78,6 +78,11 @@ $ `npm i`
 #### **EMAIL-CHECK:**
 
 > Checking if the users email is in the choosen database.
+> Configure the EMAIL_ENDING variable (e.g @test.dk) to reuse the same email domain for every user lookup.
+
+! [Validating a user through the Email-check] (frontend/public/images/email-check.png)
+
+
 
 ---
 
