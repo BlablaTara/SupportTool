@@ -86,7 +86,7 @@ describe("rolesCheckCB()", () => {
 
     expect(result.status).toBe("error");
     expect(result.message).toBe("Required index is missing");
-    expect(result.detail).toContain("CREATE INDEX");
+    expect(result.detail).toContain("CREATE PRIMARY");
   });
 
   test("returns error when keyspace is missing", async () => {

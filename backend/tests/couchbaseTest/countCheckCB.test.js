@@ -128,7 +128,7 @@ describe("countCheckCB", () => {
             title: "Orders Check",
             message: "Required index is missing",
             detail:
-                "CREATE INDEX idx_email ON `mockBucket`.`mockScope`.`users`(email);"
+                "CREATE PRIMARY INDEX `#primary` ON `mockBucket`.`mockScope`.`users`;"
         });
     });
 
