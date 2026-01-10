@@ -81,9 +81,9 @@ CREATE PRIMARY INDEX ON `<BUCKET>`.`<SCOPE>`.`<COLLECTION>`;
 
 > If you encounter a "native-build" error when starting your Couchbase database, follow these steps:
 
-$ `rm -rf node_modules package-lock.json`
+> $ `rm -rf node_modules package-lock.json`
 
-$ `npm i`
+> $ `npm i`
 
 
 
