@@ -80,8 +80,6 @@ $ `npm i`
 > Checking if the users email is in the choosen database.
 > Configure the EMAIL_ENDING variable (e.g @test.dk) to reuse the same email domain for every user lookup.
 
-![Validating a user through the Email-check](frontend/public/images/email-check.png)
-
 <img 
   src="frontend/public/images/email-check.png" 
   alt="Validating a user through the Email-check" 
@@ -95,6 +93,12 @@ $ `npm i`
 
 > Checking if the user has a role and displays it.
 
+<img 
+  src="frontend/public/images/role-check.png" 
+  alt="Looking up a users roles" 
+  width="400"
+/>
+
 ---
 
 #### **COUNT-CHECK:**
@@ -102,6 +106,12 @@ $ `npm i`
 > Counts how many items (e.g. "orders") the user has.
 - You can make several of these
 - Notice not to give your Count-check and Dropdown-check the same title
+
+<img 
+  src="frontend/public/images/count-check.png" 
+  alt="User field, count lookup" 
+  width="400"
+/>
 
 ---
 
