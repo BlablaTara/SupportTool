@@ -31,19 +31,19 @@
 
 **BACKEND:**
 
-$ `node backend/app.js`
+> $ `node backend/app.js`
 
 **FRONTEND:**
 
-$ `cd frontend`
+> $ `cd frontend`
 
-$ `npm run dev`
+> $ `npm run dev`
 
 **TESTS:**
 
-$ `cd backend`
+> $ `cd backend`
 
-$ `npm test`
+> $ `npm test`
 
 
 
@@ -52,29 +52,29 @@ $ `npm test`
 **Testdatabase:**
 > Docker Compose starts two containers: one with MongoDB and one with Couchbase.
 
-$ `docker compose up -d`
+> $ `docker compose up -d`
 
 ### Seeding
 > To seed the testdatabase follow these steps:
 
-1. Create your database with mongo or couchbase
-2. Fill out the connections to the database in you .env-file (follow .env-example)
-3. Start the database in the containers with:
+> 1. Create your database with mongo or couchbase
+> 2. Fill out the connections to the database in you .env-file (follow .env-example)
+> 3. Start the database in the containers with:
 
-$ `docker compose up -d`
+> $ `docker compose up -d`
 
-4. Now you can seed the database that you have choosen in your .env-file (DATABASE_TYPE)
+> 4. Now you can seed the database that you have choosen in your .env-file (DATABASE_TYPE)
 
-$ `cd backend`
+> $ `cd backend`
 
-$ `npm run seed`
+> $ `npm run seed`
 
 
 ### Couchbase-indexes:
 
 > For Couchbase to work with the support tool and the different checks, create the following index:
 
-CREATE PRIMARY INDEX ON `<BUCKET>`.`<SCOPE>`.`<COLLECTION>`;
+> "CREATE PRIMARY INDEX ON `<BUCKET>`.`<SCOPE>`.`<COLLECTION>`;"
 
 
 ### Couchbase error:
@@ -127,7 +127,7 @@ CREATE PRIMARY INDEX ON `<BUCKET>`.`<SCOPE>`.`<COLLECTION>`;
 #### COUNT-CHECK:
 
 > Counts how many items (e.g. "orders") the user has.
-- You can make several of these
+> - You can make several of these
 
 <img 
   src="frontend/public/images/count-check.png" 
@@ -140,7 +140,7 @@ CREATE PRIMARY INDEX ON `<BUCKET>`.`<SCOPE>`.`<COLLECTION>`;
 #### DROPDOWN-CHECK:
 
 > This check displays the payload for the chosen field.
-- You can make several of these
+> - You can make several of these
 
 <img 
   src="frontend/public/images/dropdown-check.png" 
@@ -173,8 +173,8 @@ CREATE PRIMARY INDEX ON `<BUCKET>`.`<SCOPE>`.`<COLLECTION>`;
 #### COLLECTIONS-CHECK:
 
 > Checks all collections defined in your environment variables for data.
-- If success -> shows all the collections you choose.
-- If fail -> shows all the empty collections
+> - If success -> shows all the collections you choose.
+> - If fail -> shows all the empty collections
 
 <img 
   src="frontend/public/images/collections-check.png" 
@@ -188,10 +188,10 @@ CREATE PRIMARY INDEX ON `<BUCKET>`.`<SCOPE>`.`<COLLECTION>`;
 > This check provides different metrics depending on whether MongoDB or Couchbase is used.
 
 **MongoDB-metrics**
-- Connections
-- Chache usage
-- Network requests
-- CPU usage
+> - Connections
+> - Chache usage
+> - Network requests
+> - CPU usage
 
 <img 
   src="frontend/public/images/mongo-metrics-checks1.png" 
@@ -206,9 +206,9 @@ CREATE PRIMARY INDEX ON `<BUCKET>`.`<SCOPE>`.`<COLLECTION>`;
 />
 
 **Couchbase-metrics**
-- Ram Usage in bucket
-- Connections
-- Network
+> - Ram Usage in bucket
+> - Connections 
+> - Network
 
 ---
 
