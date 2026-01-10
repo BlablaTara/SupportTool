@@ -98,7 +98,7 @@ $ `npm i`
 
 ### User Validations:
 
-#### **EMAIL-CHECK:**
+#### EMAIL-CHECK:
 
 > Checking if the users email is in the choosen database.
 > Configure the EMAIL_ENDING variable (e.g @test.dk) to reuse the same email domain for every user lookup.
@@ -112,7 +112,7 @@ $ `npm i`
 
 ---
 
-#### **ROLES-CHECK:**
+#### ROLES-CHECK:
 
 > Checking if the user has a role and displays it.
 
@@ -124,11 +124,10 @@ $ `npm i`
 
 ---
 
-#### **COUNT-CHECK:**
+#### COUNT-CHECK:
 
 > Counts how many items (e.g. "orders") the user has.
 - You can make several of these
-- Notice not to give your Count-check and Dropdown-check the same title
 
 <img 
   src="frontend/public/images/count-check.png" 
@@ -138,11 +137,10 @@ $ `npm i`
 
 ---
 
-#### **DROPDOWN-CHECK:**
+#### DROPDOWN-CHECK:
 
 > This check displays the payload for the chosen field.
 - You can make several of these
-- Notice not to give your Count-check and Dropdown-check the same title
 
 <img 
   src="frontend/public/images/dropdown-check.png" 
@@ -172,7 +170,7 @@ $ `npm i`
 
 ### DB Validations:
 
-#### **COLLECTIONS-CHECK:**
+#### COLLECTIONS-CHECK:
 
 > Checks all collections defined in your environment variables for data.
 - If success -> shows all the collections you choose.
@@ -185,7 +183,7 @@ $ `npm i`
 />
 ---
 
-#### **METRICS-CHECK:**
+#### METRICS-CHECK:
 
 > This check provides different metrics depending on whether MongoDB or Couchbase is used.
 
@@ -216,7 +214,7 @@ $ `npm i`
 
 ### System Validations:
 
-#### **PING-CHECK:**
+#### PING-CHECK:
 
 > This check pings an URL, to see if it is reachable, e.g. an SAP Identity Server.
 
@@ -228,7 +226,7 @@ $ `npm i`
 
 ---
 
-#### **SERVICE-CHECK:**
+#### SERVICE-CHECK:
 
 > This check is similar to a health check, but it renders the selected services' `/version` endpoints, allowing you to see which versions are currently deployed and which aren't running.
 
