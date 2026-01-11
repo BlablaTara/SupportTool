@@ -88,6 +88,11 @@
 
 > If you encounter a "native-build" error when starting your Couchbase database, follow these steps:
 
+``bash
+rm -rf node_modules package-lock.json
+npm install
+
+
 > $ `rm -rf node_modules package-lock.json`
 
 > $ `npm i`
