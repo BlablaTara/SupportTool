@@ -51,7 +51,7 @@
 > ```bash
 > cd backend
 > npm test
-c
+>```
 
 
 ## DATABASE:
