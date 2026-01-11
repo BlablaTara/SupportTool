@@ -1,4 +1,9 @@
 # Generic Support Tool with Couchbase or MongoDB Backend
+![Node.js](https://img.shields.io/badge/Node.js-18%2B-green)
+![MongoDB](https://img.shields.io/badge/MongoDB-supported-brightgreen)
+![Couchbase](https://img.shields.io/badge/Couchbase-supported-blue)
+![Docker](https://img.shields.io/badge/Docker-required-blue)
+
 
 > The purpose of this support tool is to make it reusable for different customers.
 > Fork it, use it for one customer, then fork it again and use it for another.
@@ -84,6 +89,14 @@
 > $ `rm -rf node_modules package-lock.json`
 
 > $ `npm i`
+
+## Configuration
+
+> All configuration is handled through environment variables.
+> Copy the example file and adjust as needed:
+
+> ```bash
+> cp .env-example .env
 
 
 
@@ -235,3 +248,8 @@
 >   alt="Service lookup" 
 >   width="400"
 > />
+
+
+## License
+
+MIT
