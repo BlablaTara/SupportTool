@@ -33,12 +33,13 @@
     - [Service Check](#service-check)
 - [License](#license)
 
-
+```md
 ## Run Locally
 
 **BACKEND:**
-
-> $ `node backend/app.js`
+```bash
+node backend/app.js
+```
 
 **FRONTEND:**
 
@@ -91,7 +92,7 @@
 ```bash
 rm -rf node_modules package-lock.json
 npm install
-
+```
 
 ## Configuration
 
