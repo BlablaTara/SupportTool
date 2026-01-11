@@ -33,26 +33,25 @@
     - [Service Check](#service-check)
 - [License](#license)
 
-```md
+
 ## Run Locally
 
 **BACKEND:**
-```bash
-node backend/app.js
-```
+> ```bash
+> node backend/app.js
+> ```
 
 **FRONTEND:**
-
-> $ `cd frontend`
-
-> $ `npm run dev`
+> ```bash
+> cd frontend
+> npm run dev
+> ```
 
 **TESTS:**
-
-> $ `cd backend`
-
-> $ `npm test`
-
+> ```bash
+> cd backend
+> npm test
+c
 
 
 ## DATABASE:
@@ -60,7 +59,9 @@ node backend/app.js
 **Testdatabase:**
 > Docker Compose starts two containers: one with MongoDB and one with Couchbase.
 
-> $ `docker compose up -d`
+> ```bash
+> docker compose up -d
+> ```
 
 ### Seeding
 > To seed the testdatabase follow these steps:
@@ -69,30 +70,33 @@ node backend/app.js
 > 2. Fill out the connections to the database in you .env-file (follow .env-example)
 > 3. Start the database in the containers with:
 
-> $ `docker compose up -d`
+> ```bash
+> docker compose up -d
+> ```
 
 > 4. Now you can seed the database that you have choosen in your .env-file (DATABASE_TYPE)
 
-> $ `cd backend`
-
-> $ `npm run seed`
-
+> ```bash
+> cd backend
+> npm run seed
+> ```
 
 ### Couchbase-indexes:
 
 > For Couchbase to work with the support tool and the different checks, create the following index:
 
+> ```bash
 > "CREATE PRIMARY INDEX ON `<BUCKET>`.`<SCOPE>`.`<COLLECTION>`;"
-
+> ```
 
 ### Couchbase error:
 
 > If you encounter a "native-build" error when starting your Couchbase database, follow these steps:
 
-```bash
-rm -rf node_modules package-lock.json
-npm install
-```
+> ```bash
+> rm -rf node_modules package-lock.json
+> npm install
+> ```
 
 ## Configuration
 
@@ -101,7 +105,7 @@ npm install
 
 > ```bash
 > cp .env-example .env
-
+> ```
 
 
 ## CHECKS:
