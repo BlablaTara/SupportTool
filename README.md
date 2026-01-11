@@ -93,10 +93,6 @@ rm -rf node_modules package-lock.json
 npm install
 
 
-> $ `rm -rf node_modules package-lock.json`
-
-> $ `npm i`
-
 ## Configuration
 
 > All configuration is handled through environment variables.
