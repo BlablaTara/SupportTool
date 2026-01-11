@@ -18,6 +18,7 @@
   - [Seeding](#seeding)
   - [Couchbase Indexes](#couchbase-indexes)
   - [Couchbase Error](#couchbase-error)
+- [Configuration](#configuration)
 - [Checks](#checks)
   - [User Validations](#user-validations)
     - [Email Check](#email-check)
@@ -30,6 +31,7 @@
   - [System Validations](#system-validations)
     - [Ping Check](#ping-check)
     - [Service Check](#service-check)
+- [License](#license)
 
 
 ## Run Locally
