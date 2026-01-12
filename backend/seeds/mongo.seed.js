@@ -31,7 +31,7 @@ export async function seedMongo() {
             { name: "Banana", quantity: 5, price: 1 }
           ],
           total: 5,
-          status: "cancelled",
+          status: "warning",
           createdAt: new Date("2025-01-02T11:30:00Z")
         },
         {
@@ -72,7 +72,7 @@ export async function seedMongo() {
             { name: "Apple", quantity: 1, price: 3 }
           ],
           total: 3,
-          status: "success",
+          status: "warning",
           createdAt: new Date("2025-01-05T16:20:00Z")
         }
       ],

@@ -44,7 +44,7 @@ export async function seedCouchbase() {
         orderId: "order-002",
         items: [{ name: "Banana", quantity: 5, price: 1 }],
         total: 5,
-        status: "cancelled",
+        status: "warning",
         createdAt: "2025-01-02T11:30:00Z"
       },
       {
@@ -80,7 +80,7 @@ export async function seedCouchbase() {
         orderId: "order-005",
         items: [{ name: "Apple", quantity: 1, price: 3 }],
         total: 3,
-        status: "success",
+        status: "warning",
         createdAt: "2025-01-05T16:20:00Z"
       }
     ],
