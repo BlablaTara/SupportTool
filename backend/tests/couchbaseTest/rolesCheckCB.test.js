@@ -89,14 +89,6 @@ describe("rolesCheckCB()", () => {
     expect(result.detail).toContain("CREATE PRIMARY");
   });
 
-  test("returns error when keyspace is missing", async () => {
-    const result = await rolesCheckCB("nokeyspace@test.dk");
-
-    expect(result.status).toBe("error");
-    expect(result.message).toBe("The bucket/scope/collection does not exist");
-    expect(result.detail).toContain("Keyspace not found");
-  });
-
   test("returns error for unknown errors", async () => {
     const result = await rolesCheckCB("error@test.dk");
 

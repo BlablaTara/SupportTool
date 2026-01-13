@@ -77,7 +77,7 @@ describe("collectionsCheckCB", () => {
         expect(result).toEqual({
             status: "error",
             title: "Collections Check",
-            message: "Missing indes for collection 'users'",
+            message: "Missing index for collection 'users'",
             detail: "CREATE PRIMARY INDEX idx_users_primary ON `mockBucket`.`mockScope`.`users`;",
             data: []
         });
