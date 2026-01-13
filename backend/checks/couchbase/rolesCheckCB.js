@@ -57,8 +57,6 @@ export async function rolesCheckCB(email) {
 
   } catch (error) {
     const missingIndex = error?.cause?.first_error_code === 4000;
-    const keyspaceNotFound =
-      error?.cause?.first_error_message?.includes("Keyspace not found");
 
     if (missingIndex) {
       return {
@@ -66,13 +64,7 @@ export async function rolesCheckCB(email) {
         message: "Required index is missing",
         detail: `CREATE PRIMARY INDEX \`#primary\` ON \`${BUCKET}\`.\`${SCOPE}\`.\`${collection}\`;`,
       };
-    } else if (keyspaceNotFound) {
-      return {
-        status: "error",
-        message: `The bucket/scope/collection does not exist`,
-        detail: error.cause.first_error_message,
-      };
-    }
+    } 
 
     return {
       status: "error",

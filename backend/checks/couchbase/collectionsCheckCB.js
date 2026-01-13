@@ -40,7 +40,7 @@ export async function collectionsCheckCB(collections) {
                     return {
                         status: "error",
                         title: "Collections Check",
-                        message: `Missing indes for collection '${name}'`,
+                        message: `Missing index for collection '${name}'`,
                         detail: `CREATE PRIMARY INDEX idx_${name}_primary ON \`${BUCKET}\`.\`${SCOPE}\`.\`${name}\`;`,
                         data: []
                     }
