@@ -1,0 +1,10 @@
+applications:
+  - name: support-tool
+    memory: 512M
+    instances: 1
+    buildpacks:
+      - nodejs_buildpack
+    env:
+      NODE_ENV: production
+    services:
+      - support-xsuaa

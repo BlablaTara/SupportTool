@@ -31,6 +31,7 @@
   - [System Validations](#system-validations)
     - [Ping Check](#ping-check)
     - [Service Check](#service-check)
+- [Deployment](#deployment)
 - [License](#license)
 
 
@@ -257,6 +258,9 @@
 >   width="400"
 > />
 
+
+## Deployment
+> The manifest.yml fil is just an example for Cloud Foundry
 
 ## License
 
