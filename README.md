@@ -260,7 +260,7 @@
 
 
 ## Deployment
-> The manifest.yml fil is just an example
+> The manifest.yml file is just an example for Cloud Foundry
 
 ## License
 
