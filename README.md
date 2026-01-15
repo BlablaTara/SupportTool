@@ -19,6 +19,7 @@
   - [Couchbase Indexes](#couchbase-indexes)
   - [Couchbase Error](#couchbase-error)
 - [Configuration](#configuration)
+- [Environment variables](#environment-variabels)
 - [Checks](#checks)
   - [User Validations](#user-validations)
     - [Email Check](#email-check)
@@ -108,7 +109,7 @@
 > ```
 
 ## ENVIRONMENT VARIABELS
-### General env variables
+### General configurations
 
 >| Variable        | Description                         | Example                                        |
 >| --------------- | ----------------------------------- | ---------------------------------------------- |
@@ -117,13 +118,13 @@
 >| FRONTEND_URL    | Frontend base URL                   | [http://localhost:5173](http://localhost:5173) |
 >| *_CHECK_ENABLED | Enable/diable, showing checks in UI | true/false
 
-### Database env variables
+### Database configurations
 
 >| Variable | Description      | Allowed values      |
 >| -------- | ---------------- | ------------------- |
 >| DB_TYPE  | Database backend | MongoDB / Couchbase |
 
-### MongoDB env variables
+### MongoDB configurations
 
 >| Variable       | Description               |
 >| -------------- | ------------------------- |
@@ -131,7 +132,7 @@
 >| MONGO_USERNAME | MongoDB username          |
 >| MONGO_PASSWORD | MongoDB password          |
 
-### Couchbase env variables
+### Couchbase configurations
 
 >| Variable        | Description                       |
 >| --------------- | --------------------------------- |
@@ -166,6 +167,12 @@
 >  width="400"
 >/>
 
+**Environment variables:**
+
+| Variable | Description |
+|--------|-------------|
+| EMAIL_COLLECTION | Collection containing users |
+| EMAIL_ENDING | Email domain to validate against (e.g. `@test.dk`) |
 
 ---
 
@@ -179,6 +186,13 @@
 >   width="400"
 > />
 
+**Environment variables:**
+
+| Variable | Description |
+|--------|-------------|
+| ROLES_CHECK_ENABLED | Enable/disable the roles check |
+| ROLES_FIELD | Field containing user roles |
+
 ---
 
 #### COUNT-CHECK:
@@ -191,6 +205,18 @@
 >   alt="User field, count lookup" 
 >   width="400"
 > />
+
+**Environment variables:**
+
+| Variable | Description |
+|--------|-------------|
+| COUNT_CHECK_ENABLED | Enable/disable the count check |
+| COUNT_CHECKS | List of checks in format `title:collection.field` |
+
+**Example:**
+```env
+COUNT_CHECKS=Orders:orders.userId,Products:products.userId
+```
 
 ---
 
@@ -222,6 +248,17 @@
 > |----------------|--------------|
 > | 'warning'      | 'warning'    |
 
+**Environment variables:**
+
+| Variable | Description |
+|--------|-------------|
+| DROPDOWN_CHECK_ENABLED | Enable/disable the dropdown check |
+| DROPDOWN_CHECKS | List of checks in format `title:collection.field` |
+
+**Example:**
+```env
+DROPDOWN_CHECKS=Order status:orders.status,Payment type:payments.method
+```
 
 ---
 
@@ -238,6 +275,16 @@
 >   alt="Collections lookup" 
 >   width="400"
 > />
+
+```md
+**Environment variables:**
+
+| Variable | Description |
+|--------|-------------|
+| COLLECTIONS_CHECK_ENABLED | Enable/disable collections check |
+| COLLECTIONS_CHECK | Comma-separated list of collections |
+````
+
 ---
 
 #### METRICS-CHECK:
@@ -267,6 +314,13 @@
 > - Connections 
 > - Network
 
+**Environment variables:**
+
+| Variable | Description |
+|--------|-------------|
+| METRICS_CHECK_ENABLED | Enable/disable metrics check |
+| CB_CONNSTR_HTTP | Couchbase HTTP endpoint (Couchbase only) |
+
 ---
 
 ### System Validations:
@@ -281,6 +335,13 @@
 >   width="400"
 > />
 
+**Environment variables:**
+
+| Variable | Description |
+|--------|-------------|
+| PING_CHECK_ENABLED | Enable/disable ping check |
+| PING_URL | URL to ping (with optional port) |
+
 ---
 
 #### SERVICE-CHECK:
@@ -293,6 +354,18 @@
 >   width="400"
 > />
 
+**Environment variables:**
+
+| Variable | Description |
+|--------|-------------|
+| SERVICE_CHECK_ENABLED | Enable/disable service check |
+| SERVICE_CHECKS | Service definitions per environment |
+
+**Format:**
+```text
+Service name,devURL,testURL,prodURL;
+
+---
 
 ## License
 
