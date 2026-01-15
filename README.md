@@ -169,10 +169,10 @@
 
 **Environment variables:**
 
-| Variable | Description |
-|--------|-------------|
-| EMAIL_COLLECTION | Collection containing users |
-| EMAIL_ENDING | Email domain to validate against (e.g. `@test.dk`) |
+>| Variable | Description |
+>|--------|-------------|
+>| EMAIL_COLLECTION | Collection containing users |
+>| EMAIL_ENDING | Email domain to validate against (e.g. `@test.dk`) |
 
 ---
 
@@ -188,10 +188,10 @@
 
 **Environment variables:**
 
-| Variable | Description |
-|--------|-------------|
-| ROLES_CHECK_ENABLED | Enable/disable the roles check |
-| ROLES_FIELD | Field containing user roles |
+>| Variable | Description |
+>|--------|-------------|
+>| ROLES_CHECK_ENABLED | Enable/disable the roles check |
+>| ROLES_FIELD | Field containing user roles |
 
 ---
 
@@ -208,15 +208,15 @@
 
 **Environment variables:**
 
-| Variable | Description |
-|--------|-------------|
-| COUNT_CHECK_ENABLED | Enable/disable the count check |
-| COUNT_CHECKS | List of checks in format `title:collection.field` |
+>| Variable | Description |
+>|--------|-------------|
+>| COUNT_CHECK_ENABLED | Enable/disable the count check |
+>| COUNT_CHECKS | List of checks in format `title:collection.field` |
 
 **Example:**
-```env
-COUNT_CHECKS=Orders:orders.userId,Products:products.userId
-```
+>```env
+>COUNT_CHECKS=Orders:orders.userId,Products:products.userId
+>```
 
 ---
 
@@ -250,15 +250,15 @@ COUNT_CHECKS=Orders:orders.userId,Products:products.userId
 
 **Environment variables:**
 
-| Variable | Description |
-|--------|-------------|
-| DROPDOWN_CHECK_ENABLED | Enable/disable the dropdown check |
-| DROPDOWN_CHECKS | List of checks in format `title:collection.field` |
+>| Variable | Description |
+>|--------|-------------|
+>| DROPDOWN_CHECK_ENABLED | Enable/disable the dropdown check |
+>| DROPDOWN_CHECKS | List of checks in format `title:collection.field` |
 
 **Example:**
-```env
-DROPDOWN_CHECKS=Order status:orders.status,Payment type:payments.method
-```
+>```env
+>DROPDOWN_CHECKS=Order status:orders.status,Payment >type:payments.method
+>```
 
 ---
 
@@ -276,14 +276,12 @@ DROPDOWN_CHECKS=Order status:orders.status,Payment type:payments.method
 >   width="400"
 > />
 
-```md
 **Environment variables:**
 
-| Variable | Description |
-|--------|-------------|
-| COLLECTIONS_CHECK_ENABLED | Enable/disable collections check |
-| COLLECTIONS_CHECK | Comma-separated list of collections |
-````
+>| Variable | Description |
+>|--------|-------------|
+>| COLLECTIONS_CHECK_ENABLED | Enable/disable collections check |
+>| COLLECTIONS_CHECK | Comma-separated list of collections |
 
 ---
 
@@ -316,10 +314,10 @@ DROPDOWN_CHECKS=Order status:orders.status,Payment type:payments.method
 
 **Environment variables:**
 
-| Variable | Description |
-|--------|-------------|
-| METRICS_CHECK_ENABLED | Enable/disable metrics check |
-| CB_CONNSTR_HTTP | Couchbase HTTP endpoint (Couchbase only) |
+>| Variable | Description |
+>|--------|-------------|
+>| METRICS_CHECK_ENABLED | Enable/disable metrics check |
+>| CB_CONNSTR_HTTP | Couchbase HTTP endpoint (Couchbase only) |
 
 ---
 
@@ -337,10 +335,10 @@ DROPDOWN_CHECKS=Order status:orders.status,Payment type:payments.method
 
 **Environment variables:**
 
-| Variable | Description |
-|--------|-------------|
-| PING_CHECK_ENABLED | Enable/disable ping check |
-| PING_URL | URL to ping (with optional port) |
+>| Variable | Description |
+>|--------|-------------|
+>| PING_CHECK_ENABLED | Enable/disable ping check |
+>| PING_URL | URL to ping (with optional port) |
 
 ---
 
@@ -356,16 +354,22 @@ DROPDOWN_CHECKS=Order status:orders.status,Payment type:payments.method
 
 **Environment variables:**
 
-| Variable | Description |
-|--------|-------------|
-| SERVICE_CHECK_ENABLED | Enable/disable service check |
-| SERVICE_CHECKS | Service definitions per environment |
+>| Variable | Description |
+>|--------|-------------|
+>| SERVICE_CHECK_ENABLED | Enable/disable service check |
+>| SERVICE_CHECKS | Service definitions per environment |
 
 **Format:**
 ```text
 Service name,devURL,testURL,prodURL;
+```
+**Example:**
+>```env
+>SERVICE_CHECKS=Test Service,localhost:8082,localhost:8083,localhost:8084;
+>```
 
 ---
+
 
 ## License
 
