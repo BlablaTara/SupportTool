@@ -98,7 +98,7 @@
 > npm install
 > ```
 
-## Configuration
+## CONFIGURATIONS
 
 > All configuration is handled through environment variables.
 > Copy the example file and adjust as needed:
@@ -106,6 +106,42 @@
 > ```bash
 > cp .env-example .env
 > ```
+
+## ENVIRONMENT VARIABELS
+### General env variables
+
+>| Variable        | Description                         | Example                                        |
+>| --------------- | ----------------------------------- | ---------------------------------------------- |
+>| ENVIRONMENT     | Environment badge (DEV, TEST, PROD) | DEV                                            |
+>| CUSTOMER        | Customer name displayed in the UI   | Google                                         |
+>| FRONTEND_URL    | Frontend base URL                   | [http://localhost:5173](http://localhost:5173) |
+>| *_CHECK_ENABLED | Enable/diable, showing checks in UI | true/false
+
+### Database env variables
+
+>| Variable | Description      | Allowed values      |
+>| -------- | ---------------- | ------------------- |
+>| DB_TYPE  | Database backend | MongoDB / Couchbase |
+
+### MongoDB env variables
+
+>| Variable       | Description               |
+>| -------------- | ------------------------- |
+>| MONGO_URI      | MongoDB connection string |
+>| MONGO_USERNAME | MongoDB username          |
+>| MONGO_PASSWORD | MongoDB password          |
+
+### Couchbase env variables
+
+>| Variable        | Description                       |
+>| --------------- | --------------------------------- |
+>| CB_CONNSTR      | Couchbase connection string       |
+>| CB_USERNAME     | Couchbase username                |
+>| CB_PASSWORD     | Couchbase password                |
+>| CB_BUCKET       | Couchbase bucket                  |
+>| CB_SCOPE        | Couchbase scope                   |
+>| CB_CONNSTR_HTTP | Couchbase HTTP endpoint (metrics) |
+
 
 
 ## CHECKS:
