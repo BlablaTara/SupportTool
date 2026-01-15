@@ -296,7 +296,7 @@
 
 **MongoDB-metrics**
 > - Connections
-> - Chache usage
+> - Cache usage
 > - Network requests
 > - CPU usage
 
@@ -312,10 +312,27 @@
 >   width="400"
 > />
 
+**Thresholds & Accuracy**
+> All MongoDB metric thresholds are **manually defined**.
+
+> MongoDB does **not provide official warning or critical thresholds** for most metrics, so the tool uses **conservative default values** to indicate potential risk.
+
+> Important notes:
+> - Thresholds are not environment-specific (future todo)
+> - Values should be tuned for developing, testing or production workloads
+> - Visual indicators are meant to demonstrate trends and health signals (Right now, sat just for show)
+
+> The values of the thresholds are intended as **safe defaults** and should be adjusted based on system capacity and expected traffic.
+> For detailed explanations, each metric includes a help dialog in the UI.
+
 **Couchbase-metrics**
-> - Ram Usage in bucket
-> - Connections 
-> - Network
+> Couchbase metrics are **partially implemented**.
+
+> This is due to differences between MongoDB’s `serverStatus` API, and Couchbase’s available HTTP statistics.
+
+> Planned:
+> - Improve Couchbase metric coverage
+> - Align Couchbase metrics with MongoDB where possible
 
 **Environment variables:**
 
@@ -374,6 +391,14 @@ Service name,devURL,testURL,prodURL;
 >```
 
 ---
+
+## Planned Improvements
+
+- Full Couchbase metrics support
+- Configurable metric thresholds via environment variables
+- New filter-check
+- Styling header for UI
+- Adding time-limit on 'dropdown-check'
 
 
 ## Deployment
